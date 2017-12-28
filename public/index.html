@@ -9,7 +9,7 @@
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <!-- <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"> -->
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -22,6 +22,30 @@
     <title>React App</title>
   </head>
   <body>
+    <div id="fb-root"></div>
+
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '135045367176902',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.11'
+      });
+      window.FB.AppEvents.logPageView();
+    };
+
+    var fbInitEvent = new Event('FBObjectReady');
+      document.dispatchEvent(fbInitEvent);
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
