@@ -4,6 +4,7 @@ export default class FacebookLogin extends React.Component {
 
   componentDidMount() {
     document.addEventListener('FBObjectReady', this.initializeFacebookLogin);
+
   }
 
   componentWillUnmount() {
@@ -11,15 +12,20 @@ export default class FacebookLogin extends React.Component {
   }
 
   initializeFacebookLogin = () => {
+    console.log('initializefacebooklogin');
     this.FB = window.FB;
     this.checkLoginStatus()
   }
 
   checkLoginStatus = () => {
-    this.FB.getLoginStatus(this.props.loginHandler);
-  }
+    console.log('check login status');
+    this.FB.getLoginStatus(res => {
+      this.props.loginHandler(res)
+  }, true)
+}
 
   facebookLogin = () => {
+    console.log('facebookLogin');
     if (!this.FB) {
       console.log('!this.FB');
       return
@@ -28,6 +34,7 @@ export default class FacebookLogin extends React.Component {
     this.FB.getLoginStatus(response => {
       console.log(response.status);
       if (response.status === 'connected') {
+        console.log('sending response to loginHandler');
         this.props.loginHandler(response);
       } else {
         this.FB.login(this.props.loginHandler, {scope: 'public_profile'});

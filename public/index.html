@@ -22,30 +22,31 @@
     <title>React App</title>
   </head>
   <body>
-    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: '135045367176902',
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: 'v2.11',
+          status: true
+        });
+        window.FB.AppEvents.logPageView();
+        // Broadcast an event when FB object is ready
+        var fbInitEvent = new Event('FBObjectReady');
+        document.dispatchEvent(fbInitEvent);
+      };
 
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '135045367176902',
-        cookie     : true,
-        xfbml      : true,
-        version    : 'v2.11'
-      });
-      window.FB.AppEvents.logPageView();
-    };
+      (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
 
-    var fbInitEvent = new Event('FBObjectReady');
-      document.dispatchEvent(fbInitEvent);
 
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "https://connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-  </script>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
