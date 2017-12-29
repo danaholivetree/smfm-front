@@ -34,10 +34,10 @@ export default class FacebookLogin extends React.Component {
     this.FB.getLoginStatus(response => {
       console.log(response.status);
       if (response.status === 'connected') {
-        console.log('sending response to loginHandler');
+        console.log('connected, sending response to loginHandler');
         this.props.loginHandler(response);
       } else {
-        this.FB.login(this.props.loginHandler, {scope: 'public_profile'});
+        this.FB.login(this.props.loginHandler(response), {scope: 'public_profile'});
       }
     }, )
   }

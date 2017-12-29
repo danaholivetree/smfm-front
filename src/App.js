@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 import './App.css';
 import NewItemForm from './components/NewItemForm'
 import FbLogin from './components/FbLogin'
+import ShoppingFeed from './components/ShoppingFeed'
+import SaleItems from './components/SaleItems'
+
 const API = process.env.REACT_APP_API_URL
 
 
@@ -11,7 +14,7 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {loggedIn: false, friends: [], currentUser: {}, itemsForSale: []}
+    this.state = {loggedIn: false, friends: [], currentUser: {}, itemsForSale: [], feedItems: []}
   }
 
   facebookLoginHandler = response => {
@@ -31,10 +34,21 @@ class App extends Component {
           let itemsForSale = await res.json()
           this.setState({currentUser: {...this.state.currentUser, userId: itemsForSale[0].seller_id, accessToken}, itemsForSale})
 
-          console.log('this.state.currentUser ', this.state.currentUser);
+          console.log('this.state.itemsForSale ', this.state.itemsForSale);
           return itemsForSale
         }
+        var getAllItems = async () => {
+          let res = await fetch(`${API}/products`, {
+            method: 'GET',
+            headers: {"Content-Type": "application/json"},
+            mode: 'cors'
+          })
+          let feedItems = await res.json()
+          console.log('feedItems came back from products ', feedItems);
+          this.setState({...this.state, feedItems})
+        }
         dbLogin(currentUser)
+        getAllItems()
       })
     }
     else {
@@ -109,13 +123,10 @@ class App extends Component {
           <h1 className="App-title">Shit my friends make</h1>
         </header>
         <div>
-          {!this.state.loggedIn ?
-          <div>
-          <FbLogin loginHandler={this.facebookLoginHandler}/>
-          </div> : <div> you are logged in </div>
-
-        }
+        <FbLogin loginHandler={this.facebookLoginHandler}/>
         <NewItemForm addProduct={this.addProduct} />
+        <ShoppingFeed items={this.state.feedItems} />
+        <SaleItems items={this.state.itemsForSale} />
         </div>
       </div>
     )
