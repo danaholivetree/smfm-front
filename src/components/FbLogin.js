@@ -1,6 +1,10 @@
 import React from 'react'
 
 export default class FacebookLogin extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {loggedIn : false}
+  }
 
   componentDidMount() {
     document.addEventListener('FBObjectReady', this.initializeFacebookLogin);
@@ -11,39 +15,54 @@ export default class FacebookLogin extends React.Component {
     document.removeEventListener('FBObjectReady', this.initializeFacebookLogin);
   }
 
-  initializeFacebookLogin = () => {
-    console.log('initializefacebooklogin');
-    this.FB = window.FB;
-    this.checkLoginStatus()
-  }
-
-  checkLoginStatus = () => {
-    console.log('check login status');
-    this.FB.getLoginStatus(res => {
-      this.props.loginHandler(res)
-  }, true)
-}
-
-  facebookLogin = () => {
-    console.log('facebookLogin');
-    if (!this.FB) {
-      console.log('!this.FB');
-      return
+  initializeFacebookLogin =  () => {
+    console.log('initialize facebook login');
+    if (!window.FB) {
+      console.log('fb wasn\'t ready in initialize');
     }
-    console.log('getting login status');
-    this.FB.getLoginStatus(response => {
-      console.log(response.status);
-      if (response.status === 'connected') {
-        console.log('connected, sending response to loginHandler');
-        this.props.loginHandler(response);
-      } else {
-        this.FB.login(this.props.loginHandler(response), {scope: 'public_profile'});
+    this.FB = window.FB
+    console.log('set this.fb = window.fb, going to check login state');
+    return this.checkLoginState()
+    }
+
+  checkLoginState = () => {
+    console.log('checking login state');
+    return this.FB.getLoginStatus( res => {
+      if (res.status === 'connected') {
+        console.log('connected, setting loggedIn state to true');
+        this.setState({loggedIn: true})
+        this.props.loginHandler(res.authResponse)
       }
-    }, )
+    })
   }
+
+  handleLogin = () => {
+    console.log('trying to use fb object in handle login');
+    if (!this.FB) {
+      console.log('fb wasn\'t ready');
+    } else {
+      this.FB.login( response => {
+        this.checkLoginState()
+        if (response.status==='connected') {
+          this.props.loginHandler(response)
+        } else {
+          console.log('login failed');
+        }
+      })
+    }
+  }
+
+  handleLogout = () => {
+    this.FB.logout(function () { document.location.reload(); });
+  }
+  // <div>
+  //   {!this.state.loggedIn ?
+  //  <input className='btn' style={{color:'black'}} type='button' name='login' value='Log In with Facebook' onClick={this.handleLogin()}/> :  <input className='btn' style={{color:'black'}} type='button' name='logout' value='Log Out' onClick={this.handleLogout()}/>}
+  // </div>
+
   render() {
     return (
-      <div className="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"  data-scope="public_profile, email, user_friends" onClick={this.facebookLogin}/>
+      <div className="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" scope="user_profile, user_friends, email"></div>
     )
   }
 }

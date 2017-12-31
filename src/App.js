@@ -5,6 +5,7 @@ import NewItemForm from './components/NewItemForm'
 import FbLogin from './components/FbLogin'
 import ShoppingFeed from './components/ShoppingFeed'
 import SaleItems from './components/SaleItems'
+import NavBar from './components/nav/NavBar'
 
 const API = process.env.REACT_APP_API_URL
 
@@ -17,10 +18,10 @@ class App extends Component {
     this.state = {loggedIn: false, friends: [], currentUser: {}, itemsForSale: [], feedItems: []}
   }
 
-  facebookLoginHandler = response => {
-    console.log('in the login handler, response ', response);
-    if (response.status === 'connected') {
-      const {accessToken, userID} = response.authResponse
+  facebookLoginHandler = (response) => {
+    console.log('in the login handler on app, response should be authResponse', response);
+
+      const {accessToken, userID} = response
       window.FB.api('/me', currentUser => {
         this.setState({currentUser, loggedIn: true})
         var dbLogin = async (user) => {
@@ -51,44 +52,6 @@ class App extends Component {
         getAllItems()
       })
     }
-    else {
-      window.FB.login()
-    }
-  }
-  onLogin = (loginStatus, resultObject) => {
-    console.log('onFacebookLogin');
-      if (loginStatus === true) {
-        this.setState({
-          username: resultObject.user.name
-        });
-      } else {
-        alert('Facebook login error');
-      }
-    }
-//   facebookLoginHandler = response => {
-//   if (response.status === 'connected') {
-//     this.FB.api('/me', userData => {
-//       let result = {
-//         ...response,
-//         user: userData
-//       };
-//       this.props.onLogin(true, result);
-//     });
-//   } else {
-//     this.props.onLogin(false);
-//   }
-// }
-
-
-  // checkLoginState = () => {
-  //   window.FB.getLoginStatus(function(response) {
-  //     this.statusChangeCallback(response);
-  //   }.bind(this))
-  // }
-
-  // handleClick = () => {
-  //   window.FB.login(this.checkLoginState());
-  // }
 
   getFriends = async (userID) => {
     await window.FB.api(
@@ -116,14 +79,17 @@ class App extends Component {
     return newProduct
   }
 
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Shit my friends make</h1>
+          <FbLogin loginHandler={this.facebookLoginHandler}/>
         </header>
         <div>
-        <FbLogin loginHandler={this.facebookLoginHandler}/>
+        <NavBar links={this.links} bgColor='yellow' textColor='black'/>
+
         <NewItemForm addProduct={this.addProduct} />
         <ShoppingFeed items={this.state.feedItems} />
         <SaleItems items={this.state.itemsForSale} />

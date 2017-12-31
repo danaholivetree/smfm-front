@@ -10,20 +10,18 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <!-- <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico"> -->
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
+
     <title>React App</title>
   </head>
   <body>
     <script>
-      window.fbAsyncInit = function () {
+      window.fbAsyncInit = function() {
         FB.init({
           appId: '135045367176902',
           autoLogAppEvents: true,
@@ -31,35 +29,41 @@
           version: 'v2.11',
           status: true
         });
-        window.FB.AppEvents.logPageView();
+        FB.AppEvents.logPageView();
         // Broadcast an event when FB object is ready
         var fbInitEvent = new Event('FBObjectReady');
         document.dispatchEvent(fbInitEvent);
+        FB.Event.subscribe('auth.authResponseChange', function(response) {
+            if (response.status === 'connected') {
+              console.log('event subscription says connected');
+            } else if (response.status === 'not_authorized') {
+              console.log('event subscription says not auth, attempting login');
+              FB.login();
+            } else {
+              console.log('event subscription says unknown, attempting login');
+              FB.login();
+            }
+          });
       };
 
       (function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) { return; }
         js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=135045367176902";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-    </script>
+
+
+  </script>
 
 
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+      <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+      <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js'></script>
   </body>
 </html>

@@ -28,7 +28,7 @@ const NewItemForm = ({addProduct}) => {
       <input type='text' name='price' placeholder='Item Name'/>
       <label htmlFor='description'>Description</label>
       <input htmlFor='text' name='description' placeholder='Item Name'/>
-      <input type='submit' className='btn' value='submit new item'/>
+      <input type='submit' className='btn btn-default' value='submit new item'/>
     </form>
   )
 }
