@@ -7,23 +7,22 @@ export default class FacebookLogin extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('FBObjectReady', this.initializeFacebookLogin);
-
+    document.addEventListener('FBObjectReady', this.initializeFacebookLogin)
   }
 
   componentWillUnmount() {
-    document.removeEventListener('FBObjectReady', this.initializeFacebookLogin);
+    document.removeEventListener('FBObjectReady', this.initializeFacebookLogin)
   }
 
-  initializeFacebookLogin =  () => {
+  initializeFacebookLogin = () => {
     console.log('initialize facebook login');
     if (!window.FB) {
       console.log('fb wasn\'t ready in initialize');
     }
     this.FB = window.FB
     console.log('set this.fb = window.fb, going to check login state');
-    return this.checkLoginState()
-    }
+    this.checkLoginState()
+  }
 
   checkLoginState = () => {
     console.log('checking login state');
@@ -31,7 +30,8 @@ export default class FacebookLogin extends React.Component {
       if (res.status === 'connected') {
         console.log('connected, setting loggedIn state to true');
         this.setState({loggedIn: true})
-        this.props.loginHandler(res.authResponse)
+        console.log('sending res to login handler ', res);
+        this.props.loginHandler(res)
       }
     })
   }

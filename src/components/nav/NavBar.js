@@ -1,7 +1,7 @@
 import React from 'react'
 import NavLink from './NavLink'
 const links = [
-  {linkTo: 'shop', text: 'Shopping Feed', active: false},
+  {linkTo: 'sell', text: 'Sell an Item', active: false},
   {linkTo: 'shoppingFeed', text: 'Shopping Feed', active: false},
   {linkTo: 'sellerFeed', text: 'Browse by Seller', active: false},
   {linkTo: 'saleItems', text: 'My Items for Sale', active: false},
@@ -13,7 +13,7 @@ const links = [
 export default class NavBar extends React.Component {
 
   listLinks = (link, index) => {
-    return <NavLink text={link.text} linkTo={link.linkTo} key={index} active={link.active} />
+    return <NavLink text={link.text} linkTo={link.linkTo} key={index} active={link.active} showDisplay={this.props.showDisplay}/>
   }
 
   render() {

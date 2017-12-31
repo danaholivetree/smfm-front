@@ -6,6 +6,7 @@ import FbLogin from './components/FbLogin'
 import ShoppingFeed from './components/ShoppingFeed'
 import SaleItems from './components/SaleItems'
 import NavBar from './components/nav/NavBar'
+import Bookmarks from './components/Bookmarks'
 
 const API = process.env.REACT_APP_API_URL
 
@@ -15,7 +16,7 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {loggedIn: false, friends: [], currentUser: {}, itemsForSale: [], feedItems: []}
+    this.state = {loggedIn: false, friends: [], currentUser: {}, itemsForSale: [], feedItems: [], bookmarks: []}
   }
 
   facebookLoginHandler = (response) => {
@@ -78,7 +79,28 @@ class App extends Component {
     console.log('newproduct came back from db ', newProduct);
     return newProduct
   }
+  showDisplay = (link) => {
+    console.log(this.state)
+    this.setState({display: `${link}`})
+  }
 
+  removeItem = async (item, view) => {
+    if (view === 'bookmarks') {
+      let res = await fetch(`${API}/bookmarks/${item}`, {
+        method: 'DELETE',
+        headers: {"Content-Type": "application/json"},
+        mode: 'cors',
+        // body: JSON.stringify(item)
+      })
+      let newBookmarks = await res.json()
+      console.log('edited bookmarks came back from db ', newBookmarks);
+      this.setState({bookmarks: newBookmarks})
+      return newBookmarks
+    }
+  }
+  displayItem = (item) => {
+
+  }
 
   render() {
     return (
@@ -87,12 +109,17 @@ class App extends Component {
           <h1 className="App-title">Shit my friends make</h1>
           <FbLogin loginHandler={this.facebookLoginHandler}/>
         </header>
-        <div>
-        <NavBar links={this.links} bgColor='yellow' textColor='black'/>
+    <div>
+      <div>
+        <NavBar links={this.links} bgColor='yellow' textColor='black' showDisplay={this.showDisplay}/>
+      </div>
 
-        <NewItemForm addProduct={this.addProduct} />
-        <ShoppingFeed items={this.state.feedItems} />
-        <SaleItems items={this.state.itemsForSale} />
+    {this.state.display === 'sell' ? <NewItemForm addProduct={this.addProduct} />
+    : this.state.display === 'shoppingFeed' ? <ShoppingFeed items={this.state.feedItems} />
+    : this.state.display === 'saleItems' ? <SaleItems items={this.state.itemsForSale} removeItem={this.removeItem}/>
+    : this.state.display === 'bookmarks' ? <Bookmarks items={this.state.bookmarks} removeItem={this.removeItem} displayItem={this.displayItem} />
+    : ""
+    }
         </div>
       </div>
     )
