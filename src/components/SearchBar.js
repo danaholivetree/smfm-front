@@ -7,6 +7,10 @@ const SearchBar = ({filterItems}) => {
     e.preventDefault()
     filterItems(e.target.value)
   }
+  const handleCheck = (e) => {
+    e.preventDefault()
+    // filterCategory(e.target.value)
+  }
 return (
   <div>
     <div>
@@ -15,14 +19,14 @@ return (
 
     <div>
       Category:
-      <input type='checkbox' value='handmade' />
-      <label htmlFor='handmade'>Handmade</label>
-      <input type='checkbox' value='art' />
-      <label htmlFor='art'>Art</label>
-      <input type='checkbox' value='writing' />
-      <label htmlFor='writing'>Writing</label>
-      <input type='checkbox' value='music' />
-      <label htmlFor='music'>Music</label>
+      <input type='checkbox' value='handmade' onChange={handleCheck} />
+      <label htmlFor='handmade'>Handmade </label>
+      <input type='checkbox' value='art' onChange={handleCheck}/>
+      <label htmlFor='art'>Art </label>
+      <input type='checkbox' value='writing' onChange={handleCheck}/>
+      <label htmlFor='writing'>Writing </label>
+      <input type='checkbox' value='music' onChange={handleCheck}/>
+      <label htmlFor='music'>Music </label>
     </div>
   </div>
 )

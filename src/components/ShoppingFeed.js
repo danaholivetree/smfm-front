@@ -1,10 +1,10 @@
 import React from 'react'
 import FeedItem from './FeedItem'
 
-const ShoppingFeed = ({items}) => {
+const ShoppingFeed = ({items, addToCart}) => {
 
   const displayFeedItems = items.map( (item) => {
-    return <FeedItem item={item} key={item.id}/>
+    return <FeedItem item={item} key={item.id} addToCart={addToCart}/>
   })
 
 return (

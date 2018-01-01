@@ -9,8 +9,11 @@ const SaleItem = ({item, displayItem}) => {
   return (
 
       <li>
-        {item.item_name} ** {item.category} ** {item.seller_id} ** {item.description} ** {item.quantity} ** {item.price}
+        {item.id} ** {item.itemName} ** {item.category} ** {item.sellerName} ** {item.description} ** {item.quantity} ** {item.price} ** {item.image_url} ** {item.sold} **
         <input type='button' value='view item' data-id='item.id' onClick='handleDisplay' />
+        <input type='button' value='edit item' data-id='item.id' onClick='handleDisplay' />
+        <input type='button' value='remove item' data-id='item.id' onClick='handleDisplay' />
+
        </li>
 
 
