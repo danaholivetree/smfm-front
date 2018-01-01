@@ -1,10 +1,10 @@
 import React from 'react'
 import SaleItem from './SaleItem'
 
-const SaleItems = ({items}) => {
+const SaleItems = ({items, displayItem}) => {
 
   const displaySaleItems = items.map( (item, i) => {
-    return <SaleItem item={item} key={i}/>
+    return <SaleItem item={item} key={i} displayItem={displayItem}/>
   })
 
 

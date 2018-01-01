@@ -3,11 +3,9 @@ import FeedItem from './FeedItem'
 
 const ShoppingFeed = ({items}) => {
 
-  const displayFeedItems = items.map( (item, i) => {
-    return <FeedItem item={item} key={i}/>
+  const displayFeedItems = items.map( (item) => {
+    return <FeedItem item={item} key={item.id}/>
   })
-
-
 
 return (
   <ul>

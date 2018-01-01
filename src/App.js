@@ -7,6 +7,7 @@ import ShoppingFeed from './components/ShoppingFeed'
 import SaleItems from './components/SaleItems'
 import NavBar from './components/nav/NavBar'
 import Bookmarks from './components/Bookmarks'
+import SearchBar from './components/SearchBar'
 
 const API = process.env.REACT_APP_API_URL
 
@@ -23,21 +24,23 @@ class App extends Component {
     console.log('in the login handler on app, response should be authResponse', response);
 
       const {accessToken, userID} = response
+      //get currentUser
       window.FB.api('/me', currentUser => {
         this.setState({currentUser, loggedIn: true})
-        var dbLogin = async (user) => {
+        var dbLogin = async (currUser) => {
           console.log('fetching from users route');
           let res = await fetch(`${API}/users`, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
             mode: 'cors',
-            body: JSON.stringify(user)
+            body: JSON.stringify(currUser)
           })
-          let itemsForSale = await res.json()
-          this.setState({currentUser: {...this.state.currentUser, userId: itemsForSale[0].seller_id, accessToken}, itemsForSale})
+          let userAndItemsForSale = await res.json()
+          const {products, user} = userAndItemsForSale
+          this.setState({currentUser: {...this.state.currentUser, id: user.id, accessToken}, itemsForSale: products})
 
           console.log('this.state.itemsForSale ', this.state.itemsForSale);
-          return itemsForSale
+          return this.state.itemsForSale
         }
         var getAllItems = async () => {
           let res = await fetch(`${API}/products`, {
@@ -97,9 +100,30 @@ class App extends Component {
       this.setState({bookmarks: newBookmarks})
       return newBookmarks
     }
+    else if (view === 'saleItems') {
+      let res = await fetch(`${API}/products/${item}`, {
+        method: 'DELETE',
+        headers: {"Content-Type": "application/json"},
+        mode: 'cors',
+        // body: JSON.stringify(item)
+      })
+      let newSaleItems = await res.json()
+      console.log('edited sale items came back from db ', newSaleItems);
+      this.setState({itemsForSale: newSaleItems})
+      return newSaleItems
+    }
   }
-  displayItem = (item) => {
+  displayItem = (itemId) => {
+    this.setState({display: 'singleItem'})
 
+  }
+
+  filterItems = (filter) => {
+    const filteredItems = this.state.feedItems.filter( item => {
+      return item.item_name.toLowerCase().includes(filter.toLowerCase()) || item.description.toLowerCase().includes(filter.toLowerCase())
+
+    })
+    this.setState({filteredItems})
   }
 
   render() {
@@ -109,15 +133,25 @@ class App extends Component {
           <h1 className="App-title">Shit my friends make</h1>
           <FbLogin loginHandler={this.facebookLoginHandler}/>
         </header>
-    <div>
+
       <div>
         <NavBar links={this.links} bgColor='yellow' textColor='black' showDisplay={this.showDisplay}/>
       </div>
+    <div>
+    {this.state.display === 'sell' ?
+    <NewItemForm addProduct={this.addProduct} />
 
-    {this.state.display === 'sell' ? <NewItemForm addProduct={this.addProduct} />
-    : this.state.display === 'shoppingFeed' ? <ShoppingFeed items={this.state.feedItems} />
-    : this.state.display === 'saleItems' ? <SaleItems items={this.state.itemsForSale} removeItem={this.removeItem}/>
-    : this.state.display === 'bookmarks' ? <Bookmarks items={this.state.bookmarks} removeItem={this.removeItem} displayItem={this.displayItem} />
+    : this.state.display === 'shoppingFeed' ?
+    <div>
+      <SearchBar filterItems={this.filterItems} />
+      <ShoppingFeed items={this.state.filteredItems ? this.state.filteredItems : this.state.feedItems} />
+    </div>
+    : this.state.display === 'saleItems' ?
+    <SaleItems items={this.state.itemsForSale} removeItem={this.removeItem} displayItem={this.displayItem}/>
+
+    : this.state.display === 'bookmarks' ?
+    <Bookmarks items={this.state.bookmarks} removeItem={this.removeItem} displayItem={this.displayItem} />
+
     : ""
     }
         </div>
