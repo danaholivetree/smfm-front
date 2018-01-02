@@ -4,11 +4,11 @@ import FbLogin from './FbLogin'
 
 const ShoppingFeed = ({items, addToCart, loginHandler}) => {
 
-  if (items.length < 1) {
-    window.FB.getLoginStatus( res => {
-      loginHandler(res)
-    })
-  }
+  // if (items.length < 1) {
+  //   window.FB.getLoginStatus( res => {
+  //     loginHandler(res)
+  //   })
+  // }
 
   const displayFeedItems = items.map( (item) => {
     return <FeedItem item={item} key={item.id} addToCart={addToCart}/>
