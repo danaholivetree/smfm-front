@@ -1,6 +1,6 @@
 import React from 'react'
 import FeedItem from './FeedItem'
-import FbLogin from './FbLogin'
+
 
 const ShoppingFeed = ({items, addToCart, loginHandler}) => {
 

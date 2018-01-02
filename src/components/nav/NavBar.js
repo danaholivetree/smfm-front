@@ -1,24 +1,25 @@
 import React from 'react'
-import NavLink from './NavLink'
+import NaviLink from './NavLink'
 const links = [
-  {linkTo: 'sell', text: 'Sell an Item', active: false},
-  {linkTo: 'shoppingFeed', text: 'Shopping Feed', active: false},
-  {linkTo: 'sellerFeed', text: 'Browse by Seller', active: false},
-  {linkTo: 'saleItems', text: 'My Items for Sale', active: false},
-  {linkTo: 'bookmarks', text: 'My Bookmarks', active: false},
-  {linkTo: 'shoppingCart', text: 'My Shopping Cart', active: false},
-  {linkTo: 'logout', text: 'Log Out', active: false}
+
+  {linkTo: '/shoppingFeed', text: 'Shopping Feed', active: false},
+  {linkTo: '/sellerFeed', text: 'Browse by Seller', active: false},
+  {linkTo: '/saleitems', text: 'My Items for Sale', active: false},
+  {linkTo: '/sell', text: 'Sell an Item', active: false},
+  {linkTo: '/bookmarks', text: 'My Bookmarks', active: false},
+  {linkTo: '/shoppingcart', text: 'My Shopping Cart', active: false},
+  {linkTo: '/logout', text: 'Log Out', active: false}
 ]
 
 export default class NavBar extends React.Component {
 
   listLinks = (link, index) => {
-    return <NavLink text={link.text} linkTo={link.linkTo} key={index} active={link.active} showDisplay={this.props.showDisplay}/>
+    return <NaviLink text={link.text} linkTo={link.linkTo} key={index} active={link.active}/>
   }
 
   render() {
     return(
-      <nav className="navbar navbar-default" style={{background: this.props.bgColor}}>
+      <nav className="navbar navbar-default">
         <div className="container-fluid">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">

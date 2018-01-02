@@ -8,7 +8,7 @@ const CartItem = ({item, addToCart, subtractFromCart, displayItem, removeItem}) 
   }
   const handleUpdate = (e) => {
     e.preventDefault()
-    displayItem(item)
+    // updateItem(item)
   }
   const handleRemove = (e) => {
     e.preventDefault()
@@ -23,6 +23,18 @@ const CartItem = ({item, addToCart, subtractFromCart, displayItem, removeItem}) 
     e.preventDefault()
     subtractFromCart(item)
   }
+  const updateQuantity = (e) => {
+    e.preventDefault()
+    console.log(e.target.value);
+    item.quantityInCart = e.target.value
+    cost = item.price * item.quantityInCart
+  }
+
+  const selector = []
+  for (let i = 1; i <= item.quantity; i++ ) {
+    selector.push(<option key={i} value={i}>{i}</option>)
+  }
+
   var cost = item.price * item.quantityInCart
 
   return (
@@ -34,7 +46,11 @@ const CartItem = ({item, addToCart, subtractFromCart, displayItem, removeItem}) 
           {item.quantityInCart > 1 ?
             <button type='button' onClick={subtractQuantity}>-</button> :'' }
         </td>
-        <td>{item.quantityInCart}</td>
+        <td>{item.quantity > 1 ?
+          <select name='quantity' onChange={updateQuantity}>
+            {selector}
+          </select>
+        : item.quantityInCart}</td>
         <td>{item.quantityInCart < item.quantity ?
           <button type='button'  onClick={addQuantity}>+</button> :'' }
         </td>

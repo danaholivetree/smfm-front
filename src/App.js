@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import NewItemForm from './components/NewItemForm'
-import FbLogin from './components/FbLogin'
-import ShoppingFeed from './components/ShoppingFeed'
-import SaleItems from './components/SaleItems'
-import NavBar from './components/nav/NavBar'
-import Bookmarks from './components/Bookmarks'
-import SearchBar from './components/SearchBar'
-import ShoppingCart from './components/ShoppingCart'
+// import NewItemForm from './components/NewItemForm'
+// import FbLogin from './components/FbLogin'
+// import ShoppingFeed from './components/ShoppingFeed'
+// import SaleItems from './components/SaleItems'
+// import NavBar from './components/nav/NavBar'
+// import Bookmarks from './components/Bookmarks'
+// import SearchBar from './components/SearchBar'
+// import ShoppingCart from './components/ShoppingCart'
+import AppRouter from './routers/AppRouter'
+import Header from './components/nav/Header'
 
 const API = process.env.REACT_APP_API_URL
 
@@ -184,7 +186,7 @@ class App extends Component {
         cart: [
           ...this.state.cart.slice(0, indexOfItem), {
             ...item,
-            quantityInCart: item.quantityInCart + 1
+            quantityInCart: (alreadyInCart[0].quantityInCart + 1)
           },
           ...this.state.cart.slice(indexOfItem + 1)
         ]
@@ -248,43 +250,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Shit my friends make</h1>
-          <FbLogin loginHandler={this.facebookLoginHandler}/>
-        </header>
-
+        <Header loginHandler={this.facebookLoginHandler}/>
         <div>
-          <NavBar links={this.links} bgColor='yellow' textColor='black' showDisplay={this.showDisplay}/>
-        </div>
-        <div>
-
-          {this.state.display === 'shoppingFeed'
-            ? <div>
-                <SearchBar filterItems={this.filterItems} filterCategory={this.filterCategory}/>
-                <ShoppingFeed items={this.state.filteredItems
-                  ? this.state.filteredItems
-                  : this.state.feedItems} addToCart={this.addToCart}/>
-              </div>
-
-            : this.state.display === 'sell'
-              ? <NewItemForm addProduct={this.addProduct}/>
-
-              : this.state.display === 'saleItems'
-                ? <SaleItems items={this.state.itemsForSale} removeItem={this.removeItem} displayItem={this.displayItem}/>
-
-                : this.state.display === 'bookmarks'
-                  ? <Bookmarks items={this.state.bookmarks} removeItem={this.removeItem} displayItem={this.displayItem}/>
-
-                  : this.state.display === 'shoppingCart'
-                    ? <ShoppingCart items={this.state.cart} removeItem={this.removeItem} displayItem={this.displayItem} addToCart={this.addToCart}/>
-
-                    : <div>
-                      <SearchBar filterItems={this.filterItems} filterCategory={this.filterCategory}/>
-                      <ShoppingFeed items={this.state.filteredItems
-                        ? this.state.filteredItems
-                        : this.state.feedItems} addToCart={this.addToCart} subtractFromCart={this.subtractFromCart} loginHandler={this.facebookLoginHandler}/>
-                    </div>
-}
+          <AppRouter />
         </div>
       </div>
     )
