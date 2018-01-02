@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import NewItemForm from './components/NewItemForm'
@@ -12,75 +12,93 @@ import ShoppingCart from './components/ShoppingCart'
 
 const API = process.env.REACT_APP_API_URL
 
-
-
 class App extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {loggedIn: false, friends: [], currentUser: {}, itemsForSale: [], feedItems: [], bookmarks: [], cart: []}
+    this.state = {
+      loggedIn: false,
+      friends: [],
+      currentUser: {},
+      itemsForSale: [],
+      feedItems: [],
+      bookmarks: [],
+      cart: []
+    }
   }
 
   facebookLoginHandler = (response) => {
-      console.log('facebook login handler ', response);
-      const {accessToken, userID} = response.authResponse
+    console.log('facebook login handler ', response);
+    const {accessToken, userID} = response.authResponse
 
-      window.FB.api('/me', currentUser => {
-        this.setState({currentUser, loggedIn: true})
-        var dbLogin = async (currUser) => {
-          let res = await fetch(`${API}/users`, {
-            method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            mode: 'cors',
-            body: JSON.stringify(currUser)
-          })
-          let userAndItemsForSale = await res.json()
-          const {products} = userAndItemsForSale
-          this.setState({currentUser: {...this.state.currentUser, id: products.id}, itemsForSale: products})
+    window.FB.api('/me', currentUser => {
+      this.setState({currentUser, loggedIn: true})
+      var dbLogin = async(currUser) => {
+        let res = await fetch(`${API}/users`, {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          mode: 'cors',
+          body: JSON.stringify(currUser)
+        })
+        let userAndItemsForSale = await res.json()
+        const {products} = userAndItemsForSale
+        this.setState({
+          currentUser: {
+            ...this.state.currentUser,
+            id: products.id
+          },
+          itemsForSale: products
+        })
 
-          return this.state.itemsForSale
-        }
-        var getAllItems = async () => {
-          let res = await fetch(`${API}/products`, {
-            method: 'GET',
-            headers: {"Content-Type": "application/json"},
-            mode: 'cors'
-          })
-          let feedItems = await res.json()
-          // console.log('***feedItems ', feedItems);
-          this.setState({...this.state, feedItems})
-        }
-        dbLogin(currentUser)
-        getAllItems()
-      })
-    }
-
-  getFriends = async (userID) => {
-    await window.FB.api(
-                `/${userID}/friends`,
-                'GET',
-                {},
-                function(friends) {
-                    console.log('response from get friends ', friends);
-                    this.setState({friends})
-                }
-            )
+        return this.state.itemsForSale
+      }
+      var getAllItems = async() => {
+        let res = await fetch(`${API}/products`, {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          mode: 'cors'
+        })
+        let feedItems = await res.json()
+        // console.log('***feedItems ', feedItems);
+        this.setState({
+          ...this.state,
+          feedItems
+        })
+      }
+      dbLogin(currentUser)
+      getAllItems()
+    })
   }
 
-  addProduct = async (product) => {
+  getFriends = async(userID) => {
+    await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
+      console.log('response from get friends ', friends);
+      this.setState({friends})
+    })
+  }
+
+  addProduct = async(product) => {
     console.log('product in addproduct ', product);
     product.sellerId = this.state.currentUser.userId
 
     let res = await fetch(`${API}/products`, {
       method: 'POST',
-      headers: {"Content-Type": "application/json"},
+      headers: {
+        "Content-Type": "application/json"
+      },
       mode: 'cors',
       body: JSON.stringify(product)
     })
     let newProduct = await res.json()
     newProduct.sellerName = this.state.currentUser.name
     console.log('newproduct came back from db ', newProduct);
-    this.setState({itemsForSale: [...this.state.itemsForSale, ]})
+    this.setState({
+      itemsForSale: [...this.state.itemsForSale]
+    })
   }
 
   showDisplay = (link) => {
@@ -88,11 +106,13 @@ class App extends Component {
     this.setState({display: `${link}`})
   }
 
-  removeItem = async (item, view) => {
+  removeItem = async(item, view) => {
     if (view === 'bookmarks') {
       let res = await fetch(`${API}/bookmarks/${item}`, {
         method: 'DELETE',
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json"
+        },
         mode: 'cors',
         // body: JSON.stringify(item)
       })
@@ -100,11 +120,12 @@ class App extends Component {
       console.log('edited bookmarks came back from db ', newBookmarks);
       this.setState({bookmarks: newBookmarks})
       return newBookmarks
-    }
-    else if (view === 'saleItems') {
+    } else if (view === 'saleItems') {
       let res = await fetch(`${API}/products/${item}`, {
         method: 'DELETE',
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          "Content-Type": "application/json"
+        },
         mode: 'cors',
         // body: JSON.stringify(item)
       })
@@ -120,30 +141,51 @@ class App extends Component {
   }
 
   filterItems = (filter) => {
-    const filteredItems = this.state.feedItems.filter( item => {
+    const filteredItems = this.state.feedItems.filter(item => {
       return item.itemName.toLowerCase().includes(filter.toLowerCase()) || item.description.toLowerCase().includes(filter.toLowerCase())
 
     })
     this.setState({filteredItems})
   }
 
+  filterCategory = (filter, checked) => {
+    if (checked) {
+      if (this.state.filteredItems) {
+        const filteredItems = this.state.filteredItems.filter( item => {
+          return item.category.toLowerCase() === filter
+        })
+        this.setState({filteredItems})
+      } else {
+        const filteredItems = this.state.feedItems.filter(item => {
+          return item.category.toLowerCase() === filter
+        })
+        this.setState({filteredItems})
+      }
+    } else { //unchecked filter
+      const unfiltered = this.state.feedItems.filter(item => {
+        return item.category.toLowerCase() === filter
+      })
+      this.setState({filteredItems: [...this.state.filteredItems, unfiltered]})
+    }
+  }
+
   addToCart = (item) => {
-    let alreadyInCart = this.state.cart.filter( el => {
+    let alreadyInCart = this.state.cart.filter(el => {
       return (el.id === item.id)
     })
-    console.log('alreadyincart ', alreadyInCart);
-    console.log('item quantity in cart ', item.quantityInCart);
-
     if (alreadyInCart.length < 1) {
       item.quantityInCart = 1
-      this.setState({cart: [...this.state.cart, item]})
+      this.setState({
+        cart: [...this.state.cart, item]
+      })
     } else if (item.quantity > item.quantityInCart) {
-      console.log('item.quantity should be greater than 1', item.quantity);
       let indexOfItem = this.state.cart.indexOf(alreadyInCart[0])
-      console.log('index of item already in cart ', indexOfItem);
-      this.setState({cart:
-        [...this.state.cart.slice(0, indexOfItem),
-          {...item, quantityInCart: item.quantityInCart+1},
+      this.setState({
+        cart: [
+          ...this.state.cart.slice(0, indexOfItem), {
+            ...item,
+            quantityInCart: item.quantityInCart + 1
+          },
           ...this.state.cart.slice(indexOfItem + 1)
         ]
       })
@@ -152,24 +194,55 @@ class App extends Component {
   }
 
   subtractFromCart = (item) => {
-    let itemToChange = this.state.cart.filter( el => {
+    let itemToChange = this.state.cart.filter(el => {
       return item.id === el.id
     })
     let indexOfItem = this.state.cart.indexOf(itemToChange)
-    this.setState({cart:
-      [...this.state.cart.slice(0, indexOfItem),
-        {...item, quantityInCart: item.quantityInCart-1},
+    this.setState({
+      cart: [
+        ...this.state.cart.slice(0, indexOfItem), {
+          ...item,
+          quantityInCart: item.quantityInCart - 1
+        },
         ...this.state.cart.slice(indexOfItem + 1)
       ]
     })
   }
 
-  removeFromCart = (item) => {
-    let allCartItems = this.state.cart
-    let itemToRemove = this.state.cart.indexOf(item)
-    this.setState({cart: [...this.state.cart.slice(0, itemToRemove),
-    ...this.state.cart.slice(itemToRemove+1)]
-    })
+  removeItem = (item, loc) => {
+    let indexToRemove
+    switch(loc) {
+      case 'cart':
+        indexToRemove = this.state.cart.indexOf(item)
+        console.log(this.state.cart.indexOf(item));
+        this.setState({
+          cart : [
+            ...this.state.cart.slice(0, indexToRemove),
+            ...this.state.cart.slice(indexToRemove + 1)
+          ]
+        })
+        break
+      case 'bookmarks':
+        indexToRemove = this.state.bookmarks.indexOf(item)
+        console.log(this.state.bookmarks.indexOf(item))
+        this.setState({
+          bookmarks : [
+            ...this.state.bookmarks.slice(0, indexToRemove),
+            ...this.state.bookmarks.slice(indexToRemove + 1)
+          ]
+        })
+        break
+      case 'itemsForSale':
+        indexToRemove = this.state.itemsForSale.indexOf(item)
+        console.log(this.state.itemsForSale.indexOf(item))
+        this.setState({
+          itemsForSale : [
+            ...this.state.itemsForSale.slice(0, indexToRemove),
+            ...this.state.itemsForSale.slice(indexToRemove + 1)
+          ]
+        })
+        break
+    }
   }
 
   render() {
@@ -180,35 +253,38 @@ class App extends Component {
           <FbLogin loginHandler={this.facebookLoginHandler}/>
         </header>
 
-      <div>
-        <NavBar links={this.links} bgColor='yellow' textColor='black' showDisplay={this.showDisplay}/>
-      </div>
-    <div>
+        <div>
+          <NavBar links={this.links} bgColor='yellow' textColor='black' showDisplay={this.showDisplay}/>
+        </div>
+        <div>
 
+          {this.state.display === 'shoppingFeed'
+            ? <div>
+                <SearchBar filterItems={this.filterItems} filterCategory={this.filterCategory}/>
+                <ShoppingFeed items={this.state.filteredItems
+                  ? this.state.filteredItems
+                  : this.state.feedItems} addToCart={this.addToCart}/>
+              </div>
 
-    {this.state.display === 'shoppingFeed' ?
-    <div>
-      <SearchBar filterItems={this.filterItems} />
-      <ShoppingFeed items={this.state.filteredItems ? this.state.filteredItems : this.state.feedItems} addToCart={this.addToCart}/>
-    </div>
+            : this.state.display === 'sell'
+              ? <NewItemForm addProduct={this.addProduct}/>
 
-    :this.state.display === 'sell' ?
-    <NewItemForm addProduct={this.addProduct} />
+              : this.state.display === 'saleItems'
+                ? <SaleItems items={this.state.itemsForSale} removeItem={this.removeItem} displayItem={this.displayItem}/>
 
-    : this.state.display === 'saleItems' ?
-    <SaleItems items={this.state.itemsForSale} removeItem={this.removeItem} displayItem={this.displayItem}/>
+                : this.state.display === 'bookmarks'
+                  ? <Bookmarks items={this.state.bookmarks} removeItem={this.removeItem} displayItem={this.displayItem}/>
 
-    : this.state.display === 'bookmarks' ?
-    <Bookmarks items={this.state.bookmarks} removeItem={this.removeItem} displayItem={this.displayItem} />
+                  : this.state.display === 'shoppingCart'
+                    ? <ShoppingCart items={this.state.cart} removeItem={this.removeItem} displayItem={this.displayItem} addToCart={this.addToCart}/>
 
-    : this.state.display === 'shoppingCart' ?
-    <ShoppingCart items={this.state.cart} removeItem={this.removeItem} displayItem={this.displayItem} addToCart={this.addToCart}/>
-
-    : <div>
-      <SearchBar filterItems={this.filterItems} />
-      <ShoppingFeed items={this.state.filteredItems ? this.state.filteredItems : this.state.feedItems} addToCart={this.addToCart} subtractFromCart={this.subtractFromCart} loginHandler={this.facebookLoginHandler}/>
-    </div>
-    }
+                    : <div>
+                      <SearchBar filterItems={this.filterItems} filterCategory={this.filterCategory}/>
+                      <ShoppingFeed items={this.state.filteredItems
+                        ? this.state.filteredItems
+                        : this.state.feedItems} addToCart={this.addToCart} subtractFromCart={this.subtractFromCart} loginHandler={this.facebookLoginHandler}/>
+                    </div>
+}
         </div>
       </div>
     )

@@ -28,6 +28,7 @@ export default class FacebookLogin extends React.Component {
         this.setState({loggedIn: true})
         this.props.loginHandler(res)
       }
+      else this.FB.login()
     })
   }
 

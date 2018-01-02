@@ -12,7 +12,7 @@ const CartItem = ({item, addToCart, subtractFromCart, displayItem, removeItem}) 
   }
   const handleRemove = (e) => {
     e.preventDefault()
-    removeItem(item)
+    removeItem(item, 'cart')
   }
 
   const addQuantity = (e) => {
