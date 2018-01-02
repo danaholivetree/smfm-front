@@ -22,16 +22,12 @@ class App extends Component {
   }
 
   facebookLoginHandler = (response) => {
-    console.log('in the login handler on app, response should be authResponse', response);
-
+      console.log('facebook login handler ', response);
       const {accessToken, userID} = response.authResponse
 
-      this.setState({currentUser: {...this.state.currentUser, accessToken}})
-      //get currentUser
       window.FB.api('/me', currentUser => {
         this.setState({currentUser, loggedIn: true})
         var dbLogin = async (currUser) => {
-          console.log('fetching from users route');
           let res = await fetch(`${API}/users`, {
             method: 'POST',
             headers: {"Content-Type": "application/json"},
@@ -40,11 +36,8 @@ class App extends Component {
           })
           let userAndItemsForSale = await res.json()
           const {products} = userAndItemsForSale
-          console.log('products came back ', products);
-
           this.setState({currentUser: {...this.state.currentUser, id: products.id}, itemsForSale: products})
 
-          // console.log('this.state after login ', this.state);
           return this.state.itemsForSale
         }
         var getAllItems = async () => {
@@ -127,26 +120,52 @@ class App extends Component {
 
   filterItems = (filter) => {
     const filteredItems = this.state.feedItems.filter( item => {
-      return item.item_name.toLowerCase().includes(filter.toLowerCase()) || item.description.toLowerCase().includes(filter.toLowerCase())
+      return item.itemName.toLowerCase().includes(filter.toLowerCase()) || item.description.toLowerCase().includes(filter.toLowerCase())
 
     })
     this.setState({filteredItems})
   }
 
   addToCart = (item) => {
-    // let allSaleItems = this.state.itemsForSale
-    // let newCartItem = this.state.itemsForSale.find( el => {
-    //   return el.id = itemId
-    // })
-    this.setState({cart: [...this.state.cart, item]})
-    
+    let alreadyInCart = this.state.cart.filter( el => {
+      return (el.id === item.id)
+    })
+    console.log('alreadyincart ', alreadyInCart);
+
+    if (alreadyInCart.length < 1) {
+      item.quantityInCart = 1
+      this.setState({cart: [...this.state.cart, item]})
+    } else if (item.quantity > 1) {
+      let indexOfItem = this.state.cart.indexOf(alreadyInCart)
+      console.log('index of item already in cart ', indexOfItem);
+      this.setState({cart:
+        [...this.state.cart.slice(0, indexOfItem),
+          {...item, quantityInCart: item.quantityInCart+1},
+          ...this.state.cart.slice(indexOfItem + 1)
+        ]
+      })
+    }
+  }
+
+  subtractFromCart = (item) => {
+    let itemToChange = this.state.cart.filter( el => {
+      return item.id === el.id
+    })
+    let indexOfItem = this.state.cart.indexOf(itemToChange)
+    this.setState({cart:
+      [...this.state.cart.slice(0, indexOfItem),
+        {...item, quantityInCart: item.quantityInCart-1},
+        ...this.state.cart.slice(indexOfItem + 1)
+      ]
+    })
   }
 
   removeFromCart = (item) => {
     let allCartItems = this.state.cart
-    let itemToRemove =
-    this.setState({cart: [...this.state.cart.slice(0, this.state.cart.indexOf(item)-1),
-    ...this.state.cart.slice(this.state.cart.indexOf(item))]})
+    let itemToRemove = this.state.cart.indexOf(item)
+    this.setState({cart: [...this.state.cart.slice(0, itemToRemove),
+    ...this.state.cart.slice(itemToRemove+1)]
+    })
   }
 
   render() {
@@ -179,9 +198,12 @@ class App extends Component {
     <Bookmarks items={this.state.bookmarks} removeItem={this.removeItem} displayItem={this.displayItem} />
 
     : this.state.display === 'shoppingCart' ?
-    <ShoppingCart items={this.state.cart} removeItem={this.removeItem} displayItem={this.displayItem} />
+    <ShoppingCart items={this.state.cart} removeItem={this.removeItem} displayItem={this.displayItem} addToCart={this.addToCart}/>
 
-    : ''
+    : <div>
+      <SearchBar filterItems={this.filterItems} />
+      <ShoppingFeed items={this.state.filteredItems ? this.state.filteredItems : this.state.feedItems} addToCart={this.addToCart} subtractFromCart={this.subtractFromCart} loginHandler={this.facebookLoginHandler}/>
+    </div>
     }
         </div>
       </div>

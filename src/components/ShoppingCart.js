@@ -8,14 +8,16 @@ const ShoppingCart = ({items, displayItem, removeItem}) => {
    })
 
 return (
-  <div>
+  <div className='container'>
     My Shopping Cart
     <table>
       <thead>
         <tr>
           <th>Product Name</th>
           <th>Seller</th>
+          <th></th>
           <th>Quantity</th>
+          <th></th>
           <th>Price</th>
           <th>Totals</th>
           <th></th>

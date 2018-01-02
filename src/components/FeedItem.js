@@ -4,19 +4,22 @@ const FeedItem = ({item, addToCart}) => {
 
   const handleAddToCart = (e) => {
     e.preventDefault()
-    console.log('item id selected for cart ', e.target.dataset.id);
     console.log('item to be added to cart ', item);
     addToCart(item)
   }
 
   return (
 
-      <li>
-        {item.itemName} ** {item.category} ** {item.sellerName} ** {item.description} ** {item.quantity} ** {item.price}
-        <input type='button' data-id={item.id} value='add to cart' onClick={handleAddToCart} />
-       </li>
-
-
+    <div className="card" style={{width: "20rem"}}>
+      <img className="card-img-top" src={item.image} alt='image' />
+      <div className="card-block">
+        <h4 className="card-title">{item.itemName}</h4>
+        <h6>Seller: {item.sellerName} Price: {item.price} Quantity Available: {item.quantity}</h6>
+        <p className="card-text">{item.description}</p>
+        <a href="#" className="btn btn-primary">link</a>
+        <input className='btn btn-primary' type='button' value='add to cart' onClick={handleAddToCart} />
+      </div>
+    </div>
   )
 }
 export default FeedItem

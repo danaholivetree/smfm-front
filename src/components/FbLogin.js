@@ -16,11 +16,7 @@ export default class FacebookLogin extends React.Component {
 
   initializeFacebookLogin = () => {
     console.log('initialize facebook login');
-    if (!window.FB) {
-      console.log('fb wasn\'t ready in initialize');
-    }
     this.FB = window.FB
-    console.log('set this.fb = window.fb, going to check login state');
     this.checkLoginState()
   }
 
@@ -28,9 +24,8 @@ export default class FacebookLogin extends React.Component {
     console.log('checking login state');
     return this.FB.getLoginStatus( res => {
       if (res.status === 'connected') {
-        console.log('connected, setting loggedIn state to true');
+        console.log('connected');
         this.setState({loggedIn: true})
-        console.log('sending res to login handler ', res);
         this.props.loginHandler(res)
       }
     })

@@ -1,31 +1,29 @@
 import React from 'react'
 
-const CartItem = ({item, displayItem, removeItem}) => {
+const CartItem = ({item, addToCart, subtractFromCart, displayItem, removeItem}) => {
 
   const handleDisplay = (e) => {
     e.preventDefault()
-    displayItem(e.target.dataset.id)
+    displayItem(item)
   }
-
-  const quantitySelector = (quant) => {
-    var options = []
-    while (quant > 0) {
-      options.shift(quant)
-      quant--
-    }
-    console.log('options ', options);
-    return options.map( opt => {
-      return `<option value={opt}>{opt}</option>`
-    })
-  }
-
-  const updateQuantity = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault()
-    console.log('e.target.value ', e.targetv);
-    cost = item.price * e.target.value
-
+    displayItem(item)
   }
-  var cost = item.price
+  const handleRemove = (e) => {
+    e.preventDefault()
+    removeItem(item)
+  }
+
+  const addQuantity = (e) => {
+    e.preventDefault()
+    addToCart(item)
+  }
+  const subtractQuantity = (e) => {
+    e.preventDefault()
+    subtractFromCart(item)
+  }
+  var cost = item.price * item.quantityInCart
 
   return (
 
@@ -33,18 +31,18 @@ const CartItem = ({item, displayItem, removeItem}) => {
         <td>{item.itemName}</td>
         <td>{item.sellerName}</td>
         <td>
-            { item.quantity > 1 ?
-              <select name="text" onChange={updateQuantity}>
-                {quantitySelector}
-              </select>
-            : 1
-          }
+          {item.quantityInCart > 1 ?
+            <button type='button' onClick={subtractQuantity}>-</button> :'' }
         </td>
-        <td>{item.price}</td>
+        <td>{item.quantityInCart}</td>
+        <td>{item.quantityInCart < item.quantity ?
+          <button type='button'  onClick={addQuantity}>+</button> :'' }
+        </td>
+        <td>${item.price}</td>
         <td>{cost}</td>
-        <td><input type='button' value='view item' data-id='item.id' onClick='handleDisplay' /></td>
-        <td><input type='button' value='update item' data-id='item.id' onClick='handleUpdate' /></td>
-        <td><input type='button' value='remove item' data-id='item.id' onClick='handleRemove' /></td>
+        <td><input type='button' value='view item' data-id='item.id' onClick={handleDisplay} /></td>
+        <td><input type='button' value='update item' data-id='item.id' onClick={handleUpdate} /></td>
+        <td><input type='button' value='remove item' data-id='item.id' onClick={handleRemove} /></td>
       </tr>
 
 
