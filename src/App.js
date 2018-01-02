@@ -82,8 +82,9 @@ class App extends Component {
     console.log('newproduct came back from db ', newProduct);
     this.setState({itemsForSale: [...this.state.itemsForSale, ]})
   }
+
   showDisplay = (link) => {
-    console.log(this.state)
+
     this.setState({display: `${link}`})
   }
 
@@ -131,12 +132,14 @@ class App extends Component {
       return (el.id === item.id)
     })
     console.log('alreadyincart ', alreadyInCart);
+    console.log('item quantity in cart ', item.quantityInCart);
 
     if (alreadyInCart.length < 1) {
       item.quantityInCart = 1
       this.setState({cart: [...this.state.cart, item]})
-    } else if (item.quantity > 1) {
-      let indexOfItem = this.state.cart.indexOf(alreadyInCart)
+    } else if (item.quantity > item.quantityInCart) {
+      console.log('item.quantity should be greater than 1', item.quantity);
+      let indexOfItem = this.state.cart.indexOf(alreadyInCart[0])
       console.log('index of item already in cart ', indexOfItem);
       this.setState({cart:
         [...this.state.cart.slice(0, indexOfItem),
@@ -145,6 +148,7 @@ class App extends Component {
         ]
       })
     }
+    return this.state.cart
   }
 
   subtractFromCart = (item) => {

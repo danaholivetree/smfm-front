@@ -21,11 +21,11 @@ return (
     : ''
     }
 
-    <div>
-      <ul>
+    <div className='container'>
+
         ShoppingFeed
         {displayFeedItems}
-      </ul>
+
     </div>
   </div>
 )
