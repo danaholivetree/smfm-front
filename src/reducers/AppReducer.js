@@ -54,5 +54,40 @@ const AppReducer = (state, action) => {
             state.cart.slice(indexToEdit + 1)
           ]
       }
-  }
+    case 'FILTER_ITEMS_BY_SEARCH':
+      //onChange event on SearchBar in ShoppingFeed. action.filter
+      const filteredItems = state.feedItems.filter(item => {
+        return item.itemName.toLowerCase().includes(action.filter.toLowerCase()) || item.description.toLowerCase().includes(action.filter.toLowerCase())
+
+      })
+      return {...state, {filteredItems}
+      }
+    case 'FILTER_SELLERS_BY_SEARCH':
+      //onChange event on SearchBar in SellersFeed. action.filter
+      const filteredSellers = state.friends.filter(friend => {
+        return friend.name.toLowerCase().includes(action.filter.toLowerCase())
+      })
+      return {...state, {filteredSellers}
+      }
+    case 'FILTER_CATEGORY':
+      // action.filter and action.checked from checkbox onChange handler in ShoppingFeed
+      if (action.checked) {
+        if (state.filteredItems) {
+          const filteredItems = state.filteredItems.filter( item => {
+            return item.category.toLowerCase() === filter
+          })
+        } else {
+          const filteredItems = state.feedItems.filter(item => {
+            return item.category.toLowerCase() === filter
+          })
+          return {...state, filteredItems}
+          break;
+        }
+      } else { //unchecked filter
+        const unfiltered = state.feedItems.filter(item => {
+          return item.category.toLowerCase() === filter
+        })
+        return {...state, filteredItems: [...state.filteredItems, unfiltered]}
+      }
+  } //end switch
 }
