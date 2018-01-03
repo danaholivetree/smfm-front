@@ -60,6 +60,7 @@ class Login extends React.Component {
         appId="135045367176902"
         autoLoad={true}
         fields="name,email,picture"
+        returnScopes={true}
         scope="public_profile,user_friends"
         callback={this.props.loginHandler}
         onFailure=''

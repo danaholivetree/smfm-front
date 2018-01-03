@@ -72,6 +72,7 @@ class App extends Component {
         })
       }
       dbLogin(currentUser)
+      this.getFriends(currentUser.id)
       getAllItems()
     })
   }
@@ -80,6 +81,8 @@ class App extends Component {
     await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
       console.log('response from get friends ', friends);
       this.setState({friends})
+      
+      return this.state.friends
     })
   }
 
