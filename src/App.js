@@ -34,54 +34,54 @@ class App extends Component {
     // const {accessToken, userID} = response.authResponse
     window.FB.api('/me', currentUser => {
       this.setState({currentUser, loggedIn: true})
-      var dbLogin = async(currUser) => {
-        let res = await fetch(`${API}/users`, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json"
-          },
-          mode: 'cors',
-          body: JSON.stringify(currUser)
-        })
-        let userAndItemsForSale = await res.json()
-        const {products} = userAndItemsForSale
-        this.setState({
-          currentUser: {
-            ...this.state.currentUser,
-            id: products.id
-          },
-          itemsForSale: products
-        })
-        console.log('state ', this.state);
-
-        return this.state.itemsForSale
-      }
-      var getAllItems = async() => {
-        let res = await fetch(`${API}/products`, {
-          method: 'GET',
-          headers: {
-            "Content-Type": "application/json"
-          },
-          mode: 'cors'
-        })
-        let feedItems = await res.json()
-        // console.log('***feedItems ', feedItems);
-        this.setState({
-          ...this.state,
-          feedItems
-        })
-      }
-      dbLogin(currentUser)
+      this.dbLogin(currentUser)
       this.getFriends(currentUser.id)
-      getAllItems()
+      this.getAllItems()
+    })
+  }
+
+  dbLogin = async(currUser) => {
+    let res = await fetch(`${API}/users`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: 'cors',
+      body: JSON.stringify(currUser)
+    })
+    let userAndItemsForSale = await res.json()
+    const {products} = userAndItemsForSale
+    this.setState({
+      currentUser: {
+        ...this.state.currentUser,
+        id: products.id
+      },
+      itemsForSale: products
+    })
+    console.log('state ', this.state);
+    return this.state.itemsForSale
+  }
+
+  getAllItems = async() => {
+    let res = await fetch(`${API}/products`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: 'cors'
+    })
+    let feedItems = await res.json()
+    // console.log('***feedItems ', feedItems);
+    this.setState({
+      ...this.state,
+      feedItems
     })
   }
 
   getFriends = async(userID) => {
     await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
-      console.log('response from get friends ', friends);
-      this.setState({friends})
-      
+      console.log('response from get friends ', friends.data);
+      this.setState({friends: friends.data})
       return this.state.friends
     })
   }
@@ -104,11 +104,6 @@ class App extends Component {
     this.setState({
       itemsForSale: [...this.state.itemsForSale]
     })
-  }
-
-  showDisplay = (link) => {
-
-    this.setState({display: `${link}`})
   }
 
   removeItem = async(item, view) => {
@@ -138,6 +133,19 @@ class App extends Component {
       console.log('edited sale items came back from db ', newSaleItems);
       this.setState({itemsForSale: newSaleItems})
       return newSaleItems
+    } else if (view === 'shoppingCart') {
+      let res = await fetch(`${API}/cart/${item}`, {
+        method: 'DELETE',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        mode: 'cors',
+        // body: JSON.stringify(item)
+      })
+      let newCartItems = await res.json()
+      console.log('edited cart items came back from db ', newCartItems);
+      this.setState({cart: newCartItems})
+      return newCartItems
     }
   }
   displayItem = (itemId) => {
@@ -150,7 +158,7 @@ class App extends Component {
       return item.itemName.toLowerCase().includes(filter.toLowerCase()) || item.description.toLowerCase().includes(filter.toLowerCase())
 
     })
-    this.setState({filteredItems})
+    this.setState(...this.state, {filteredItems})
   }
 
   filterCategory = (filter, checked) => {
