@@ -31,8 +31,7 @@ class App extends Component {
 
   facebookLoginHandler = (response) => {
     console.log('facebook login handler ', response);
-    const {accessToken, userID} = response.authResponse
-
+    // const {accessToken, userID} = response.authResponse
     window.FB.api('/me', currentUser => {
       this.setState({currentUser, loggedIn: true})
       var dbLogin = async(currUser) => {
@@ -53,6 +52,7 @@ class App extends Component {
           },
           itemsForSale: products
         })
+        console.log('state ', this.state);
 
         return this.state.itemsForSale
       }
@@ -244,13 +244,18 @@ class App extends Component {
           ]
         })
         break
+      default:
+        return
     }
   }
 
   render() {
     return (
       <div className="App">
-        <Header loginHandler={this.facebookLoginHandler}/>
+        <div>
+          <Header loginHandler={this.facebookLoginHandler}/>
+        </div>
+
         <div>
           <AppRouter />
         </div>
