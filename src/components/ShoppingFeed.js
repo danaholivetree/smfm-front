@@ -1,9 +1,11 @@
 import React from 'react'
 import FeedItem from './FeedItem'
+import { addToCart } from '../actions/AppActions'
+const API = process.env.REACT_APP_API_URL
 
-const ShoppingFeed = ({state}) => {
+const ShoppingFeed = (props, {store}) => {
 
-  export const addToCart = async (item) => {
+  const addItemToCart = async (item) => {
     let alreadyInCart = state.cart.filter(el => {
         return (el.id === item.id)
     })
@@ -18,15 +20,12 @@ const ShoppingFeed = ({state}) => {
             body: JSON.stringify({...item, quantityInCart: 1, userId: state.currentUser.id})
       })
       let newCartItem = await res.json()
-      return {
-        type: 'ADD_TO_CART',
-        newCartItem
-      }
+    store.dispatch(addToCart(newCartItem))
     }
   }
 
   const displayFeedItems = state.feedItems.map( (item) => {
-    return <FeedItem item={item} key={item.id} addToCart={addToCart}/>
+    return <FeedItem key={item.id}/>
   })
 
   return (

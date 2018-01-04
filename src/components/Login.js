@@ -50,9 +50,6 @@ class Login extends React.Component {
   //   })
   // }
 
-  failureMsg = (res) => {
-
-  }
 
   render() {
     return (
@@ -63,7 +60,6 @@ class Login extends React.Component {
         returnScopes={true}
         scope="public_profile,user_friends"
         callback={this.props.loginHandler}
-        onFailure=''
       />
     )
   }

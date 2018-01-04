@@ -1,6 +1,8 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux'
 //import reducers
-import AppReducer from './reducers/AppReducer';
+import AppReducer from './reducers/AppReducer'
+
+import { syncHistoryWithStore, routerReducer, ConnectedRouter } from 'react-router-redux'
 
 const preloadedState = {
   loggedIn: false,
@@ -11,7 +13,9 @@ const preloadedState = {
   bookmarks: [],
   cart: []
 }
-let store = createStore(AppReducer, preloadedState)
+const store = createStore(AppReducer, preloadedState)
+// const history = syncHistoryWithStore(browserHistory, store)
+
     // combineReducers({
     //     AppReducer
     // })
@@ -19,5 +23,4 @@ let store = createStore(AppReducer, preloadedState)
     //     logger(),
     //     promise()
     // )
-
-  export default store
+export default store

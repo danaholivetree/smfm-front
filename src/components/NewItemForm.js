@@ -1,8 +1,8 @@
 import React from 'react'
+import { addItemForSale } from '../actions/AppActions'
 const API = process.env.REACT_APP_API_URL
-import addItemForSale from '../actions/AppActions'
 
-const NewItemForm = ({addProduct, state}) => {
+const NewItemForm = ({state}) => {
 
   const createProduct = (e) => {
     e.preventDefault()
@@ -11,8 +11,8 @@ const NewItemForm = ({addProduct, state}) => {
       category: e.target.category.value,
       quantity: e.target.quantity.value,
       price: e.target.price.value,
-      description: e.target.description.value
-      sellerId: state.currentUser.id
+      description: e.target.description.value,
+      sellerId: state.currentUser.id,
       sellerName: state.currentUser.name
     }
     console.log('product in createProduct ', product);
@@ -30,11 +30,8 @@ const NewItemForm = ({addProduct, state}) => {
     })
     let newProduct = await res.json()
     console.log('newproduct came back from db ', newProduct);
-    dispatch(addItemForSale(newProduct))
+    addItemForSale(newProduct)
   }
-
-
-
 
   return (
     <form onSubmit={createProduct}>

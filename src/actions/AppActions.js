@@ -1,10 +1,3 @@
-export const addItemForSale = (newProduct) => {
-  return {
-    type: 'ADD_ITEM_FOR_SALE',
-    newProduct
-  }
-}
-
 export const logIn = (loggedIn) => {
   return {
     type: 'LOG_IN',
@@ -32,7 +25,7 @@ export const getAllFeedItems = (feedItems) => {
   }
 }
 
-export const getAllFeedItems = (itemsForSale) => {
+export const getAllSaleItems = (itemsForSale) => {
   return {
     type: 'GET_ITEMS_FOR_SALE',
     itemsForSale
@@ -109,23 +102,24 @@ export const updateCartQuantity = (updatedCartItem) => {
   }
 }
 
-export const filterItemsBySearch = (filteredItems) => {
+export const filterItemsBySearch = (searchFilter) => {
   return {
     type: 'FILTER_ITEMS_BY_SEARCH',
-    filteredItems
+    searchFilter
   }
 }
 
-export const filterSellersBySearch = (filteredSellers) => {
+export const filterSellersBySearch = (filter) => {
   return {
     type: 'FILTER_SELLERS_BY_SEARCH',
-    filteredSellers
+    filter
   }
 }
 
-export const filterItemsByCategory = (filteredItems) => {
+export const filterItemsByCategory = (categoryFilter, checked) => {
   return {
     type: 'FILTER_CATEGORY',
-    filteredItems
+    categoryFilter,
+    checked
   }
 }

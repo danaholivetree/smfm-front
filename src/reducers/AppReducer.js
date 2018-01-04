@@ -39,16 +39,17 @@ const AppReducer = (state, action) => {
       let indexToEdit = state.itemsForSale.indexOf(action.editedItem)
       return {...state, itemsForSale:
           [...state.itemsForSale.slice(0, indexToEdit),
-            editedItem,
+            action.editedItem,
             state.itemsForSale.slice(indexToEdit + 1)
           ]
       }
     case 'ADD_BOOKMARK':
       //bookmark button onClick on FeedItem. takes product.id, sends it with currentUser.id to POST bookmarks/:id, returns a bookmark product object with a bookmark.id and set as newBookmark
-      return {...state, bookmarks: [...state.bookmarks, newBookmark]}
+      return {...state, bookmarks: [...state.bookmarks, action.newBookmark]}
+
     case 'REMOVE_BOOKMARK':
       //delete button on Bookmarks component takes bookmark.id, sends it to DELETE bookmarks/:id, and sets returned item as itemToRemove
-      let indexToRemove = state.bookmarks.indexOf(action.itemToRemove)
+      indexToRemove = state.bookmarks.indexOf(action.itemToRemove)
       return {...state, bookmarks:
           [...state.bookmarks.slice(0, indexToRemove),
             state.bookmarks.slice(indexToRemove + 1)
@@ -63,7 +64,7 @@ const AppReducer = (state, action) => {
       // if (alreadyInCart.length < 1) { //wasn't already in the cart
       //   item.quantityInCart = 1
         //api POST to cart. takes action.item.id, sends it with currentUser.id to POST cart/:id, returns a cart product object with cart quantity and a cart.id. set it as newCartItem.
-        return {...state, cart: [...state.cart, newCartItem]}
+        return {...state, cart: [...state.cart, action.newCartItem]}
       // } else if (item.quantity > item.quantityInCart) { //item already in cart
       //   let indexOfItem = this.state.cart.indexOf(alreadyInCart[0])
       //   let oldQuantity = alreadyInCart[0].quantityInCart
@@ -83,7 +84,7 @@ const AppReducer = (state, action) => {
 
     case 'REMOVE_FROM_CART':
       //delete button on CartItem in ShoppingCart container. sends cartItem.id to DELETE cart/:id and returns item as itemToRemove
-      let indexToRemove = state.cart.indexOf(action.itemToRemove)
+      indexToRemove = state.cart.indexOf(action.itemToRemove)
       return {...state, cart:
           [...state.cart.slice(0, indexToRemove),
             state.cart.slice(indexToRemove + 1)
@@ -91,17 +92,17 @@ const AppReducer = (state, action) => {
       }
     case 'UPDATE_CART_QUANTITY':
       // onChange event for shopping cart selector OR quantity selector in FeedItem. send NEW Quantity to PUT cart/:id and receive updatedCartItem
-      let indexToEdit = state.cart.indexOf(action.updatedCartItem)
+      indexToEdit = state.cart.indexOf(action.updatedCartItem)
       return {...state, cart:
           [...state.cart.slice(0, indexToEdit),
-            updatedCartItem,
+            action.updatedCartItem,
             state.cart.slice(indexToEdit + 1)
           ]
       }
     case 'FILTER_ITEMS_BY_SEARCH':
       //onChange event on SearchBar in ShoppingFeed. action.filter
       const filteredItems = state.feedItems.filter(item => {
-        return item.itemName.toLowerCase().includes(action.filter.toLowerCase()) || item.description.toLowerCase().includes(action.filter.toLowerCase())
+        return item.itemName.toLowerCase().includes(action.searchFilter.toLowerCase()) || item.description.toLowerCase().includes(action.searchFilter.toLowerCase())
 
       })
       return {...state, filteredItems }
@@ -116,18 +117,18 @@ const AppReducer = (state, action) => {
       if (action.checked) {
         if (state.filteredItems) {
           const filteredItems = state.filteredItems.filter( item => {
-            return item.category.toLowerCase() === filter
+            return item.category.toLowerCase() === action.categoryFilter
           })
         } else {
           const filteredItems = state.feedItems.filter(item => {
-            return item.category.toLowerCase() === filter
+            return item.category.toLowerCase() === action.categoryFilter
           })
         }
         return {...state, filteredItems}
         break;
       } else { //unchecked filter
         const unfiltered = state.feedItems.filter(item => {
-          return item.category.toLowerCase() === filter
+          return item.category.toLowerCase() === action.categoryFilter
         })
         return {...state, filteredItems: [...state.filteredItems, unfiltered]}
       }
@@ -135,3 +136,4 @@ const AppReducer = (state, action) => {
       return state;
   } //end switch
 }
+export default AppReducer
