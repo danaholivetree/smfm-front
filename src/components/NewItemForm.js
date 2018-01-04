@@ -1,6 +1,7 @@
 import React from 'react'
+const API = process.env.REACT_APP_API_URL
 
-const NewItemForm = ({addProduct}) => {
+const NewItemForm = ({addProduct, state}) => {
 
   const createProduct = (e) => {
     e.preventDefault()
@@ -10,9 +11,32 @@ const NewItemForm = ({addProduct}) => {
       quantity: e.target.quantity.value,
       price: e.target.price.value,
       description: e.target.description.value
+      sellerId: state.currentUser.id
+      sellerName: state.currentUser.name
     }
     console.log('product in createProduct ', product);
     addProduct(product)
+  }
+
+  const addProduct = async(product) => {
+    let res = await fetch(`${API}/products`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: 'cors',
+      body: JSON.stringify(product)
+    })
+    let newProduct = await res.json()
+    console.log('newproduct came back from db ', newProduct);
+    dispatch(addItemForSale(newProduct))
+  }
+
+  function addItemForSale(newProduct) {
+    return {
+      type: ADD_ITEM_FOR_SALE,
+      newProduct
+    }
   }
 
 

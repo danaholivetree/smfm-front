@@ -9,18 +9,23 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import routes from './components/nav/Router'
+import store, { history } from './store'
+import { ConnectedRouter } from 'react-router-redux'
 
-
-const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
+// const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
 
 
 
 
 ReactDOM.render(
   <Provider store={store}>
-    <App>
-      {routes}
-    </App>
+     <ConnectedRouter history={history}>
+      <div>
+        <App>
+          {routes}
+        </App>
+      </div>
+    </ConnectedRouter>
   </Provider>
 , document.getElementById('root'));
 registerServiceWorker();
