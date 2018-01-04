@@ -122,9 +122,9 @@ const AppReducer = (state, action) => {
           const filteredItems = state.feedItems.filter(item => {
             return item.category.toLowerCase() === filter
           })
-          return {...state, filteredItems}
-          break;
         }
+        return {...state, filteredItems}
+        break;
       } else { //unchecked filter
         const unfiltered = state.feedItems.filter(item => {
           return item.category.toLowerCase() === filter

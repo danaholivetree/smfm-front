@@ -1,6 +1,7 @@
 import React from 'react'
 
 const SaleItem = ({item, displayItem, removeItem}) => {
+
   const handleDisplay = (e) => {
     e.preventDefault()
     displayItem(e.target.dataset.id)

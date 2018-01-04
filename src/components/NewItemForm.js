@@ -1,5 +1,6 @@
 import React from 'react'
 const API = process.env.REACT_APP_API_URL
+import addItemForSale from '../actions/AppActions'
 
 const NewItemForm = ({addProduct, state}) => {
 
@@ -32,12 +33,7 @@ const NewItemForm = ({addProduct, state}) => {
     dispatch(addItemForSale(newProduct))
   }
 
-  function addItemForSale(newProduct) {
-    return {
-      type: ADD_ITEM_FOR_SALE,
-      newProduct
-    }
-  }
+
 
 
   return (
