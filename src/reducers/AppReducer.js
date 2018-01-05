@@ -3,36 +3,39 @@
 const AppReducer = (state, action) => {
   switch (action.type) {
     case 'LOG_IN':
-      console.log('log in reducer');
       return {...state, loggedIn: true, currentUser: {id: action.id, name: action.name}}
     case 'LOG_OUT':
       return {}
     case 'GOT_FRIENDS':
-      console.log('got friends reducer');
       //upon login. gets response from await window.FB.api(`/${userID}/friends`, 'GET', {}, friends => { and sets action.friends = friends.data
       return {...state, friends: action.friends}
     case 'GET_ALL_FEED_ITEMS':
-      console.log('get all feed items reducer');
       //upon login. (temporarily) fetches all products from GET products and returns them as action.feedItems
-      console.log('action.feedItems ', action.feedItems);
       return {...state, feedItems: action.feedItems}
     case 'GET_ITEMS_FOR_SALE':
-       console.log('get items for sale reducer');
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns PRODUCTS with seller.id = user.id. products come back and set as action.itemsForSale
       return {...state, itemsForSale: action.itemsForSale}
     case 'GET_BOOKMARKS':
+    console.log('get bookmarks reducer');
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns BOOKMARKS with user_id = user.id. bookmarks come back and set as action.bookmarks
       return {...state, bookmarks: action.bookmarks}
     case 'GET_CART':
+    console.log('get cart reducer');
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns cart items with user_id = user.id. bookmarks come back and set as action.cart
       return {...state, cart: action.cart}
     case 'ADD_ITEM_FOR_SALE':
       //sent data from NewItemForm onSubmit event to POST products. received db item with product.id and set it as action.newItem
       return {...state, itemsForSale: [...state.itemsForSale, action.newItem]}
     case 'REMOVE_ITEM_FOR_SALE':
+    console.log('remove item for sale reducer');
       // sent item id to DELETE products/:id. received deleted item from DB and set as action.itemToRemove
       // find index of item to remove in state.itemsForSale
-      let indexToRemove = state.itemsForSale.indexOf(action.itemToRemove)
+      let itemToRemove = state.itemsForSale.filter( item => {
+        return item.id === action.itemToRemove
+      })
+      console.log('item to remove ', itemToRemove);
+      let indexToRemove = state.itemsForSale.indexOf(itemToRemove[0])
+      console.log('index to remove ', indexToRemove);
       return {...state, itemsForSale:
           [...state.itemsForSale.slice(0, indexToRemove),
             state.itemsForSale.slice(indexToRemove + 1)

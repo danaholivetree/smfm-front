@@ -1,5 +1,4 @@
 export const logIn = (id, name) => {
-  console.log('action: logging in with ' , id, name);
   return {
     type: 'LOG_IN',
     id,
@@ -14,7 +13,6 @@ export const logOut = () => {
 }
 
 export const gotFriends = (friends) => {
-  console.log('action: getting friends ', friends);
   return {
     type: 'GOT_FRIENDS',
     friends
@@ -22,7 +20,6 @@ export const gotFriends = (friends) => {
 }
 
 export const getAllFeedItems = (feedItems) => {
-  console.log('action: getting all feed items ', feedItems);
   return {
     type: 'GET_ALL_FEED_ITEMS',
     feedItems
@@ -30,7 +27,6 @@ export const getAllFeedItems = (feedItems) => {
 }
 
 export const getAllForSaleItems = (itemsForSale) => {
-  console.log('action: getting all items for sale ', itemsForSale);
   return {
     type: 'GET_ITEMS_FOR_SALE',
     itemsForSale
@@ -61,6 +57,7 @@ export const addItemForSale = (newItem) => {
 }
 
 export const removeItemForSale = (itemToRemove) => {
+  console.log('removeItemForSale action , item to remove ', itemToRemove);
   return {
     type: 'REMOVE_ITEM_FOR_SALE',
     itemToRemove

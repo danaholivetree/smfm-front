@@ -8,13 +8,10 @@ const API = process.env.REACT_APP_API_URL
 const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getBookmarks, getCart}) => {
 
   const loadData = (response) => {
-    console.log('main login handler loadData ', response);
-    // const {accessToken, userID} = response.authResponse
     window.FB.api('/me', currentUser => {
       dbLogin(currentUser)
       getAllFriends(currentUser.id)
       getFeedItems()
-      // console.log('store.getState() in login container ', store.getState())
     })
   }
 
@@ -28,14 +25,13 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
       body: JSON.stringify(currUser)
     })
     let userAndItemsForSale = await res.json()
-    const {products} = userAndItemsForSale
-    console.log('products[0].sellerId ', products[0].sellerId);
-    console.log('currUser.name ', currUser.name);
-    console.log('products for sale ', products);
-    logIn(products[0].sellerId, currUser.name)
-    let editedProducts = products.map (product => {
+    const {products, id} = userAndItemsForSale
+    logIn(id, currUser.name)
+
+    let editedProducts = products.map(product => {
       return {...product, price: Number(product.price)}
-    })
+    }) || []
+    console.log('edited products ', editedProducts);
     getAllForSaleItems(editedProducts)
     // getBookmarks(bookmarks)
     // getCart(cart)
@@ -50,7 +46,6 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
       mode: 'cors'
     })
     let feedItems = await res.json()
-    console.log('feedItems ', feedItems);
     let editedFeedItems = feedItems.map (item => {
       return {...item, price: Number(item.price)}
     })
@@ -59,7 +54,6 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
 
   const getAllFriends = async(userID) => {
     await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
-      console.log('friends ', friends.data);
       gotFriends(friends.data)
     })
   }
