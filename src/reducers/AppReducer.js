@@ -4,14 +4,14 @@ import addToCart from '../components/ShoppingCart'
 const AppReducer = (state, action) => {
   switch (action.type) {
     case 'LOG_IN':
-      return {...state, loggedIn: action.loggedIn}
+      return {...state, loggedIn: true, currentUser: {id: action.id, name: action.name}}
     case 'LOG_OUT':
       return {}
-    case 'GET_FRIENDS':
+    case 'GOT_FRIENDS':
       //upon login. gets response from await window.FB.api(`/${userID}/friends`, 'GET', {}, friends => { and sets action.friends = friends.data
       return {...state, friends: action.friends}
     case 'GET_ALL_FEED_ITEMS':
-      //upon login. temporarily fetches all products from GET products and returns them as action.feedItems
+      //upon login. (temporarily) fetches all products from GET products and returns them as action.feedItems
       return {...state, feedItems: action.feedItems}
     case 'GET_ITEMS_FOR_SALE':
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns PRODUCTS with seller.id = user.id. products come back and set as action.itemsForSale

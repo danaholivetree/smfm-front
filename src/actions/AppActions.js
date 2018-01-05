@@ -1,7 +1,8 @@
-export const logIn = (loggedIn) => {
+export const logIn = (id, name) => {
   return {
     type: 'LOG_IN',
-    loggedIn
+    id,
+    name
   }
 }
 
@@ -11,9 +12,9 @@ export const logOut = () => {
   }
 }
 
-export const getFriends = (friends) => {
+export const gotFriends = (friends) => {
   return {
-    type: 'GET_FRIENDS',
+    type: 'GOT_FRIENDS',
     friends
   }
 }

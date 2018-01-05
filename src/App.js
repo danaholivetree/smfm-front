@@ -1,43 +1,22 @@
 import React, {Component} from 'react';
-// import logo from './logo.svg';
-import './App.css';
-// import AppRouter from './routers/AppRouter'
 
-import store from './store'
-import PropTypes from 'prop-types'
-import {browserHistory} from 'react-router'
+// import PropTypes from 'prop-types'
+// import {browserHistory} from 'react-router'
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Header from './components/nav/Header'
 // import { ConnectedRouter } from 'react-router-redux';
 import NewItemForm from './components/NewItemForm'
 // import FbLogin from '../../components/FbLogin'
-import ShoppingFeed from './components/ShoppingFeed'
+import ShoppingFeedContainer from './containers/ShoppingFeedContainer'
 import SaleItems from './components/SaleItems'
 import NavBar from './components/nav/NavBar'
 import Bookmarks from './components/Bookmarks'
 import ShoppingCart from './components/ShoppingCart'
-import * as actionCreators from './actions/AppActions';
+import {logIn, gotFriends, getAllFeedItems, getAllSaleItems, getBookmarks, getCart} from './actions/AppActions';
 
 const API = process.env.REACT_APP_API_URL
-
-const mapStateToProps = function(state){
-  return {
-    loggedIn: state.loggedIn,
-    friends: state.friends,
-    currentUser: state.currentUser,
-    itemsForSale: state.itemsForSale,
-    feedItems: state.feedItems,
-    bookmarks: state.bookmarks,
-    cart: state.cart,
-    filteredItems: state.filteredItems
-  }
-}
-
-const mapDispatchToProps = function (dispatch) {
-  return bindActionCreators({
-    getSomething: actionCreators.getSomething,
-  }, dispatch)
-}
 
 class App extends Component {
   // constructor(props) {
@@ -58,8 +37,44 @@ class App extends Component {
     // const {accessToken, userID} = response.authResponse
     window.FB.api('/me', currentUser => {
       this.dbLogin(currentUser)
-      this.getFriends(currentUser.id)
-      this.getAllItems()
+      this.getAllFriends(currentUser.id)
+      this.getFeedItems()
+    })
+  }
+
+  dbLogin = async(currUser) => {
+    let res = await fetch(`${API}/users`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: 'cors',
+      body: JSON.stringify(currUser)
+    })
+    let userAndItemsForSale = await res.json()
+    const {products} = userAndItemsForSale
+    logIn(products.id, currUser.name)
+    getAllSaleItems(products)
+    // getBookmarks(bookmarks)
+    // getCart(cart)
+  }
+
+  getFeedItems = async() => {
+    let res = await fetch(`${API}/products`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: 'cors'
+    })
+    let feedItems = await res.json()
+    getAllFeedItems(feedItems)
+  }
+
+  getAllFriends = async(userID) => {
+    await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
+      console.log('response from get friends ', friends.data);
+      gotFriends(friends.data)
     })
   }
 
@@ -69,15 +84,15 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <div>
-            <Header />
+            <Header loginHandler={this.loadData}/>
             <NavBar />
             <Switch>
-              <Route exact path='/' component={ShoppingFeed} />
-              <Route path='/sell' component={NewItemForm} />
+              <Route exact path='/' component={ShoppingFeedContainer} />
+              {/* <Route path='/sell' component={NewItemForm} />
               <Route path='/saleitems' component={SaleItems} />
               <Route path='/shoppingcart' component={ShoppingCart} />
-              {/* <Route path='/bookmarks' component={Bookmarks} /> */}
-              <Route path='/shoppingfeed' component={ShoppingFeed} />
+              <Route path='/bookmarks' component={Bookmarks} />
+              <Route path='/shoppingfeed' component={ShoppingFeed} /> */}
               {/* <Route path='/sellerfeed' component={SellerFeed} /> */}
             </Switch>
           </div>
@@ -86,10 +101,8 @@ class App extends Component {
     )
   }
 }
-// App.contextTypes = {
-//   store: PropTypes.object
-// }
+
+export default App
 
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+// export default connect(mapStateToProps, mapDispatchToProps)(App)
