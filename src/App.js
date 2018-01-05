@@ -14,7 +14,7 @@ import SaleItems from './components/SaleItems'
 import NavBar from './components/nav/NavBar'
 import Bookmarks from './components/Bookmarks'
 import ShoppingCart from './components/ShoppingCart'
-import {logIn, gotFriends, getAllFeedItems, getAllSaleItems, getBookmarks, getCart} from './actions/AppActions';
+import {logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getBookmarks, getCart} from './actions/AppActions';
 
 const API = process.env.REACT_APP_API_URL
 
@@ -53,8 +53,11 @@ class App extends Component {
     })
     let userAndItemsForSale = await res.json()
     const {products} = userAndItemsForSale
-    logIn(products.id, currUser.name)
-    getAllSaleItems(products)
+    console.log('products[0].sellerId ', products[0].sellerId);
+    console.log('currUser.name ', currUser.name);
+    console.log('products for sale ', products);
+    logIn(products[0].sellerId, currUser.name)
+    getAllForSaleItems(products)
     // getBookmarks(bookmarks)
     // getCart(cart)
   }
@@ -68,12 +71,13 @@ class App extends Component {
       mode: 'cors'
     })
     let feedItems = await res.json()
+    console.log('feedItems ', feedItems);
     getAllFeedItems(feedItems)
   }
 
   getAllFriends = async(userID) => {
     await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
-      console.log('response from get friends ', friends.data);
+      console.log('friends ', friends.data);
       gotFriends(friends.data)
     })
   }

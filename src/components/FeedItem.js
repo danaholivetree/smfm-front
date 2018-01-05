@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 
 const FeedItem = ({id, itemName, sellerName, description, category, price, quantity, image, onAddToCart}) => {
 
+  console.log('id ', id);
+
   return (
 
     <div className="card">

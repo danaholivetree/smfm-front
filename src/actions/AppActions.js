@@ -26,7 +26,7 @@ export const getAllFeedItems = (feedItems) => {
   }
 }
 
-export const getAllSaleItems = (itemsForSale) => {
+export const getAllForSaleItems = (itemsForSale) => {
   return {
     type: 'GET_ITEMS_FOR_SALE',
     itemsForSale

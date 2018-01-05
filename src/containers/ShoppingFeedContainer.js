@@ -11,7 +11,7 @@ import ShoppingFeed from '../components/ShoppingFeed'
 
 const mapStateToProps =  state => {
   return  {
-    feedItems: state.filteredItems || state.feedItems
+    feedItems: state.feedItems
   }
 }
 

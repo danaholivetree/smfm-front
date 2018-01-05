@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 // const API = process.env.REACT_APP_API_URL
 
 const ShoppingFeed = ({feedItems, onAddToCart}) => {
+  console.log('feedItems in shoppingfeed ', feedItems);
 // {dispatch, currentUser, feedItems, addToCart, cart}
 
 
