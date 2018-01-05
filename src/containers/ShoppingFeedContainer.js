@@ -9,7 +9,7 @@ import ShoppingFeed from '../components/ShoppingFeed'
 //   }
 // }
 
-const mapStateToProps =  state => {
+const mapStateToProps = state => {
   return  {
     feedItems: state.feedItems
   }

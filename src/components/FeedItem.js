@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 const FeedItem = ({id, itemName, sellerName, description, category, price, quantity, image, onAddToCart}) => {
 
-  console.log('id ', id);
+  console.log('feed item id ', id);
 
   return (
 
@@ -24,10 +24,10 @@ const FeedItem = ({id, itemName, sellerName, description, category, price, quant
   )
 }
 
-FeedItem.PropTypes = {
+FeedItem.propTypes = {
   id: PropTypes.number.isRequired,
   itemName: PropTypes.string.isRequired,
-  // description: PropTypes.text.isRequired,
+  description: PropTypes.string.isRequired,
   sellerName: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,

@@ -29,7 +29,7 @@ const ShoppingFeed = ({feedItems, onAddToCart}) => {
   // }
 
   const displayFeedItems = feedItems.map( item => {
-    return <FeedItem key={item.id} {...item} onAddToCart={ (e) => { e.preventDefault(); onAddToCart(item.id)}} />
+    return <FeedItem key={item.id} {...item} onAddToCart={ () => onAddToCart(item.id)} />
   })
 
   return (
@@ -45,7 +45,7 @@ ShoppingFeed.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       itemName: PropTypes.string.isRequired,
-      // description: PropTypes.text.isRequired,
+      description: PropTypes.string.isRequired,
       sellerName: PropTypes.string.isRequired,
       category: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,

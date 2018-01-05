@@ -3,19 +3,18 @@ import ReactDOM from 'react-dom';
 
 import registerServiceWorker from './registerServiceWorker';
 // import PropTypes from 'prop-types'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import AppReducer from './reducers/AppReducer'
-// import thunk from 'redux-thunk';
+import thunk from 'redux-thunk'
 // import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-import './index.css';
-import App from './App';
-// import store from './store'
+import { Provider } from 'react-redux'
+import './index.css'
+import App from './App'
 
-// Provider.childContextTypes = {
-//   store: PropTypes.object
-// }
-const preloadedState = {
+const API = process.env.REACT_APP_API_URL
+
+
+const initialState = {
   loggedIn: false,
   friends: [],
   currentUser: {},
@@ -24,7 +23,7 @@ const preloadedState = {
   bookmarks: [],
   cart: []
 }
-const store = createStore(AppReducer, preloadedState)
+let store = createStore(AppReducer, initialState, applyMiddleware(thunk.withExtraArgument(API)))
 
 ReactDOM.render(
   <Provider store={store}>
