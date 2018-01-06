@@ -1,36 +1,26 @@
 import React from 'react'
-import { addItemForSale } from '../actions/AppActions'
-const API = process.env.REACT_APP_API_URL
 
-const NewItemForm = ({state}) => {
+// import { connect } from 'react-redux'
+// import thunk from 'redux-thunk'
+// const API = process.env.REACT_APP_API_URL
+
+const NewItemForm = ({addNewProduct, currentUser}) => {
+
 
   const createProduct = (e) => {
     e.preventDefault()
+      console.log('currentUser ', currentUser)
     let product = {
       name: e.target.name.value,
       category: e.target.category.value,
       quantity: e.target.quantity.value,
       price: e.target.price.value,
       description: e.target.description.value,
-      sellerId: state.currentUser.id,
-      sellerName: state.currentUser.name
+      sellerId: currentUser.id,
+      sellerName: currentUser.name
     }
     console.log('product in createProduct ', product);
-    addProduct(product)
-  }
-
-  const addProduct = async(product) => {
-    let res = await fetch(`${API}/products`, {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
-      mode: 'cors',
-      body: JSON.stringify(product)
-    })
-    let newProduct = await res.json()
-    console.log('newproduct came back from db ', newProduct);
-    addItemForSale(newProduct)
+    addNewProduct(product)
   }
 
   return (

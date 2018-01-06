@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import LoginContainer from './containers/LoginContainer'
 // import { ConnectedRouter } from 'react-router-redux';
-import NewItemForm from './components/NewItemForm'
+import SellItemContainer from './containers/SellItemContainer'
 import ShoppingFeedContainer from './containers/ShoppingFeedContainer'
 import ItemsForSaleContainer from './containers/ItemsForSaleContainer'
 import NavBar from './components/nav/NavBar'
@@ -27,7 +27,7 @@ class App extends Component {
             <NavBar />
             <Switch>
               <Route exact path='/' component={ShoppingFeedContainer} />
-              <Route path='/sell' component={NewItemForm} />
+              <Route path='/sell' component={SellItemContainer} />
               <Route path='/saleitems' component={ItemsForSaleContainer} />
               {/* <Route path='/shoppingcart' component={ShoppingCart} /> */}
               {/* <Route path='/bookmarks' component={Bookmarks} /> */}

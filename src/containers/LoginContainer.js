@@ -26,6 +26,9 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
     })
     let userAndItemsForSale = await res.json()
     const {products, id} = userAndItemsForSale
+    console.log('products ', products);
+    console.log('id ' , id);
+    console.log('currUser.name ', currUser.name);
     logIn(id, currUser.name)
 
     let editedProducts = products.map(product => {

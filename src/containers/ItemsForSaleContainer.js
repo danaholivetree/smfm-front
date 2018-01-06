@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { removeItemForSale } from '../actions/AppActions'
 import SaleItems from '../components/SaleItems'
-import thunk from 'redux-thunk'
+// import thunk from 'redux-thunk'
 
 
 const removeSaleItemFromDatabase = async (id, API) => {
@@ -12,6 +12,8 @@ const removeSaleItemFromDatabase = async (id, API) => {
        },
        mode: 'cors'
   })
+  let removedItem = await res.json()
+  return removedItem
 }
 
 const startRemovingItemForSale = (id) => {

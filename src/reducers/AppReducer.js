@@ -3,6 +3,7 @@
 const AppReducer = (state, action) => {
   switch (action.type) {
     case 'LOG_IN':
+      console.log('setting state with current user ', action.id, action.name);
       return {...state, loggedIn: true, currentUser: {id: action.id, name: action.name}}
     case 'LOG_OUT':
       return {}
@@ -24,10 +25,11 @@ const AppReducer = (state, action) => {
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns cart items with user_id = user.id. bookmarks come back and set as action.cart
       return {...state, cart: action.cart}
     case 'ADD_ITEM_FOR_SALE':
+    console.log('add item for sale reducer, new item is ', action.newItem);
       //sent data from NewItemForm onSubmit event to POST products. received db item with product.id and set it as action.newItem
       return {...state, itemsForSale: [...state.itemsForSale, action.newItem]}
     case 'REMOVE_ITEM_FOR_SALE':
-    console.log('remove item for sale reducer');
+    console.log('remove item for sale reducer ');
       // sent item id to DELETE products/:id. received deleted item from DB and set as action.itemToRemove
       // find index of item to remove in state.itemsForSale
       let itemToRemove = state.itemsForSale.filter( item => {
@@ -132,7 +134,6 @@ const AppReducer = (state, action) => {
           })
         }
         return {...state, filteredItems}
-        break;
       } else { //unchecked filter
         const unfiltered = state.feedItems.filter(item => {
           return item.category.toLowerCase() === action.categoryFilter
