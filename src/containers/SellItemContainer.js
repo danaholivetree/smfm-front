@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { addItemForSale } from '../actions/AppActions'
 import NewItemForm from '../components/NewItemForm'
-// import thunk from 'redux-thunk'
 
 const addProductToDatabase = async (product, API) => {
   let res = await fetch(`${API}/products`, {
@@ -13,17 +12,15 @@ const addProductToDatabase = async (product, API) => {
     body: JSON.stringify(product)
   })
   let newProduct = await res.json()
-  console.log('newProduct in addtodatabase ', newProduct);
   return newProduct
 }
 
 const startAddingProduct = (product) => {
-
-  console.log('start adding ', product)
+  console.log('product ', product);
   return function (dispatch, getState, API) {
     return addProductToDatabase(product, API).then(
       newItem => {
-        console.log('newItem right before dispatch ', newItem);
+        console.log('newItem ', newItem);
         dispatch(addItemForSale(newItem))
       }
     )
@@ -34,9 +31,7 @@ const mapStateToProps = state => {
   return {currentUser: state.currentUser}
 }
 const mapDispatchToProps = dispatch => {
-    return {
-      addNewProduct: product => dispatch(startAddingProduct(product))
-    }
+    return {addNewProduct: product => dispatch(startAddingProduct(product))}
 }
 
 const SellItemContainer = connect(mapStateToProps, mapDispatchToProps)(NewItemForm)

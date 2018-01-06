@@ -4,11 +4,11 @@ const Bookmark = ({item, displayItem, removeItem}) => {
 
   const handleGoToItem = (e) => {
     e.preventDefault()
-    displayItem(e.target.value)
+    displayItem(item.id)
   }
   const removeBookmark = (e) => {
     e.preventDefault()
-    removeItem(e.target.value, 'bookmarks')
+    removeItem(item.id)
   }
 
   return (

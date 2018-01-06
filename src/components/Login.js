@@ -1,7 +1,6 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import PropTypes from 'prop-types'
-const API = process.env.REACT_APP_API_URL
 
 const Login = ({loadData}) => {
 

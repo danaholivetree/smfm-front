@@ -31,11 +31,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-
     return {
       removeItem: id => dispatch(startRemovingItemForSale(id))
     }
-
 }
 
 const ItemsForSaleContainer = connect(mapStateToProps, mapDispatchToProps)(SaleItems)

@@ -1,28 +1,40 @@
 import { connect } from 'react-redux'
-import { addToCart } from '../actions/AppActions'
-import ShoppingFeed from '../components/ShoppingFeed'
+import { removeBookmark } from '../actions/AppActions'
+import Bookmarks from '../components/Bookmarks'
 
-// const getFilteredFeed = ( feedItems, filter ) => {
-//   switch (filter) {
-//     case 'FILTER_ITEMS_BY_SEARCH':
-//      return
-//   }
-// }
+
+const removeBookmarkFromDatabase = async (id, API) => {
+  let res = await fetch(`${API}/bookmarks/${id}`, {
+       method: 'DELETE',
+       headers: {
+         "Content-Type": "application/json"
+       },
+       mode: 'cors'
+  })
+  let removedItem = await res.json()
+  return removedItem
+}
+
+const startRemovingBookmark = (id) => {
+  return function (dispatch, getState, API) {
+    return removeBookmarkFromDatabase(id, API).then(
+      bookmark => dispatch(removeBookmark(bookmark.id)),
+    )
+  }
+}
 
 const mapStateToProps = state => {
   return  {
-    feedItems: state.feedItems
+    bookmarks: state.bookmarks
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddToCart: id => {
-      dispatch(addToCart(id))
-    }
+    removeItem: id => dispatch(startRemovingBookmark(id))
   }
 }
 
-const ShoppingFeedContainer = connect(mapStateToProps, mapDispatchToProps)(ShoppingFeed)
+const BookmarksContainer = connect(mapStateToProps, mapDispatchToProps)(Bookmarks)
 
-export default ShoppingFeedContainer
+export default BookmarksContainer
