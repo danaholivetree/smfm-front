@@ -32,7 +32,7 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
     logIn(id, currUser.name)
 
     let editedProducts = products.map(product => {
-      return {...product, price: Number(product.price)}
+      return {...product, price: parseFloat(Number(product.price).toFixed(2))}
     }) || []
     console.log('edited products ', editedProducts);
     getAllForSaleItems(editedProducts)
@@ -50,7 +50,7 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
     })
     let feedItems = await res.json()
     let editedFeedItems = feedItems.map (item => {
-      return {...item, price: Number(item.price)}
+      return {...item, numberPrice: parseFloat(Number(item.price).toFixed(2))}
     })
     getAllFeedItems(editedFeedItems)
   }

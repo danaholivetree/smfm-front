@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 
 
-const FeedItem = ({id, itemName, sellerName, description, category, price, quantity, image, onAddToCart}) => {
+const FeedItem = ({id, itemName, sellerName, description, category, price, quantity, image, onAddToCart, onAddBookmark}) => {
 
   return (
 
@@ -16,7 +16,8 @@ const FeedItem = ({id, itemName, sellerName, description, category, price, quant
           <h6 className="card-subtitle mb-2 text-muted">Quantity Available: {quantity} </h6>
         <p className="card-text">{description}</p>
         <a href="#" className="btn btn-primary">link</a>
-        <input className='btn btn-primary' type='button' value='add to cart' onClick={onAddToCart(id)} />
+        <input className='btn btn-primary' type='button' value='add to cart' onClick={onAddToCart} />
+        <input className='btn btn-primary' type='button' value='bookmark' onClick={onAddBookmark} />
       </div>
     </div>
   )
@@ -30,7 +31,7 @@ FeedItem.propTypes = {
   category: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
+  // price: PropTypes.number.isRequired,
   onAddToCart: PropTypes.func.isRequired
 }
 

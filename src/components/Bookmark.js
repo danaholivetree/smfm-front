@@ -13,7 +13,7 @@ const Bookmark = ({item, displayItem, removeItem}) => {
 
   return (
     <li onClick={handleGoToItem} data-value={item.id}>
-      {item.item_name} ** {item.category} ** {item.seller_id} ** {item.description} ** {item.quantity} ** {item.price}
+      {item.itemName} ** {item.category} ** {item.sellerId} ** {item.description} ** {item.quantity} ** {item.price}
       <input type='button' className='btn' value='remove' onClick={removeBookmark} />
      </li>
 

@@ -31,7 +31,7 @@ class App extends Component {
               <Route path='/saleitems' component={ItemsForSaleContainer} />
               {/* <Route path='/shoppingcart' component={ShoppingCart} /> */}
               <Route path='/bookmarks' component={BookmarksContainer} />
-              {/* <Route path='/shoppingfeed' component={ShoppingFeed} /> */}
+              <Route path='/shoppingfeed' component={ShoppingFeedContainer} />
               {/* <Route path='/sellerfeed' component={SellerFeed} /> */}
             </Switch>
           </div>

@@ -72,6 +72,7 @@ export const editItemForSale = (editedItem) => {
 }
 
 export const addBookmark = (newBookmark) => {
+  console.log('addBookmark action newBookmark (was id, want it to be item) ', newBookmark);
   return {
     type: 'ADD_BOOKMARK',
     newBookmark
@@ -86,6 +87,7 @@ export const removeBookmark = (bookmarkToRemove) => {
 }
 
 export const addToCart = (newCartItem) => {
+  console.log('add to cart action newCartItem ', newCartItem);
   return {
     type: 'ADD_TO_CART',
     newCartItem

@@ -19,7 +19,7 @@ const removeSaleItemFromDatabase = async (id, API) => {
 const startRemovingItemForSale = (id) => {
   return function (dispatch, getState, API) {
     return removeSaleItemFromDatabase(id, API).then(
-      item => dispatch(removeItemForSale(item.id)),
+      item => dispatch(removeItemForSale(item.id))
     )
   }
 }

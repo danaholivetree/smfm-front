@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 // const API = process.env.REACT_APP_API_URL
 
-const ShoppingFeed = ({feedItems, onAddToCart}) => {
+const ShoppingFeed = ({feedItems, onAddToCart, onAddBookmark, currentUser}) => {
 
   // const addItemToCart = async (item) => {
   //   let alreadyInCart = cart.filter(el => {
@@ -26,7 +26,7 @@ const ShoppingFeed = ({feedItems, onAddToCart}) => {
   // }
 
   const displayFeedItems = feedItems.map( item => {
-    return <FeedItem key={item.id} {...item} onAddToCart={ () => onAddToCart(item.id)} />
+    return <FeedItem key={item.id} {...item} onAddToCart={ () => onAddToCart(item.id, currentUser.id)} onAddBookmark={ () => onAddBookmark(item.id, currentUser.id)} />
   })
 
   return (
@@ -47,10 +47,11 @@ ShoppingFeed.propTypes = {
       category: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
       quantity: PropTypes.number.isRequired,
-      price: PropTypes.number.isRequired
+      // price: PropTypes.number.isRequired
     }).isRequired
   ).isRequired,
-  onAddToCart: PropTypes.func.isRequired
+  onAddToCart: PropTypes.func.isRequired,
+  onAddBookmark: PropTypes.func.isRequired
 }
 
 export default ShoppingFeed
