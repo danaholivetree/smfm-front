@@ -18,8 +18,14 @@ const removeBookmarkFromDatabase = async (id, API) => {
 const startRemovingBookmark = (id) => {
   return function (dispatch, getState, API) {
     return removeBookmarkFromDatabase(id, API).then(
-      bookmark => dispatch(removeBookmark(bookmark.id)),
-    )
+      removed => {
+        if (removed.id === id) {
+          dispatch(removeBookmark(id))
+        }
+        else {
+          console.log('remove failed ', removed);
+        }
+    })
   }
 }
 

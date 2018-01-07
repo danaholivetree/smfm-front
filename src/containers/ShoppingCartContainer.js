@@ -12,14 +12,21 @@ const removeCartItemFromDatabase = async (id, API) => {
        mode: 'cors'
   })
   let removedItem = await res.json()
-  if (removedItem === 1) return id
+  return removedItem
 }
 
 const startRemovingCartItem = (id) => {
   return function (dispatch, getState, API) {
     return removeCartItemFromDatabase(id, API).then(
-      removedId => dispatch(removeFromCart(removedId)),
-    )
+      returned => {
+        console.log('returned from delete', returned);
+        if (returned.id === id) {
+          dispatch(removeFromCart(id))
+        }
+        else {
+          console.log('delete item failed, returned ', returned)
+        }
+    })
   }
 }
 

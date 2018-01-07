@@ -93,7 +93,7 @@ export const addToCart = (newCartItem) => {
 }
 
 export const removeFromCart = (itemToRemove) => {
-  console.log('remove from cart action');
+  console.log('remove from cart action itemToRemove ', itemToRemove);
   return {
     type: 'REMOVE_FROM_CART',
     itemToRemove

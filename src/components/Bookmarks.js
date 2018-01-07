@@ -2,10 +2,10 @@ import React from 'react'
 import Bookmark from './Bookmark'
 
 
-const Bookmarks = ({removeItem, bookmarks, displayItem}) => {
+const Bookmarks = ({removeItem, bookmarks}) => {
 
-  const displayBookmarks = bookmarks.map( item => {
-    return <Bookmark item={item} key={item.id} removeItem={removeItem} displayItem={displayItem}/>
+  const displayBookmarks = bookmarks.map( (item, i) => {
+    return <Bookmark item={item} key={i} removeItem={removeItem} />
   })
 
   return (

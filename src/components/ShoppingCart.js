@@ -3,9 +3,9 @@ import CartItem from './CartItem'
 
 const ShoppingCart = ({cart, displayItem, removeItem, addToCart}) => {
 
-   const displayCartItems = cart.map( item => {
+   const displayCartItems = cart.map( (item, i) => {
      console.log(item)
-     return <CartItem key={item.id} item={item} displayItem={displayItem} removeItem={removeItem} addToCart={addToCart} />
+     return <CartItem key={i} item={item} displayItem={displayItem} removeItem={removeItem} addToCart={addToCart} />
    })
 
 return (

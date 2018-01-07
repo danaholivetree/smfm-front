@@ -57,11 +57,20 @@ const AppReducer = (state, action) => {
 
     case 'REMOVE_BOOKMARK':
       //delete button on Bookmarks component takes bookmark.id, sends it to DELETE bookmarks/:id, and sets returned item as itemToRemove
-      indexToRemove = state.bookmarks.indexOf(action.itemToRemove)
-      return {...state, bookmarks:
-          [...state.bookmarks.slice(0, indexToRemove),
-            state.bookmarks.slice(indexToRemove + 1)
-          ]
+      const bookmarkToRemove = state.bookmarks.filter( bookmark => {
+        return bookmark.id === action.bookmarkToRemove
+      })
+      console.log('reducer bookmarkToRemove ', bookmarkToRemove[0]);
+      indexToRemove = state.bookmarks.indexOf(bookmarkToRemove[0])
+      console.log('reducer index to remove ', indexToRemove);
+      if (indexToRemove === 0) {
+        return {...state, bookmarks: state.bookmarks.slice(1)}
+      } else {
+        return {...state, bookmarks:
+            [...state.bookmarks.slice(0, indexToRemove),
+              state.bookmarks.slice(indexToRemove + 1)
+            ]
+        }
       }
     case 'ADD_TO_CART':
     console.log('add to cart reducer');
@@ -92,16 +101,22 @@ const AppReducer = (state, action) => {
       // else return state
 
     case 'REMOVE_FROM_CART':
-    console.log('remove from cart reducer ');
+    console.log('remove from cart reducer, action.itemToRemove ', action.itemToRemove);
       //delete button on CartItem in ShoppingCart container. sends cartItem.id to DELETE cart/:id and returns item as itemToRemove
       const cartItemToRemove = state.cart.filter( cartItem => {
         return cartItem.id === action.itemToRemove
       })
-      indexToRemove = state.cart.indexOf(cartItemToRemove)
-      return {...state, cart:
-          [...state.cart.slice(0, indexToRemove),
-            state.cart.slice(indexToRemove + 1)
-          ]
+      console.log('cart item to remove ', cartItemToRemove);
+      indexToRemove = state.cart.indexOf(cartItemToRemove[0])
+      console.log('index to remove ', indexToRemove);
+      if (indexToRemove === 0) {
+        return {...state, cart: state.cart.slice(1)}
+      } else {
+        return {...state, cart:
+            [...state.cart.slice(0, indexToRemove),
+              state.cart.slice(indexToRemove + 1)
+            ]
+        }
       }
     case 'UPDATE_CART_QUANTITY':
       // onChange event for shopping cart selector OR quantity selector in FeedItem. send NEW Quantity to PUT cart/:id and receive updatedCartItem
