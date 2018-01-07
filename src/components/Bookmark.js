@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Bookmark = ({item, removeItem}) => {
+const Bookmark = ({item, removeItem, onAddToCart}) => {
 
   // const handleGoToItem = (e) => {
   //   e.preventDefault()
@@ -15,6 +15,7 @@ const Bookmark = ({item, removeItem}) => {
     <li>
       {item.itemName} ** {item.category} ** {item.sellerId} ** {item.description} ** {item.quantity} ** {item.price}
       <input className='btn btn-primary' type='button' value='remove' onClick={removeBookmark} />
+      <input className='btn btn-primary' type='button' value='add to cart' onClick={onAddToCart} />
     </li>
 
   )
