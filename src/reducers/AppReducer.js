@@ -20,6 +20,7 @@ const AppReducer = (state, action) => {
       return {...state, bookmarks: action.bookmarks}
     case 'GET_CART':
     console.log('get cart reducer');
+    console.log('action.cart ', action.cart);
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns cart items with user_id = user.id. bookmarks come back and set as action.cart
       return {...state, cart: action.cart}
     case 'ADD_ITEM_FOR_SALE':
@@ -63,6 +64,7 @@ const AppReducer = (state, action) => {
           ]
       }
     case 'ADD_TO_CART':
+    console.log('add to cart reducer');
       //add to cart button on FeedItem onClick. checks to see if item is already in the cart by comparing the item's id with items in the cart state.
       //
       // let alreadyInCart = state.cart.filter(el => {
