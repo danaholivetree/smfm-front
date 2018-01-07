@@ -1,7 +1,7 @@
 import React from 'react'
 import CartItem from './CartItem'
 
-const ShoppingCart = ({items, displayItem, removeItem, addToCart}) => {
+const ShoppingCart = ({items= [], displayItem, removeItem, addToCart}) => {
 
    const displayCartItems = items.map( item => {
      return <CartItem key={item.id} item={item} displayItem={displayItem} removeItem={removeItem} addToCart={addToCart} />

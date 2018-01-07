@@ -56,12 +56,10 @@ const CartItem = ({item, addToCart, subtractFromCart, displayItem, removeItem}) 
         </td>
         <td>${item.price}</td>
         <td>{cost}</td>
-        <td><input type='button' value='view item' data-id='item.id' onClick={handleDisplay} /></td>
-        <td><input type='button' value='update item' data-id='item.id' onClick={handleUpdate} /></td>
-        <td><input type='button' value='remove item' data-id='item.id' onClick={handleRemove} /></td>
+        <td><input className='btn btn-primary' type='button' value='view item' data-id='item.id' onClick={handleDisplay} /></td>
+        <td><input className='btn btn-primary' type='button' value='update item' data-id='item.id' onClick={handleUpdate} /></td>
+        <td><input className='btn btn-primary' type='button' value='remove item' data-id='item.id' onClick={handleRemove} /></td>
       </tr>
-
-
   )
 }
 export default CartItem

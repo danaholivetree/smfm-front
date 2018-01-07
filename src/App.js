@@ -10,7 +10,7 @@ import ShoppingFeedContainer from './containers/ShoppingFeedContainer'
 import ItemsForSaleContainer from './containers/ItemsForSaleContainer'
 import NavBar from './components/nav/NavBar'
 import BookmarksContainer from './containers/BookmarksContainer'
-// import ShoppingCart from './components/ShoppingCart'
+import ShoppingCartContainer from './containers/ShoppingCartContainer'
 
 
 
@@ -29,7 +29,7 @@ class App extends Component {
               <Route exact path='/' component={ShoppingFeedContainer} />
               <Route path='/sell' component={SellItemContainer} />
               <Route path='/saleitems' component={ItemsForSaleContainer} />
-              {/* <Route path='/shoppingcart' component={ShoppingCart} /> */}
+              <Route path='/shoppingcart' component={ShoppingCartContainer} />
               <Route path='/bookmarks' component={BookmarksContainer} />
               <Route path='/shoppingfeed' component={ShoppingFeedContainer} />
               {/* <Route path='/sellerfeed' component={SellerFeed} /> */}

@@ -33,15 +33,14 @@ export const getAllForSaleItems = (itemsForSale) => {
   }
 }
 
-export const getBookmarks = (bookmarks) => {
-  console.log('action: getting all bookmarks ', bookmarks);
+export const getAllBookmarks = (bookmarks) => {
   return {
     type: 'GET_BOOKMARKS',
     bookmarks
   }
 }
 
-export const getCart = (cart) => {
+export const getAllCart = (cart) => {
   console.log('action: retrieving cart ', cart);
   return {
     type: 'GET_CART',
@@ -72,7 +71,6 @@ export const editItemForSale = (editedItem) => {
 }
 
 export const addBookmark = (newBookmark) => {
-  console.log('addBookmark action newBookmark (was id, want it to be item) ', newBookmark);
   return {
     type: 'ADD_BOOKMARK',
     newBookmark
@@ -95,6 +93,7 @@ export const addToCart = (newCartItem) => {
 }
 
 export const removeFromCart = (itemToRemove) => {
+  console.log('remove from cart action');
   return {
     type: 'REMOVE_FROM_CART',
     itemToRemove

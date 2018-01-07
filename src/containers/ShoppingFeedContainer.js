@@ -3,6 +3,8 @@ import { addToCart, addBookmark } from '../actions/AppActions'
 import ShoppingFeed from '../components/ShoppingFeed'
 
 const addCartItemToDatabase = async (productId, userId, API) => {
+  console.log('product id, user id ', productId, userId);
+  console.log(typeof userId);
   let res = await fetch(`${API}/cart`, {
        method: 'POST',
        headers: {

@@ -3,7 +3,6 @@
 const AppReducer = (state, action) => {
   switch (action.type) {
     case 'LOG_IN':
-      console.log('setting state with current user ', action.id, action.name);
       return {...state, loggedIn: true, currentUser: {id: action.id, name: action.name}}
     case 'LOG_OUT':
       return {}
@@ -17,8 +16,7 @@ const AppReducer = (state, action) => {
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns PRODUCTS with seller.id = user.id. products come back and set as action.itemsForSale
       return {...state, itemsForSale: action.itemsForSale}
     case 'GET_BOOKMARKS':
-    console.log('get bookmarks reducer');
-      //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns BOOKMARKS with user_id = user.id. bookmarks come back and set as action.bookmarks
+      //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns BOOKMARKS with user_id = user.id. bookmarks come back and set as action.bookmarks. need to get feedItems and filter out the items by product id in each bookmark
       return {...state, bookmarks: action.bookmarks}
     case 'GET_CART':
     console.log('get cart reducer');
@@ -92,8 +90,12 @@ const AppReducer = (state, action) => {
       // else return state
 
     case 'REMOVE_FROM_CART':
+    console.log('remove from cart reducer ');
       //delete button on CartItem in ShoppingCart container. sends cartItem.id to DELETE cart/:id and returns item as itemToRemove
-      indexToRemove = state.cart.indexOf(action.itemToRemove)
+      const cartItemToRemove = state.cart.filter( cartItem => {
+        return cartItem.id === action.itemToRemove
+      })
+      indexToRemove = state.cart.indexOf(cartItemToRemove)
       return {...state, cart:
           [...state.cart.slice(0, indexToRemove),
             state.cart.slice(indexToRemove + 1)

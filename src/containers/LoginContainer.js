@@ -1,20 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getBookmarks, getCart} from '../actions/AppActions';
+import {logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getAllBookmarks, getAllCart} from '../actions/AppActions';
 import Login from '../components/Login'
 
 const API = process.env.REACT_APP_API_URL
 
-const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getBookmarks, getCart}) => {
+const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getAllBookmarks, getAllCart}) => {
 
   const loadData = (response) => {
     window.FB.api('/me', currentUser => {
       dbLogin(currentUser)
       getAllFriends(currentUser.id)
-      getFeedItems()
     })
   }
 
+//get userId from database and fetch their items for sale
   const dbLogin = async(currUser) => {
     let res = await fetch(`${API}/users`, {
       method: 'POST',
@@ -25,21 +25,26 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
       body: JSON.stringify(currUser)
     })
     let userAndItemsForSale = await res.json()
-    const {products, id} = userAndItemsForSale
-    console.log('products ', products);
-    console.log('id ' , id);
-    console.log('currUser.name ', currUser.name);
-    logIn(id, currUser.name)
-
+    let {products, id} = userAndItemsForSale
+    id = +id
+    getBookmarksFromDatabase(id) //retrieve bookmarks from db
+    getCartFromDatabase(id)
+    logIn(id, currUser.name) //action
     let editedProducts = products.map(product => {
       return {...product, price: parseFloat(Number(product.price).toFixed(2))}
     }) || []
-    console.log('edited products ', editedProducts);
-    getAllForSaleItems(editedProducts)
-    // getBookmarks(bookmarks)
-    // getCart(cart)
+    getAllForSaleItems(editedProducts) //action
   }
 
+  //fetch all user's friends
+    const getAllFriends = async(userID) => {
+      await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
+        gotFriends(friends.data)
+        getFeedItems() //should be async after getAllFriends
+      })
+    }
+
+//fetch all items (will need to filter this by friends ids and by not sold)
   const getFeedItems = async() => {
     let res = await fetch(`${API}/products`, {
       method: 'GET',
@@ -49,16 +54,32 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
       mode: 'cors'
     })
     let feedItems = await res.json()
-    let editedFeedItems = feedItems.map (item => {
-      return {...item, numberPrice: parseFloat(Number(item.price).toFixed(2))}
+    getAllFeedItems(feedItems) // action
+  }
+//fetch all bookmarks by user id
+  const getBookmarksFromDatabase = async(id) => {
+    let res = await fetch(`${API}/bookmarks/${id}`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: 'cors'
     })
-    getAllFeedItems(editedFeedItems)
+    let bookmarks = await res.json()
+    getAllBookmarks(bookmarks) //action
   }
 
-  const getAllFriends = async(userID) => {
-    await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
-      gotFriends(friends.data)
+  const getCartFromDatabase = async(id) => {
+    let res = await fetch(`${API}/cart/${id}`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: 'cors'
     })
+    let cartItems = await res.json()
+    console.log('got user\'s cart items ', cartItems);
+    getAllCart(cartItems) //action
   }
 
   return (
@@ -94,11 +115,11 @@ const mapDispatchToProps = dispatch => {
     getAllForSaleItems: saleItems => {
       dispatch(getAllForSaleItems(saleItems))
     },
-    getBookmarks: bookmarks => {
-      dispatch(getBookmarks(bookmarks))
+    getAllBookmarks: bookmarks => {
+      dispatch(getAllBookmarks(bookmarks))
     },
-    getCart: cart => {
-      dispatch(getCart(cart))
+    getAllCart: cart => {
+      dispatch(getAllCart(cart))
     }
   }
 }
