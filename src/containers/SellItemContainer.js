@@ -3,6 +3,7 @@ import { addItemForSale } from '../actions/AppActions'
 import NewItemForm from '../components/NewItemForm'
 
 const addProductToDatabase = async (product, API) => {
+  console.log('product about to be sent to DB ', product);
   let res = await fetch(`${API}/products`, {
     method: 'POST',
     headers: {
@@ -12,6 +13,8 @@ const addProductToDatabase = async (product, API) => {
     body: JSON.stringify(product)
   })
   let newProduct = await res.json()
+  console.log('newProduct came back from database ', newProduct);
+  // newProduct.sellerName = product.sellerName
   return newProduct
 }
 

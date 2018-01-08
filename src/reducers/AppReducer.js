@@ -11,7 +11,8 @@ const AppReducer = (state, action) => {
       return {...state, friends: action.friends}
     case 'GET_ALL_FEED_ITEMS':
       //upon login. (temporarily) fetches all products from GET products and returns them as action.feedItems
-      return {...state, feedItems: action.feedItems}
+      console.log('action.feedItems ', action.feedItems);
+      return {...state, feedItems: action.feedItems, filteredItems: action.feedItems}
     case 'GET_ITEMS_FOR_SALE':
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns PRODUCTS with seller.id = user.id. products come back and set as action.itemsForSale
       return {...state, itemsForSale: action.itemsForSale}
@@ -19,8 +20,6 @@ const AppReducer = (state, action) => {
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns BOOKMARKS with user_id = user.id. bookmarks come back and set as action.bookmarks. need to get feedItems and filter out the items by product id in each bookmark
       return {...state, bookmarks: action.bookmarks}
     case 'GET_CART':
-    console.log('get cart reducer');
-    console.log('action.cart ', action.cart);
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns cart items with user_id = user.id. bookmarks come back and set as action.cart
       return {...state, cart: action.cart}
     case 'ADD_ITEM_FOR_SALE':
@@ -120,13 +119,10 @@ const AppReducer = (state, action) => {
       }
     case 'UPDATE_CART_QUANTITY':
       // onChange event for shopping cart selector OR quantity selector in FeedItem. send NEW Quantity to PUT cart/:id and receive updatedCartItem id and cartQuantity
-      console.log('action ', action);
       let itemToEdit = state.cart.filter( cartItem => {
         return cartItem.id === action.id
       })
-      console.log('editing cart item ', itemToEdit);
       indexToEdit = state.cart.indexOf(itemToEdit[0])
-      console.log('editing cart index ', indexToEdit)
       if (indexToEdit === 0) {
         return {...state, cart: [{...state.cart[0], cartQuantity: action.cartQuantity}]}
       } else {
@@ -153,21 +149,15 @@ const AppReducer = (state, action) => {
     case 'FILTER_CATEGORY':
       // action.filter and action.checked from checkbox onChange handler in ShoppingFeed
       if (action.checked) {
-        if (state.filteredItems) {
           const filteredItems = state.filteredItems.filter( item => {
             return item.category.toLowerCase() === action.categoryFilter
           })
-        } else {
-          const filteredItems = state.feedItems.filter(item => {
-            return item.category.toLowerCase() === action.categoryFilter
-          })
-        }
         return {...state, filteredItems}
       } else { //unchecked filter
         const unfiltered = state.feedItems.filter(item => {
-          return item.category.toLowerCase() === action.categoryFilter
+          return item.category.toLowerCase() !== action.categoryFilter
         })
-        return {...state, filteredItems: [...state.filteredItems, unfiltered]}
+        return {...state, filteredItems: [...state.filteredItems, ...unfiltered]}
       }
     default:
       return state;

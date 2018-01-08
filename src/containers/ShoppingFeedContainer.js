@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
-import { addToCart, addBookmark } from '../actions/AppActions'
+import { addToCart, addBookmark, filterItemsBySearch, filterItemsByCategory } from '../actions/AppActions'
 import ShoppingFeed from '../components/ShoppingFeed'
 
+
 const addCartItemToDatabase = async (productId, userId, API) => {
-  console.log('product id, user id ', productId, userId);
   let res = await fetch(`${API}/cart`, {
        method: 'POST',
        headers: {
@@ -25,7 +25,6 @@ const startAddingToCart = (productId, userId) => {
 }
 
 const addBookmarkToDatabase = async (productId, userId, API) => {
-  console.log('addbookmarktodatabase productId, userId ', productId, userId);
   let res = await fetch(`${API}/bookmarks`, {
        method: 'POST',
        headers: {
@@ -35,7 +34,6 @@ const addBookmarkToDatabase = async (productId, userId, API) => {
        body: JSON.stringify({productId, userId})
   })
   let newBookmark = await res.json()
-  console.log('new bookmark came back from db ', newBookmark);
   return newBookmark
 }
 
@@ -48,8 +46,10 @@ const startAddingBookmark = (productId, userId) => {
 }
 
 const mapStateToProps = state => {
+  console.log('state in mapstate ', state);
   return  {
     feedItems: state.feedItems,
+    filteredItems: state.filteredItems,
     currentUser: state.currentUser
   }
 }
@@ -57,7 +57,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAddToCart: (productId, userId) => dispatch(startAddingToCart(productId, userId)),
-    onAddBookmark: (productId, userId) => dispatch(startAddingBookmark(productId, userId))
+    onAddBookmark: (productId, userId) => dispatch(startAddingBookmark(productId, userId)),
+    filterItems: (filt) => dispatch(filterItemsBySearch(filt)),
+    filterCategory: (filt, checked) => dispatch(filterItemsByCategory(filt, checked))
   }
 }
 

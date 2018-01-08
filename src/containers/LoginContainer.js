@@ -78,7 +78,6 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
       mode: 'cors'
     })
     let cartItems = await res.json()
-    console.log('got user\'s cart items ', cartItems);
     getAllCart(cartItems) //action
   }
 

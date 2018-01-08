@@ -11,6 +11,7 @@ import ItemsForSaleContainer from './containers/ItemsForSaleContainer'
 import NavBar from './components/nav/NavBar'
 import BookmarksContainer from './containers/BookmarksContainer'
 import ShoppingCartContainer from './containers/ShoppingCartContainer'
+import BuyOrSell from './components/nav/BuyOrSell'
 
 
 
@@ -26,7 +27,7 @@ class App extends Component {
             <LoginContainer />
             <NavBar />
             <Switch>
-              <Route exact path='/' component={ShoppingFeedContainer} />
+              <Route exact path='/' component={BuyOrSell} />
               <Route path='/sell' component={SellItemContainer} />
               <Route path='/saleitems' component={ItemsForSaleContainer} />
               <Route path='/shoppingcart' component={ShoppingCartContainer} />

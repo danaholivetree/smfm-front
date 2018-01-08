@@ -19,7 +19,6 @@ const startRemovingCartItem = (id) => {
   return function (dispatch, getState, API) {
     return removeCartItemFromDatabase(id, API).then(
       returned => {
-        console.log('returned from delete', returned);
         if (returned.id === id) {
           dispatch(removeFromCart(id))
         }
@@ -30,7 +29,6 @@ const startRemovingCartItem = (id) => {
   }
 }
 const updateCartQuantityInDatabase = async (id, quantity, API) => {
-  console.log('update in database where id, quantity', id, quantity );
   let res = await fetch(`${API}/cart/${id}`, {
        method: 'PUT',
        headers: {
@@ -47,7 +45,6 @@ const startUpdatingQuantity = (id, quantity) => {
   return function (dispatch, getState, API) {
     return updateCartQuantityInDatabase(id, quantity, API).then(
       updatedItem => {
-        console.log('returned from update id, updated quantity', updatedItem.id, updatedItem.cartQuantity);
           dispatch(updateCartQuantity(updatedItem.id, updatedItem.cartQuantity))
     })
   }

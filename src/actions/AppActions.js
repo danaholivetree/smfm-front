@@ -41,7 +41,6 @@ export const getAllBookmarks = (bookmarks) => {
 }
 
 export const getAllCart = (cart) => {
-  console.log('action: retrieving cart ', cart);
   return {
     type: 'GET_CART',
     cart

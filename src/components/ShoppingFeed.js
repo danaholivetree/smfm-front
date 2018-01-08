@@ -1,10 +1,9 @@
 import React from 'react'
 import FeedItem from './FeedItem'
 import PropTypes from 'prop-types'
+import SearchBar from './SearchBar'
 
-// const API = process.env.REACT_APP_API_URL
-
-const ShoppingFeed = ({feedItems, onAddToCart, onAddBookmark, currentUser}) => {
+const ShoppingFeed = ({filteredItems, onAddToCart, onAddBookmark, currentUser, filterItems, filterCategory}) => {
 
   // const addItemToCart = async (item) => {
   //   let alreadyInCart = cart.filter(el => {
@@ -25,20 +24,23 @@ const ShoppingFeed = ({feedItems, onAddToCart, onAddBookmark, currentUser}) => {
   //   }
   // }
 
-  const displayFeedItems = feedItems.map( item => {
+
+
+  const displayFeedItems = filteredItems.map( item => {
     return <FeedItem key={item.id} {...item} onAddToCart={ () => onAddToCart(item.id, currentUser.id)} onAddBookmark={ () => onAddBookmark(item.id, currentUser.id)} />
   })
 
   return (
       <div className='container'>
           ShoppingFeed
+          <SearchBar filterItems={filterItems} filterCategory={filterCategory} />
           {displayFeedItems}
       </div>
   )
 }
 
 ShoppingFeed.propTypes = {
-  feedItems: PropTypes.arrayOf(
+  filteredItems: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       itemName: PropTypes.string.isRequired,
@@ -51,7 +53,9 @@ ShoppingFeed.propTypes = {
     }).isRequired
   ).isRequired,
   onAddToCart: PropTypes.func.isRequired,
-  onAddBookmark: PropTypes.func.isRequired
+  onAddBookmark: PropTypes.func.isRequired,
+  filterItems: PropTypes.func.isRequired,
+  filterCategory: PropTypes.func.isRequired
 }
 
 export default ShoppingFeed

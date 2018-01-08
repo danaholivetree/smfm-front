@@ -11,7 +11,7 @@ const NewItemForm = ({addNewProduct, currentUser}) => {
     e.preventDefault()
       console.log('currentUser ', currentUser)
     let product = {
-      name: e.target.name.value,
+      itemName: e.target.name.value,
       category: e.target.category.value,
       quantity: e.target.quantity.value,
       price: e.target.price.value,

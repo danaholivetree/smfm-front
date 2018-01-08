@@ -21,7 +21,8 @@ const initialState = {
   itemsForSale: [],
   feedItems: [],
   bookmarks: [],
-  cart: []
+  cart: [],
+  filteredItems: []
 }
 let store = createStore(AppReducer, initialState, applyMiddleware(thunk.withExtraArgument(API)))
 

@@ -30,7 +30,6 @@ const startRemovingBookmark = (id) => {
 }
 
 const addCartItemToDatabase = async (productId, userId, API) => {
-  console.log('product id, user id ', productId, userId);
   let res = await fetch(`${API}/cart`, {
        method: 'POST',
        headers: {
