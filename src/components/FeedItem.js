@@ -2,10 +2,7 @@ import React from 'react'
 
 const FeedItem = ({item, onAddToCart, onAddBookmark}) => {
 
-   const onClickView = (e) => {
-    e.preventDefault()
 
-   }
   return (
 
     <div className="card">
@@ -19,7 +16,7 @@ const FeedItem = ({item, onAddToCart, onAddBookmark}) => {
         {/* <a href="#" className="btn btn-primary">link</a> */}
         <input className='btn btn-primary' type='button' value='add to cart' onClick={onAddToCart} />
         <input className='btn btn-primary' type='button' value='bookmark' onClick={onAddBookmark} />
-        <input className='btn btn-primary' type='button' value='view large' onClick={onClickView} />
+
       </div>
     </div>
   )

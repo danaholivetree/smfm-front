@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
-import { addToCart, addBookmark, filterItemsBySearch, filterItemsByCategory } from '../actions/AppActions'
-import ShoppingFeed from '../components/ShoppingFeed'
-
+import { addToCart, addBookmark } from '../actions/AppActions'
+import JumboFeedItem from '../components/JumboFeedItem'
 
 
 const addCartItemToDatabase = async (productId, userId, API) => {
@@ -47,9 +46,9 @@ const startAddingBookmark = (productId, userId) => {
 }
 
 const mapStateToProps = state => {
+  console.log('state.feedItems to send to jumbo item ', state.feedItems);
   return  {
-    feedItems: state.feedItems,
-    filteredItems: state.filteredItems,
+    items: state.feedItems,
     currentUser: state.currentUser
   }
 }
@@ -58,11 +57,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onAddToCart: (productId, userId) => dispatch(startAddingToCart(productId, userId)),
     onAddBookmark: (productId, userId) => dispatch(startAddingBookmark(productId, userId)),
-    filterItems: (filt) => dispatch(filterItemsBySearch(filt)),
-    filterCategory: (filt, checked) => dispatch(filterItemsByCategory(filt, checked))
   }
 }
 
-const ShoppingFeedContainer = connect(mapStateToProps, mapDispatchToProps)(ShoppingFeed)
+const JumboItemContainer = connect(mapStateToProps, mapDispatchToProps)(JumboFeedItem)
 
-export default ShoppingFeedContainer
+export default JumboItemContainer
