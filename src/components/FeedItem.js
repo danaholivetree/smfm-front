@@ -15,7 +15,7 @@ const FeedItem = ({id, itemName, sellerName, description, category, price, quant
           <h6 className="card-subtitle mb-2 text-muted">Price: {price} </h6>
           <h6 className="card-subtitle mb-2 text-muted">Quantity Available: {quantity} </h6>
         <p className="card-text">{description}</p>
-        <a href="#" className="btn btn-primary">link</a>
+        {/* <a href="#" className="btn btn-primary">link</a> */}
         <input className='btn btn-primary' type='button' value='add to cart' onClick={onAddToCart} />
         <input className='btn btn-primary' type='button' value='bookmark' onClick={onAddBookmark} />
       </div>

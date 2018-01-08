@@ -11,7 +11,6 @@ const AppReducer = (state, action) => {
       return {...state, friends: action.friends}
     case 'GET_ALL_FEED_ITEMS':
       //upon login. (temporarily) fetches all products from GET products and returns them as action.feedItems
-      console.log('action.feedItems ', action.feedItems);
       return {...state, feedItems: action.feedItems, filteredItems: action.feedItems}
     case 'GET_ITEMS_FOR_SALE':
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns PRODUCTS with seller.id = user.id. products come back and set as action.itemsForSale

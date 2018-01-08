@@ -46,7 +46,6 @@ const startAddingBookmark = (productId, userId) => {
 }
 
 const mapStateToProps = state => {
-  console.log('state in mapstate ', state);
   return  {
     feedItems: state.feedItems,
     filteredItems: state.filteredItems,

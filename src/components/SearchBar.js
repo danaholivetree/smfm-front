@@ -10,7 +10,7 @@ const SearchBar = ({filterItems, filterCategory}) => {
   const handleCheck = (e) => {
     filterCategory(e.target.value, e.target.checked)
   }
-  
+
   return (
     <div>
       <div>

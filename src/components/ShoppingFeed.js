@@ -5,27 +5,6 @@ import SearchBar from './SearchBar'
 
 const ShoppingFeed = ({filteredItems, onAddToCart, onAddBookmark, currentUser, filterItems, filterCategory}) => {
 
-  // const addItemToCart = async (item) => {
-  //   let alreadyInCart = cart.filter(el => {
-  //       return (el.id === item.id)
-  //   })
-  //   if (alreadyInCart.length < 1) { //item wasn't in cart
-  //     item.quantityInCart = 1
-  //     let res = await fetch(`${API}/cart/${item.id}`, {
-  //           method: 'POST',
-  //           headers: {
-  //             "Content-Type": "application/json"
-  //           },
-  //           mode: 'cors',
-  //           body: JSON.stringify({...item, quantityInCart: 1, userId: currentUser.id})
-  //     })
-  //     let newCartItem = await res.json()
-  //     dispatch(addToCart(newCartItem))
-  //   }
-  // }
-
-
-
   const displayFeedItems = filteredItems.map( item => {
     return <FeedItem key={item.id} {...item} onAddToCart={ () => onAddToCart(item.id, currentUser.id)} onAddBookmark={ () => onAddBookmark(item.id, currentUser.id)} />
   })
@@ -48,10 +27,8 @@ ShoppingFeed.propTypes = {
       sellerName: PropTypes.string.isRequired,
       category: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-      // price: PropTypes.number.isRequired
-    }).isRequired
-  ).isRequired,
+      quantity: PropTypes.number.isRequired
+    }).isRequired).isRequired,
   onAddToCart: PropTypes.func.isRequired,
   onAddBookmark: PropTypes.func.isRequired,
   filterItems: PropTypes.func.isRequired,
