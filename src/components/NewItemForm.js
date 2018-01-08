@@ -22,7 +22,7 @@ const NewItemForm = ({addNewProduct, currentUser}) => {
     console.log('product in createProduct ', product);
     addNewProduct(product)
   }
-
+  // https://react-bootstrap.github.io/components/forms/
   return (
     <form onSubmit={createProduct}>
       <label htmlFor='name'>Name</label>
