@@ -13,7 +13,14 @@ return (
   <div>
     <Jumbotron>
   		<FeedItem item={itemToRender[0]} onAddToCart={ () => onAddToCart(itemToRender.id, currentUser.id)} onAddBookmark={ () => onAddBookmark(itemToRender.id, currentUser.id)}/>
-      <Button className='btn btn-primary'><NavLink to='/shoppingfeed'>Close</NavLink></Button>
+      <Button className='btn btn-primary'>
+        {match.path.split('/')[1] === 'shoppingfeed' ?
+        <NavLink to='/shoppingfeed'>Close</NavLink>
+        : match.path.split('/')[1] ==='bookmarks' ?
+        <NavLink to='/bookmarks'>Close</NavLink>
+        : ''
+      }
+      </Button>
   	</Jumbotron>
   </div>
   )
