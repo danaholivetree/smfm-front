@@ -119,13 +119,23 @@ const AppReducer = (state, action) => {
         }
       }
     case 'UPDATE_CART_QUANTITY':
-      // onChange event for shopping cart selector OR quantity selector in FeedItem. send NEW Quantity to PUT cart/:id and receive updatedCartItem
-      indexToEdit = state.cart.indexOf(action.updatedCartItem)
-      return {...state, cart:
-          [...state.cart.slice(0, indexToEdit),
-            action.updatedCartItem,
-            state.cart.slice(indexToEdit + 1)
-          ]
+      // onChange event for shopping cart selector OR quantity selector in FeedItem. send NEW Quantity to PUT cart/:id and receive updatedCartItem id and cartQuantity
+      console.log('action ', action);
+      let itemToEdit = state.cart.filter( cartItem => {
+        return cartItem.id === action.id
+      })
+      console.log('editing cart item ', itemToEdit);
+      indexToEdit = state.cart.indexOf(itemToEdit[0])
+      console.log('editing cart index ', indexToEdit)
+      if (indexToEdit === 0) {
+        return {...state, cart: [{...state.cart[0], cartQuantity: action.cartQuantity}]}
+      } else {
+        return {...state, cart:
+            [...state.cart.slice(0, indexToEdit),
+              {...state.cart[indexToEdit], cartQuantity: action.cartQuantity},
+              state.cart.slice(indexToEdit + 1)
+            ]
+        }
       }
     case 'FILTER_ITEMS_BY_SEARCH':
       //onChange event on SearchBar in ShoppingFeed. action.filter

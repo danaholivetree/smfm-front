@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CartItem = ({item, addToCart, subtractFromCart, removeItem}) => {
+const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
 
   // const handleDisplay = (e) => {
   //   e.preventDefault()
@@ -15,45 +15,37 @@ const CartItem = ({item, addToCart, subtractFromCart, removeItem}) => {
     removeItem(item.id)
   }
 
-  const addQuantity = (e) => {
-    e.preventDefault()
-    addToCart(item)
-  }
-  const subtractQuantity = (e) => {
-    e.preventDefault()
-    subtractFromCart(item)
-  }
-  // const updateQuantity = (e) => {
+  // const addQuantity = (e) => {
   //   e.preventDefault()
-  //   console.log(e.target.value);
-  //   item.quantityInCart = e.target.value
-  //   cost = item.price * item.quantityInCart
+  //   addToCart(item)
   // }
+  // const subtractQuantity = (e) => {
+  //   e.preventDefault()
+  //   subtractFromCart(item)
+  // }
+  const handleQuantityChange = (e) => {
+    e.preventDefault()
+    console.log('new quantity ', e.target.value);
+    updateCartQuantity(item.id, e.target.value)
+  }
 
   const selector = []
   for (let i = 1; i <= item.quantity; i++ ) {
     selector.push(<option key={i} value={i}>{i}</option>)
   }
 
-
-
   return (
 
       <tr>
         <td>{item.itemName}</td>
         <td>{item.sellerName}</td>
-        <td>
-          {item.quantityInCart > 1 ?
-            <button type='button' onClick={subtractQuantity}>-</button> :'' }
-        </td>
+
         <td>{item.quantity > 1 ?
-          <select name='quantity' >
+          <select onChange={handleQuantityChange} name='quantity' defaultValue={item.cartQuantity}>
             {selector}
           </select>
         : item.quantityInCart}</td>
-        <td>{item.quantityInCart < item.quantity ?
-          <button type='button'  onClick={addQuantity}>+</button> :'' }
-        </td>
+
         <td>${item.price}</td>
         <td>${item.cartQuantity === 1 ? item.price : Number(item.price) * item.cartQuantity}</td>
         {/* <td><input className='btn btn-primary' type='button' value='view item' data-id='item.id' onClick={handleDisplay} /></td> */}

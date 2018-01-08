@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { removeFromCart } from '../actions/AppActions'
+import { removeFromCart, updateCartQuantity } from '../actions/AppActions'
 import ShoppingCart from '../components/ShoppingCart'
 
 
@@ -29,6 +29,29 @@ const startRemovingCartItem = (id) => {
     })
   }
 }
+const updateCartQuantityInDatabase = async (id, quantity, API) => {
+  console.log('update in database where id, quantity', id, quantity );
+  let res = await fetch(`${API}/cart/${id}`, {
+       method: 'PUT',
+       headers: {
+         "Content-Type": "application/json"
+       },
+       mode: 'cors',
+       body: JSON.stringify({cartQuantity: quantity})
+  })
+  let updatedItem = await res.json()
+  return updatedItem
+}
+
+const startUpdatingQuantity = (id, quantity) => {
+  return function (dispatch, getState, API) {
+    return updateCartQuantityInDatabase(id, quantity, API).then(
+      updatedItem => {
+        console.log('returned from update id, updated quantity', updatedItem.id, updatedItem.cartQuantity);
+          dispatch(updateCartQuantity(updatedItem.id, updatedItem.cartQuantity))
+    })
+  }
+}
 
 const mapStateToProps = state => {
   return  {
@@ -38,7 +61,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    removeItem: id => dispatch(startRemovingCartItem(id))
+    removeItem: id => dispatch(startRemovingCartItem(id)),
+    updateCartQuantity: (id, quantity) => dispatch(startUpdatingQuantity(id, quantity))
   }
 }
 

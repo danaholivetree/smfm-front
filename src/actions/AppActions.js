@@ -100,10 +100,11 @@ export const removeFromCart = (itemToRemove) => {
   }
 }
 
-export const updateCartQuantity = (updatedCartItem) => {
+export const updateCartQuantity = (id, cartQuantity) => {
   return {
     type: 'UPDATE_CART_QUANTITY',
-    updatedCartItem
+    id,
+    cartQuantity
   }
 }
 
