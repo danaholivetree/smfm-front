@@ -78,3 +78,7 @@ typings/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Lock file junk
+package-lock.json
+yarn.lock
