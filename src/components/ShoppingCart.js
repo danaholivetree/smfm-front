@@ -15,6 +15,7 @@ return (
     <table>
       <thead>
         <tr>
+          <th>Image</th>
           <th>Product Name</th>
           <th>Seller</th>
           <th>Quantity</th>

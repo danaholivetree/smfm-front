@@ -30,11 +30,16 @@ const startAddingProduct = (product) => {
   }
 }
 
+// const onImageUpload = ({publicUrl, cloudinaryId}) => {
+//     /* do something with the just uploaded image id/url. */
+//   }
+
 const mapStateToProps = state => {
   return {currentUser: state.currentUser}
 }
 const mapDispatchToProps = dispatch => {
-    return {addNewProduct: product => dispatch(startAddingProduct(product))}
+    return {addNewProduct: product => dispatch(startAddingProduct(product))
+    }
 }
 
 const SellItemContainer = connect(mapStateToProps, mapDispatchToProps)(NewItemForm)

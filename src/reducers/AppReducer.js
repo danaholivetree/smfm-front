@@ -1,6 +1,7 @@
 // import * as action from '../actions/AppActions'
 
 const AppReducer = (state, action) => {
+  let indexToRemove
   switch (action.type) {
     case 'LOG_IN':
       return {...state, loggedIn: true, currentUser: {id: action.id, name: action.name}}
@@ -27,18 +28,38 @@ const AppReducer = (state, action) => {
       return {...state, itemsForSale: [...state.itemsForSale, action.newItem]}
     case 'REMOVE_ITEM_FOR_SALE':
     console.log('remove item for sale reducer ');
-      // sent item id to DELETE products/:id. received deleted item from DB and set as action.itemToRemove
-      // find index of item to remove in state.itemsForSale
-      let itemToRemove = state.itemsForSale.filter( item => {
+      let productToRemove = state.feedItems.filter( item => {
         return item.id === action.itemToRemove
       })
-      console.log('item to remove ', itemToRemove);
-      let indexToRemove = state.itemsForSale.indexOf(itemToRemove[0])
-      console.log('index to remove ', indexToRemove);
-      return {...state, itemsForSale:
-          [...state.itemsForSale.slice(0, indexToRemove),
-            state.itemsForSale.slice(indexToRemove + 1)
-          ]
+      let itemRemove = state.itemsForSale.filter( item => {
+        return item.id === action.itemToRemove
+      })
+      let productIndexToRemove = state.feedItems.indexOf(productToRemove[0])
+      let saleIndexToRemove = state.itemsForSale.indexOf(itemRemove[0])
+      if (saleIndexToRemove === 0 && productIndexToRemove === 0) {
+        return {...state, feedItems: state.feedItems.slice(1), itemsForSale: state.itemsForSale.slice(1)}
+      }
+      else if (saleIndexToRemove !== 0 && productIndexToRemove !== 0) {
+        return {...state, itemsForSale:
+            [...state.itemsForSale.slice(0, saleIndexToRemove),
+              ...state.itemsForSale.slice(saleIndexToRemove + 1)
+            ],
+            feedItems:
+                [...state.feedItems.slice(0, productIndexToRemove),
+                  ...state.feedItems.slice(productIndexToRemove + 1)
+                ]
+        }
+      } else if (saleIndexToRemove === 0) {
+          return {...state, feedItems: [...state.feedItems.slice(0, productIndexToRemove),
+            ...state.feedItems.slice(productIndexToRemove + 1)
+          ], itemsForSale: state.itemsForSale.slice(1)}
+      }
+      else {
+        return {...state, itemsForSale:
+            [...state.itemsForSale.slice(0, saleIndexToRemove),
+            ...state.itemsForSale.slice(saleIndexToRemove + 1)
+          ], feedItems: state.feedItems.slice(1)
+        }
       }
     case 'EDIT_ITEM_FOR_SALE':
       // set data from EditItemForm onSubmit event to PUT products/:id. received db item and set it as action.editedItem
@@ -46,7 +67,7 @@ const AppReducer = (state, action) => {
       return {...state, itemsForSale:
           [...state.itemsForSale.slice(0, indexToEdit),
             action.editedItem,
-            state.itemsForSale.slice(indexToEdit + 1)
+            ...state.itemsForSale.slice(indexToEdit + 1)
           ]
       }
     case 'ADD_BOOKMARK':
@@ -56,7 +77,7 @@ const AppReducer = (state, action) => {
     case 'REMOVE_BOOKMARK':
       //delete button on Bookmarks component takes bookmark.id, sends it to DELETE bookmarks/:id, and sets returned item as itemToRemove
       const bookmarkToRemove = state.bookmarks.filter( bookmark => {
-        return bookmark.id === action.bookmarkToRemove
+        return bookmark.id === action.bookmarkToRemove.id
       })
       console.log('reducer bookmarkToRemove ', bookmarkToRemove[0]);
       indexToRemove = state.bookmarks.indexOf(bookmarkToRemove[0])
@@ -66,7 +87,7 @@ const AppReducer = (state, action) => {
       } else {
         return {...state, bookmarks:
             [...state.bookmarks.slice(0, indexToRemove),
-              state.bookmarks.slice(indexToRemove + 1)
+              ...state.bookmarks.slice(indexToRemove + 1)
             ]
         }
       }
@@ -112,7 +133,7 @@ const AppReducer = (state, action) => {
       } else {
         return {...state, cart:
             [...state.cart.slice(0, indexToRemove),
-              state.cart.slice(indexToRemove + 1)
+              ...state.cart.slice(indexToRemove + 1)
             ]
         }
       }
@@ -128,7 +149,7 @@ const AppReducer = (state, action) => {
         return {...state, cart:
             [...state.cart.slice(0, indexToEdit),
               {...state.cart[indexToEdit], cartQuantity: action.cartQuantity},
-              state.cart.slice(indexToEdit + 1)
+              ...state.cart.slice(indexToEdit + 1)
             ]
         }
       }

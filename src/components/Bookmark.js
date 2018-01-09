@@ -8,12 +8,13 @@ const Bookmark = ({item, removeItem, onAddToCart}) => {
   // }
   const removeBookmark = (e) => {
     e.preventDefault()
+    console.log('item.id from remove bookmark click ', item.id);
     removeItem(item.id)
   }
 
   return (
     <li>
-      {item.itemName} ** {item.category} ** {item.sellerId} ** {item.description} ** {item.quantity} ** {item.price}
+      <img src={item.image} alt='' /> ** {item.itemName} ** {item.category} ** {item.sellerId} ** {item.description} ** {item.quantity} ** {item.price}
       <input className='btn btn-primary' type='button' value='remove' onClick={removeBookmark} />
       <input className='btn btn-primary' type='button' value='add to cart' onClick={onAddToCart} />
     </li>
