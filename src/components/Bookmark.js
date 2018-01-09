@@ -14,7 +14,7 @@ const Bookmark = ({item, removeItem, onAddToCart}) => {
 
   return (
     <li>
-      <img src={item.image} alt='' /> ** {item.itemName} ** {item.category} ** {item.sellerId} ** {item.description} ** {item.quantity} ** {item.price}
+      <img src={item.thumbnail} alt='' /> ** {item.itemName} ** {item.category} ** {item.sellerId} ** {item.description} ** {item.quantity} ** {item.price}
       <input className='btn btn-primary' type='button' value='remove' onClick={removeBookmark} />
       <input className='btn btn-primary' type='button' value='add to cart' onClick={onAddToCart} />
     </li>

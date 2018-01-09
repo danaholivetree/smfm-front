@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { Image } from 'cloudinary-react'
+// import { Image } from 'cloudinary-react'
 
 const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
 
@@ -39,7 +39,7 @@ const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
 console.log('item.image ', item.image);
   return (
       <tr>
-        <td><img src={item.image} alt='' /></td>
+        <td><img src={item.thumbnail} alt='' /></td>
         <td>{item.itemName}</td>
         <td>{item.sellerName}</td>
 

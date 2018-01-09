@@ -11,7 +11,6 @@ const BookmarksRoute = () => (
         <Route path='/bookmarks/:number' component={JumboItemContainer}/>
       </Switch>
     </div>
-
   )
 
 export default BookmarksRoute

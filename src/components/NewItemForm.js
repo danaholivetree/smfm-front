@@ -7,6 +7,7 @@ import React from 'react'
 const NewItemForm = ({addNewProduct, currentUser}) => {
 
 var imageUrl = ''
+var thumbnailUrl = ''
 
   const uploadWidget = (e) => {
     console.log('click');
@@ -17,6 +18,7 @@ var imageUrl = ''
             console.log(error, results[0])
             console.log('setting imageUrl as secure_url= ', results[0].secure_url);
             imageUrl = results[0].secure_url
+            thumbnailUrl = results[0].thumbnail_url
             // onUploadSuccess({url: secure_url, id: path});
         })
   }
@@ -32,7 +34,8 @@ var imageUrl = ''
       description: e.target.description.value,
       sellerId: currentUser.id,
       sellerName: currentUser.name,
-      image: imageUrl
+      image: imageUrl,
+      thumbnail: thumbnailUrl
     }
     console.log('product in createProduct ', product);
     addNewProduct(product)
@@ -49,17 +52,16 @@ var imageUrl = ''
 
 
       <form onSubmit={createProduct}>
-        {/* <input type="file" name="pic" accept="image/*"/> */}
         <label htmlFor='name'>Name</label>
         <input type='text' name='name' placeholder='Item Name'/>
         <label htmlFor='category'>Category</label>
-        <input type='text' name='category' placeholder='Item Name'/>
+        <input type='text' name='category' placeholder='Item Category'/>
         <label htmlFor='quantity'>Quantity</label>
-        <input type='text' name='quantity' placeholder='Item Name'/>
+        <input type='text' name='quantity' placeholder='Quantity Available'/>
         <label htmlFor='price'>Price</label>
-        <input type='text' name='price' placeholder='Item Name'/>
+        <input type='text' name='price' placeholder='Price'/>
         <label htmlFor='description'>Description</label>
-        <input htmlFor='text' name='description' placeholder='Item Name'/>
+        <input htmlFor='text' name='description' placeholder='Description'/>
         <input type='submit' className='btn btn-default' value='submit new item'/>
       </form>
     </div>

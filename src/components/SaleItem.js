@@ -10,7 +10,7 @@ const SaleItem = ({item, removeItem}) => {
   return (
 
       <li>
-        <img src={item.image} alt='' /> ** {item.id} ** {item.itemName} ** {item.category} ** {item.description} ** {item.quantity} ** {item.price} ** {item.image} **
+        <img src={item.thumbnail} alt='' /> ** {item.id} ** {item.itemName} ** {item.category} ** {item.description} ** {item.quantity} ** {item.price} **
         {/* <input type='button' value='view item' onClick={handleDisplay} /> */}
         {/* <input type='button' value='edit item' onClick={handleEdit} /> */}
         <input type='button' value='remove item' onClick={handleRemove} />
