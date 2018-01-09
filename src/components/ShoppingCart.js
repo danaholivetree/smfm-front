@@ -3,9 +3,11 @@ import CartItem from './CartItem'
 
 const ShoppingCart = ({cart, displayItem, removeItem, addToCart, updateCartQuantity}) => {
 
-   const displayCartItems = cart.map( (item, i) => {
-     return <CartItem key={i} item={item} displayItem={displayItem} removeItem={removeItem} addToCart={addToCart} updateCartQuantity={updateCartQuantity} />
-   })
+  const displayCartItems = cart.map( (item, i) => {
+    return (
+        <CartItem key={i} item={item} displayItem={displayItem} removeItem={removeItem} addToCart={addToCart} updateCartQuantity={updateCartQuantity} />
+    )
+  })
 
 return (
   <div className='container'>
@@ -15,9 +17,7 @@ return (
         <tr>
           <th>Product Name</th>
           <th>Seller</th>
-          <th></th>
           <th>Quantity</th>
-          <th></th>
           <th>Price</th>
           <th>Totals</th>
           <th></th>

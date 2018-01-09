@@ -46,7 +46,6 @@ const startAddingBookmark = (productId, userId) => {
 }
 
 const mapStateToProps = state => {
-  console.log('state.feedItems to send to jumbo item ', state.feedItems);
   return  {
     items: state.feedItems,
     currentUser: state.currentUser
@@ -56,7 +55,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onAddToCart: (productId, userId) => dispatch(startAddingToCart(productId, userId)),
-    onAddBookmark: (productId, userId) => dispatch(startAddingBookmark(productId, userId)),
+    onAddBookmark: (productId, userId) => dispatch(startAddingBookmark(productId, userId))
   }
 }
 

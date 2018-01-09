@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
 
@@ -48,7 +49,7 @@ const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
 
         <td>${item.price}</td>
         <td>${item.cartQuantity === 1 ? item.price : Number(item.price) * item.cartQuantity}</td>
-        {/* <td><input className='btn btn-primary' type='button' value='view item' data-id='item.id' onClick={handleDisplay} /></td> */}
+        <td>  <NavLink to={`/shoppingcart/${item.productId}`} className='btn btn-primary' type='button'> View Large </NavLink> </td>
         {/* <td><input className='btn btn-primary' type='button' value='update item' data-id='item.id' onClick={handleUpdate} /></td> */}
         <td><input className='btn btn-primary' type='button' value='remove item' data-id='item.id' onClick={handleRemove} /></td>
       </tr>
