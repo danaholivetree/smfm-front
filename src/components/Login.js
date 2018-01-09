@@ -10,7 +10,7 @@ const Login = ({loadData}) => {
         autoLoad={true}
         fields="name,email,picture"
         returnScopes={true}
-        scope="public_profile,user_friends"
+        scope="public_profile,user_friends,email"
         callback={loadData}
       />
     )

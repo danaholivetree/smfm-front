@@ -6,6 +6,12 @@ import React from 'react'
 
 const NewItemForm = ({addNewProduct, currentUser}) => {
 
+  const uploadWidget = () => {
+    window.cloudinary.openUploadWidget({ cloud_name: 'smfm', multiple: 'false', resource_type: 'image', client_allowed_formats: ['jpeg'] },
+        (error, result) => {
+            console.log(result);
+        })
+  }
 
   const createProduct = (e) => {
     e.preventDefault()
@@ -25,6 +31,12 @@ const NewItemForm = ({addNewProduct, currentUser}) => {
   // https://react-bootstrap.github.io/components/forms/
   return (
     <form onSubmit={createProduct}>
+      {/* <input type="file" name="pic" accept="image/*"/> */}
+      <div className="upload">
+                    <button onClick={uploadWidget} className="upload-button">
+                        Add Image
+                    </button>
+                </div>
       <label htmlFor='name'>Name</label>
       <input type='text' name='name' placeholder='Item Name'/>
       <label htmlFor='category'>Category</label>
