@@ -6,16 +6,17 @@ import React from 'react'
 
 const NewItemForm = ({addNewProduct, currentUser}) => {
 
-let imageUrl
+var imageUrl = ''
 
   const uploadWidget = (e) => {
     console.log('click');
     e.preventDefault()
     window.cloudinary.openUploadWidget({ cloud_name: 'smfm', upload_preset: 'ymtqac0s', multiple: 'false', resource_type: 'image'},
-        (error, result) => {
-            console.log('cloudinary uploadwidget ', result);
-            const { url, secure_url, public_id, path } = result;
-            imageUrl = secure_url
+        (error, results) => {
+            // const { url, secure_url, public_id, path } = result;
+            console.log(error, results[0])
+            console.log('setting imageUrl as secure_url= ', results[0].secure_url);
+            imageUrl = results[0].secure_url
             // onUploadSuccess({url: secure_url, id: path});
         })
   }
@@ -31,7 +32,7 @@ let imageUrl
       description: e.target.description.value,
       sellerId: currentUser.id,
       sellerName: currentUser.name,
-      image: 'http://res.cloudinary.com/smfm/image/upload/v1515521564/y1w4nmlskrz4nnxwxk9r.jpg'
+      image: imageUrl
     }
     console.log('product in createProduct ', product);
     addNewProduct(product)
