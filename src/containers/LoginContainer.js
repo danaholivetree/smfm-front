@@ -5,7 +5,7 @@ import Login from '../components/Login'
 
 const API = process.env.REACT_APP_API_URL
 
-const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getAllBookmarks, getAllCart}) => {
+const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getAllBookmarks, getAllCart}) => {
 
   const loadData = (response) => {
     window.FB.api('/me', currentUser => {
@@ -34,7 +34,7 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
     //   let editedProducts = products.map(product => {
     //     return {...product, price: parseFloat(Number(product.price).toFixed(2))}
     //   })
-    // } 
+    // }
     getAllForSaleItems(products) //action
   }
 
@@ -82,25 +82,16 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
     let cartItems = await res.json()
     getAllCart(cartItems) //action
   }
-
+console.log('loggedIn ', loggedIn);
+console.log('currentUser ', currentUser);
   return (
-    <Login loadData={loadData} />
+     !loggedIn ?  <Login loadData={loadData} /> : <h1> SMFM {currentUser.name} </h1>
   )
 }
 
-
-// const mapStateToProps =  state => {
-//   return  {
-//     loggedIn: state.loggedIn,
-//     friends: state.friends,
-//     currentUser: state.currentUser,
-//     itemsForSale: state.itemsForSale,
-//     feedItems: state.feedItems,
-//     bookmarks: state.bookmarks,
-//     cart: state.cart
-//
-//   }
-// }
+const mapStateToProps = state => {
+  return {loggedIn: state.loggedIn, currentUser: state.currentUser}
+}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -125,4 +116,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(LoginContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)
