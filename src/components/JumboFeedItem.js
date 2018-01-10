@@ -24,6 +24,7 @@ return (
         onAddBookmark={ () => onAddBookmark(itemToRender[0].id, currentUser.id)}
         // : ''
         // }
+        path={match.path.split('/')[1]}
       />
       <Button className='btn btn-primary'>
         <NavLink to={`/${match.path.split('/')[1]}`}>Close</NavLink>
