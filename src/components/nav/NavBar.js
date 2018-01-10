@@ -2,8 +2,8 @@ import React from 'react'
 import NaviLink from './NavLink'
 const links = [
 
-  {linkTo: '/shoppingFeed', text: 'Shopping Feed', active: false},
-  {linkTo: '/sellerFeed', text: 'Browse by Seller', active: false},
+  {linkTo: '/shoppingfeed', text: 'Shopping Feed', active: false},
+  {linkTo: '/sellerfeed', text: 'Browse by Seller', active: false},
   {linkTo: '/saleitems', text: 'My Items for Sale', active: false},
   {linkTo: '/sell', text: 'Sell an Item', active: false},
   {linkTo: '/bookmarks', text: 'My Bookmarks', active: false},
