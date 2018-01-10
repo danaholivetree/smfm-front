@@ -11,16 +11,17 @@ const JumboFeedItem = ({items, match, currentUser, onAddToCart, onAddBookmark, r
     return item.id === Number(match.params.number)
   })
 
+
 return (
   <div>
     <Jumbotron>
       <FeedItem item={itemToRender[0]}
         // { match.path.split('/')[1] !== 'cart' ?
-        onAddToCart={ () => onAddToCart(itemToRender[0].productId, currentUser.id)}
+        onAddToCart={ () => onAddToCart(itemToRender[0].id, currentUser.id)}
         // : ''
         // }
         // { match.path.split('/')[1] !== 'bookmarks' ?
-        onAddBookmark={ () => onAddBookmark(itemToRender[0].productId, currentUser.id)}
+        onAddBookmark={ () => onAddBookmark(itemToRender[0].id, currentUser.id)}
         // : ''
         // }
       />
