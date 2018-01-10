@@ -3,22 +3,23 @@ import { addToCart, addBookmark } from '../actions/AppActions'
 import JumboFeedItem from '../components/JumboFeedItem'
 
 
-const addCartItemToDatabase = async (productId, userId, API) => {
+const addCartItemToDatabase = async (productId, userId, cartQuantity, API) => {
   let res = await fetch(`${API}/cart`, {
        method: 'POST',
        headers: {
          "Content-Type": "application/json"
        },
        mode: 'cors',
-       body: JSON.stringify({productId, userId})
+       body: JSON.stringify({productId, userId, cartQuantity})
   })
   let newCartItem = await res.json()
   return newCartItem
 }
 
-const startAddingToCart = (productId, userId) => {
+const startAddingToCart = (productId, userId, cartQuantity) => {
+  console.log('selected cart quantity ', cartQuantity);
   return function (dispatch, getState, API) {
-    return addCartItemToDatabase(productId, userId, API).then(
+    return addCartItemToDatabase(productId, userId, cartQuantity, API).then(
       newCartItem => dispatch(addToCart(newCartItem)),
     )
   }
@@ -54,7 +55,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddToCart: (productId, userId) => dispatch(startAddingToCart(productId, userId)),
+    onAddToCart: (productId, userId, cartQuantity = 1) => dispatch(startAddingToCart(productId, userId, cartQuantity)),
     onAddBookmark: (productId, userId) => dispatch(startAddingBookmark(productId, userId))
   }
 }

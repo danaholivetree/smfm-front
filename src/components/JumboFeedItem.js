@@ -8,8 +8,14 @@ import { NavLink } from 'react-router-dom'
 const JumboFeedItem = ({items, match, currentUser, onAddToCart, onAddBookmark, removeItem}) => {
 
   const itemToRender = items.filter( item => {
-    return item.id === Number(match.params.number)
+    return item.id === Number(match.params.id)
   })
+
+  const selector = []
+  for (let i = 1; i <= itemToRender[0].quantity; i++ ) {
+    selector.push(<option key={i} value={i}>{i}</option>)
+  }
+
 
 
 return (
@@ -17,7 +23,7 @@ return (
     <Jumbotron>
       <FeedItem item={itemToRender[0]}
         // { match.path.split('/')[1] !== 'cart' ?
-        onAddToCart={ () => onAddToCart(itemToRender[0].id, currentUser.id)}
+        onAddToCart={ (quantity) => onAddToCart(itemToRender[0].id, currentUser.id, quantity)}
         // : ''
         // }
         // { match.path.split('/')[1] !== 'bookmarks' ?
@@ -25,10 +31,11 @@ return (
         // : ''
         // }
         path={match.path.split('/')[1]}
+        selector={selector}
       />
-      <Button className='btn btn-primary'>
-        <NavLink to={`/${match.path.split('/')[1]}`}>Close</NavLink>
-      </Button>
+
+        <NavLink to={`/${match.path.split('/')[1]}`}><button type='button' className='btn btn-primary'>Close</button></NavLink>
+
   	</Jumbotron>
   </div>
   )
