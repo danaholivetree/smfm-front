@@ -30,10 +30,12 @@ const LoginContainer = ({logIn, gotFriends, getAllFeedItems, getAllForSaleItems,
     getBookmarksFromDatabase(id) //retrieve bookmarks from db
     getCartFromDatabase(id)
     logIn(id, currUser.name) //action
-    let editedProducts = products.map(product => {
-      return {...product, price: parseFloat(Number(product.price).toFixed(2))}
-    }) || []
-    getAllForSaleItems(editedProducts) //action
+    // if (products) {
+    //   let editedProducts = products.map(product => {
+    //     return {...product, price: parseFloat(Number(product.price).toFixed(2))}
+    //   })
+    // } 
+    getAllForSaleItems(products) //action
   }
 
   //fetch all user's friends

@@ -1,6 +1,5 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
-import PropTypes from 'prop-types'
 
 const Login = ({loadData}) => {
 
@@ -16,8 +15,6 @@ const Login = ({loadData}) => {
     )
 }
 
-Login.propTypes = {
-  loadData: PropTypes.func.isRequired
-}
+
 
 export default Login;

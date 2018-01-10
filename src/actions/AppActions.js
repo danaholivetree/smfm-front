@@ -1,4 +1,5 @@
 export const logIn = (id, name) => {
+  console.log('login action id, name ', id, name);
   return {
     type: 'LOG_IN',
     id,

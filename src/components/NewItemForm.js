@@ -39,6 +39,7 @@ var thumbnailUrl = ''
     }
     console.log('product in createProduct ', product);
     addNewProduct(product)
+    e.target.reset()
   }
   // https://react-bootstrap.github.io/components/forms/
 
