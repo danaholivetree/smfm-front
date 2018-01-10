@@ -82,8 +82,7 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
     let cartItems = await res.json()
     getAllCart(cartItems) //action
   }
-console.log('loggedIn ', loggedIn);
-console.log('currentUser ', currentUser);
+
   return (
      !loggedIn ?  <Login loadData={loadData} /> : <h1> SMFM {currentUser.name} </h1>
   )
