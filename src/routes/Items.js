@@ -8,7 +8,7 @@ const Items = () => (
     <div>
       <Switch>
         <Route exact path='/shoppingfeed' component={ShoppingFeedContainer}/>
-        <Route path='/shoppingfeed/:number' component={JumboItemContainer}/>
+        <Route path='/shoppingfeed/:id' component={JumboItemContainer}/>
       </Switch>
     </div>
 

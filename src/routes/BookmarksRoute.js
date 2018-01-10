@@ -8,7 +8,7 @@ const BookmarksRoute = () => (
     <div>
       <Switch>
         <Route exact path='/bookmarks' component={BookmarksContainer}/>
-        <Route path='/bookmarks/:number' component={JumboItemContainer}/>
+        <Route path='/bookmarks/:id' component={JumboItemContainer}/>
       </Switch>
     </div>
   )

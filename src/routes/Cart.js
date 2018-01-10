@@ -8,7 +8,7 @@ const CartRoute = () => (
     <div>
       <Switch>
         <Route exact path='/shoppingcart' component={ShoppingCartContainer}/>
-        <Route path='/shoppingcart/:number' component={JumboItemContainer}/>
+        <Route path='/shoppingcart/:id' component={JumboItemContainer}/>
       </Switch>
     </div>
 
