@@ -4,7 +4,6 @@ const AppReducer = (state, action) => {
   let indexToRemove
   switch (action.type) {
     case 'LOG_IN':
-    console.log('login reducer');
       return {...state, loggedIn: true, currentUser: {id: action.id, name: action.name}}
     case 'LOG_OUT':
       return {}
@@ -24,11 +23,9 @@ const AppReducer = (state, action) => {
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns cart items with user_id = user.id. bookmarks come back and set as action.cart
       return {...state, cart: action.cart}
     case 'ADD_ITEM_FOR_SALE':
-    console.log('add item for sale reducer, new item is ', action.newItem);
       //sent data from NewItemForm onSubmit event to POST products. received db item with product.id and set it as action.newItem
       return {...state, itemsForSale: [...state.itemsForSale, action.newItem]}
     case 'REMOVE_ITEM_FOR_SALE':
-    console.log('remove item for sale reducer ');
       let productToRemove = state.feedItems.filter( item => {
         return item.id === action.itemToRemove
       })
@@ -80,9 +77,7 @@ const AppReducer = (state, action) => {
       const bookmarkToRemove = state.bookmarks.filter( bookmark => {
         return bookmark.id === action.bookmarkToRemove.id
       })
-      console.log('reducer bookmarkToRemove ', bookmarkToRemove[0]);
       indexToRemove = state.bookmarks.indexOf(bookmarkToRemove[0])
-      console.log('reducer index to remove ', indexToRemove);
       if (indexToRemove === 0) {
         return {...state, bookmarks: state.bookmarks.slice(1)}
       } else {
@@ -93,7 +88,6 @@ const AppReducer = (state, action) => {
         }
       }
     case 'ADD_TO_CART':
-    console.log('add to cart reducer');
       //add to cart button on FeedItem onClick. checks to see if item is already in the cart by comparing the item's id with items in the cart state.
       //
       // let alreadyInCart = state.cart.filter(el => {
@@ -121,14 +115,11 @@ const AppReducer = (state, action) => {
       // else return state
 
     case 'REMOVE_FROM_CART':
-    console.log('remove from cart reducer, action.itemToRemove ', action.itemToRemove);
       //delete button on CartItem in ShoppingCart container. sends cartItem.id to DELETE cart/:id and returns item as itemToRemove
       const cartItemToRemove = state.cart.filter( cartItem => {
         return cartItem.id === action.itemToRemove
       })
-      console.log('cart item to remove ', cartItemToRemove);
       indexToRemove = state.cart.indexOf(cartItemToRemove[0])
-      console.log('index to remove ', indexToRemove);
       if (indexToRemove === 0) {
         return {...state, cart: state.cart.slice(1)}
       } else {
