@@ -1,6 +1,5 @@
 import React from 'react'
 import SaleItem from './SaleItem'
-import EditItem from './EditItem'
 
 const SaleItems = ({itemsForSale, removeItem, match}) => {
 

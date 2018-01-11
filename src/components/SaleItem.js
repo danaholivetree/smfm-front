@@ -19,7 +19,7 @@ const SaleItem = ({item, removeItem}) => {
         <p> Price: ** {item.price} ** </p>
         <p>{item.description} </p>
         <input type='button' className='btn btn-primary' value='remove item' onClick={handleRemove} />
-        <NavLink className='btn btn-primary' type='button' to={`saleitems/${item.id}`}>Edit</NavLink>
+        <NavLink className='btn btn-primary' type='button' to={`sell/${item.id}`}>Edit</NavLink>
       </li>
 
 

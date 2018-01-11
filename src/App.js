@@ -29,8 +29,7 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={BuyOrSell} />
               <Route path='/sell' component={SellItemContainer} />
-              <Route exact path='/saleitems' component={ItemsForSaleContainer} />
-              <Route path='/saleitems/:id' component={EditItem} />
+              <Route path='/saleitems' component={ItemsForSaleContainer} />
               <Route path='/shoppingcart' component={CartRoute} />
               <Route path='/bookmarks' component={BookmarksRoute} />
               <Route path='/shoppingfeed' component={Items} />
