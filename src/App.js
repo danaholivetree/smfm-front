@@ -12,6 +12,7 @@ import BuyOrSell from './components/nav/BuyOrSell'
 import Items from './routes/Items'
 import BookmarksRoute from './routes/BookmarksRoute'
 import CartRoute from './routes/Cart'
+import EditItem from './components/EditItem'
 
 
 
@@ -28,7 +29,8 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={BuyOrSell} />
               <Route path='/sell' component={SellItemContainer} />
-              <Route path='/saleitems' component={ItemsForSaleContainer} />
+              <Route exact path='/saleitems' component={ItemsForSaleContainer} />
+              <Route path='/saleitems/:id' component={EditItem} />
               <Route path='/shoppingcart' component={CartRoute} />
               <Route path='/bookmarks' component={BookmarksRoute} />
               <Route path='/shoppingfeed' component={Items} />

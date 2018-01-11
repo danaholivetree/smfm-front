@@ -1,12 +1,16 @@
 import React from 'react'
+import { Form, FormControl, FormGroup, ControlLabel, InputGroup, Col, Checkbox, Button } from 'react-bootstrap'
 
-const NewItemForm = ({addNewProduct, currentUser}) => {
+const EditItem = (props) => {
 
-var imageUrl = ''
-var thumbnailUrl = ''
+console.log('trying to render EditItem, props ', props);
+
+  
+
+  var imageUrl = ''
+  var thumbnailUrl = ''
 
   const uploadWidget = (e) => {
-    console.log('click');
     e.preventDefault()
     window.cloudinary.openUploadWidget({ cloud_name: 'smfm', upload_preset: 'ymtqac0s', multiple: 'false', resource_type: 'image'},
         (error, results) => {
@@ -19,36 +23,15 @@ var thumbnailUrl = ''
         })
   }
 
-  const createProduct = (e) => {
-    e.preventDefault()
-      console.log('currentUser ', currentUser)
-    let product = {
-      itemName: e.target.name.value,
-      category: e.target.category.value,
-      quantity: Number(e.target.quantity.value),
-      price: e.target.price.value,
-      description: e.target.description.value,
-      sellerId: currentUser.id,
-      sellerName: currentUser.name,
-      image: imageUrl,
-      thumbnail: thumbnailUrl
-    }
-    console.log('product in createProduct ', product);
-    addNewProduct(product)
-    e.target.reset()
-  }
-  // https://react-bootstrap.github.io/components/forms/
+  return  (
 
-
-  return (
-
-    <div className="upload">
+    <div>
       <button onClick={uploadWidget} className="upload-button">
           Add Image
       </button>
 
 
-      <form onSubmit={createProduct}>
+      {/* <form onSubmit={createProduct}>
         <label htmlFor='name'>Name</label>
         <input type='text' name='name' placeholder='Item Name'/>
         <label htmlFor='category'>Category</label>
@@ -65,8 +48,12 @@ var thumbnailUrl = ''
         <label htmlFor='description'>Description</label>
         <input htmlFor='text' name='description' placeholder='Description'/>
         <input type='submit' className='btn btn-default' value='submit new item'/>
-      </form>
+      </form> */}
     </div>
+
   )
+
+
 }
-export default NewItemForm
+
+export default EditItem

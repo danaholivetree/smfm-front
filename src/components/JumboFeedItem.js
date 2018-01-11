@@ -2,7 +2,7 @@ import React from 'react'
 import FeedItem from './FeedItem'
 // import Bookmark from './Bookmark'
 // import CartItem from './CartItem'
-import { Jumbotron, Button } from 'react-bootstrap'
+import { Jumbotron } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
 //
 const JumboFeedItem = ({items, match, currentUser, onAddToCart, onAddBookmark, removeItem}) => {

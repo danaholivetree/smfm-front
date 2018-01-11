@@ -147,6 +147,7 @@ const AppReducer = (state, action) => {
       }
     case 'FILTER_ITEMS_BY_SEARCH':
       //onChange event on SearchBar in ShoppingFeed. action.filter
+
       const filteredItems = state.feedItems.filter(item => {
         return item.itemName.toLowerCase().includes(action.searchFilter.toLowerCase()) || item.description.toLowerCase().includes(action.searchFilter.toLowerCase())
 
@@ -159,6 +160,7 @@ const AppReducer = (state, action) => {
       })
       return {...state, filteredSellers}
     case 'FILTER_CATEGORY':
+
       // action.filter and action.checked from checkbox onChange handler in ShoppingFeed
       if (action.checked) {
           const filteredItems = state.filteredItems.filter( item => {

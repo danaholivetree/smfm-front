@@ -6,7 +6,7 @@ const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => {
     console.log('e.target.quantitySelector.value ', e.target.quantitySelector.value);
     onAddToCart(e.target.quantitySelector.value)
   }
-
+  
   return (
 
     <div className="card">

@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const SaleItem = ({item, removeItem}) => {
 
@@ -10,12 +11,16 @@ const SaleItem = ({item, removeItem}) => {
   return (
 
       <li>
-        <img src={item.thumbnail} alt='' /> ** {item.id} ** {item.itemName} ** {item.category} ** {item.description} ** {item.quantity} ** {item.price} **
-        {/* <input type='button' value='view item' onClick={handleDisplay} /> */}
-        {/* <input type='button' value='edit item' onClick={handleEdit} /> */}
-        <input type='button' value='remove item' onClick={handleRemove} />
+        <img src={item.thumbnail} alt='' />
+        <h4> {item.itemName} </h4>
 
-       </li>
+        <h1>{item.category}</h1>
+        <p> Quantity Available: {item.quantity}</p>
+        <p> Price: ** {item.price} ** </p>
+        <p>{item.description} </p>
+        <input type='button' className='btn btn-primary' value='remove item' onClick={handleRemove} />
+        <NavLink className='btn btn-primary' type='button' to={`saleitems/${item.id}`}>Edit</NavLink>
+      </li>
 
 
   )
