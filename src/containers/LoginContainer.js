@@ -25,11 +25,11 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
       body: JSON.stringify(currUser)
     })
     let userAndItemsForSale = await res.json()
-    let {products, id} = userAndItemsForSale
+    let {products, id, isSeller} = userAndItemsForSale
     id = +id
     getBookmarksFromDatabase(id) //retrieve bookmarks from db
     getCartFromDatabase(id)
-    logIn(id, currUser.name) //action
+    logIn(id, currUser.name, isSeller) //action
     // if (products) {
     //   let editedProducts = products.map(product => {
     //     return {...product, price: parseFloat(Number(product.price).toFixed(2))}
