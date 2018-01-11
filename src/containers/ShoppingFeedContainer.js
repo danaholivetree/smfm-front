@@ -4,22 +4,22 @@ import ShoppingFeed from '../components/ShoppingFeed'
 
 
 
-const addCartItemToDatabase = async (productId, userId, API) => {
+const addCartItemToDatabase = async (productId, userId, quant, API) => {
   let res = await fetch(`${API}/cart`, {
        method: 'POST',
        headers: {
          "Content-Type": "application/json"
        },
        mode: 'cors',
-       body: JSON.stringify({productId, userId})
+       body: JSON.stringify({productId, userId, quant})
   })
   let newCartItem = await res.json()
   return newCartItem
 }
 
-const startAddingToCart = (productId, userId) => {
+const startAddingToCart = (productId, userId, quant) => {
   return function (dispatch, getState, API) {
-    return addCartItemToDatabase(productId, userId, API).then(
+    return addCartItemToDatabase(productId, userId, quant, API).then(
       newCartItem => dispatch(addToCart(newCartItem)),
     )
   }
@@ -56,7 +56,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddToCart: (productId, userId) => dispatch(startAddingToCart(productId, userId)),
+    onAddToCart: (productId, userId, quant) => dispatch(startAddingToCart(productId, userId, quant)),
     onAddBookmark: (productId, userId) => dispatch(startAddingBookmark(productId, userId)),
     filterItems: (filt) => dispatch(filterItemsBySearch(filt)),
     filterCategory: (filt, checked) => dispatch(filterItemsByCategory(filt, checked))

@@ -8,7 +8,7 @@ const ShoppingFeed = ({filteredItems, onAddToCart, onAddBookmark, currentUser, f
   const displayFeedItems = filteredItems.map( item => {
     return (
       <div key={item.id}>
-        <FeedItem item={item} onAddToCart={ () => onAddToCart(item.id, currentUser.id)} onAddBookmark={ () => onAddBookmark(item.id, currentUser.id)} />
+        <FeedItem item={item} onAddToCart={ (quant) => onAddToCart(item.id, currentUser.id, quant)} onAddBookmark={ () => onAddBookmark(item.id, currentUser.id)} />
         <NavLink to={`/shoppingfeed/${item.id}`} className='btn btn-primary' type='button'> View Large </NavLink>
       </div>
     )

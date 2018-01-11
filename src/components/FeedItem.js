@@ -2,11 +2,17 @@ import React from 'react'
 
 const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => {
 
+  var quantity = 1
+
   const handleAdd = (e) => {
-    console.log('e.target.quantitySelector.value ', e.target.quantitySelector.value);
-    onAddToCart(e.target.quantitySelector.value)
+    onAddToCart(quantity)
   }
-  
+
+  const changeQuantity = (e) => {
+    console.log(e.target.value)
+    quantity = e.target.value
+  }
+
   return (
 
     <div className="card">
@@ -19,7 +25,7 @@ const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => {
         <p className="card-text">{item.description}</p>
         {/* <a href="#" className="btn btn-primary">link</a> */}
         {selector && item.quantity > 1 ?
-          <select name='quantitySelector' defaultValue={item.cartQuantity}>
+          <select name='quantitySelector' defaultValue={item.cartQuantity} onChange={changeQuantity}>
             {selector}
           </select>
         :''}
