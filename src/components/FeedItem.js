@@ -9,7 +9,6 @@ const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => {
   }
 
   const changeQuantity = (e) => {
-    console.log(e.target.value)
     quantity = e.target.value
   }
 
