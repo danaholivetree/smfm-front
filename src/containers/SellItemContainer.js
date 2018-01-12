@@ -10,7 +10,6 @@ import SignUpStripe from '../components/SignUpStripe'
 
 const SellItemContainer = ({itemsForSale, startAddingProduct, startEditingProduct, addNewProduct, editProduct, currentUser}) => {
 
-  console.log('currentUser.isSeller ', currentUser.isSeller);
   return (
     <div>
       <Switch>

@@ -8,7 +8,6 @@ import BuyOrSell from './components/nav/BuyOrSell'
 import Items from './routes/Items'
 import BookmarksRoute from './routes/BookmarksRoute'
 import CartRoute from './routes/Cart'
-import EditItem from './components/EditItem'
 import { connect } from 'react-redux'
 import Blah from './components/Blah'
 

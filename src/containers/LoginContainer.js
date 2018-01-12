@@ -30,7 +30,6 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
     id = +id
     getBookmarksFromDatabase(id) //retrieve bookmarks from db
     getCartFromDatabase(id)
-    console.log('isSeller in login ', isSeller);
     logIn(id, currUser.name, isSeller) //action
     getAllForSaleItems(products) //action
   }
