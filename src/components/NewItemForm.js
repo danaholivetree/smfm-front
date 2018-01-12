@@ -4,6 +4,9 @@ const NewItemForm = ({addNewProduct, currentUser}) => {
 
 var imageUrl = ''
 var thumbnailUrl = ''
+if (!currentUser.isSeller) {
+  
+}
 
   const uploadWidget = (e) => {
     console.log('click');

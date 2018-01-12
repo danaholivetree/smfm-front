@@ -1,9 +1,11 @@
-export const logIn = (id, name) => {
-  console.log('logged in as ', name);
+export const logIn = (id, name, isSeller) => {
+  console.log('login action logged in as ', name);
+  console.log('is seller? ', isSeller);
   return {
     type: 'LOG_IN',
     id,
-    name
+    name,
+    isSeller
   }
 }
 

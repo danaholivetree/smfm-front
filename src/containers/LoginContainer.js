@@ -26,9 +26,11 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
     })
     let userAndItemsForSale = await res.json()
     let {products, id, isSeller} = userAndItemsForSale
+
     id = +id
     getBookmarksFromDatabase(id) //retrieve bookmarks from db
     getCartFromDatabase(id)
+    console.log('isSeller in login ', isSeller);
     logIn(id, currUser.name, isSeller) //action
     // if (products) {
     //   let editedProducts = products.map(product => {
@@ -94,8 +96,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    logIn: (id, name) => {
-      dispatch(logIn(id, name))
+    logIn: (id, name, isSeller) => {
+      dispatch(logIn(id, name, isSeller))
     },
     gotFriends: friends => {
       dispatch(gotFriends(friends))

@@ -4,17 +4,25 @@ import { addItemForSale, editItemForSale } from '../actions/AppActions'
 import NewItemForm from '../components/NewItemForm'
 import { Switch, Route } from 'react-router-dom'
 import EditItem from '../components/EditItem'
+import SignUpStripe from '../components/SignUpStripe'
 
 
 
 const SellItemContainer = ({itemsForSale, startAddingProduct, startEditingProduct, addNewProduct, editProduct, currentUser}) => {
 
+  console.log('currentUser.isSeller ', currentUser.isSeller);
   return (
     <div>
       <Switch>
+        { currentUser.isSeller ?
         <Route exact path='/sell' render={() => (
           <NewItemForm addNewProduct={addNewProduct} currentUser={currentUser} />
-        )}/>
+        )} />
+        :
+        <Route exact path='/sell' render={ () => (
+          <SignUpStripe currentUser={currentUser} />
+        )} />
+      }
         <Route path='/sell/:id' render={(props) => (
           <EditItem items={itemsForSale} editProduct={editProduct} currentUser={currentUser} history={props.history} location={props.location} match={props.match}/>
         )}/>
