@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
-
-// import {browserHistory} from 'react-router'
-// import { bindActionCreators } from 'redux';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import LoginContainer from './containers/LoginContainer'
-// import { ConnectedRouter } from 'react-router-redux';
 import SellItemContainer from './containers/SellItemContainer'
 import ItemsForSaleContainer from './containers/ItemsForSaleContainer'
 import NavBar from './components/nav/NavBar'
@@ -13,29 +9,40 @@ import Items from './routes/Items'
 import BookmarksRoute from './routes/BookmarksRoute'
 import CartRoute from './routes/Cart'
 import EditItem from './components/EditItem'
+import { connect } from 'react-redux'
+import Blah from './components/Blah'
 
 
 
 class App extends Component {
 
-  render() {
 
+  render() {
     return (
       <div className="App">
         <BrowserRouter>
           <div>
             <LoginContainer />
-            <NavBar />
-            <Switch>
-              <Route exact path='/' component={BuyOrSell} />
-              <Route path='/sell' component={SellItemContainer} />
-              <Route path='/saleitems' component={ItemsForSaleContainer} />
-              <Route path='/shoppingcart' component={CartRoute} />
-              <Route path='/bookmarks' component={BookmarksRoute} />
-              <Route path='/shoppingfeed' component={Items} />
-              {/* <Route path='/sellerfeed' component={SellerFeed} /> */}
 
-            </Switch>
+            {this.props.loggedIn ?
+              <div>
+                <NavBar />
+
+                <Switch>
+                  <Route exact path='/' component={BuyOrSell} />
+                  <Route path='/sell' component={SellItemContainer} />
+                  <Route path='/saleitems' component={ItemsForSaleContainer} />
+                  <Route path='/shoppingcart' component={CartRoute} />
+                  <Route path='/bookmarks' component={BookmarksRoute} />
+                  <Route path='/shoppingfeed' component={Items} />
+                </Switch>
+              </div>
+
+              :
+
+              <Blah />
+            }
+
           </div>
         </BrowserRouter>
       </div>
@@ -43,4 +50,9 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = state => {
+  return (
+    {loggedIn: state.loggedIn}
+  )
+}
+export default connect(mapStateToProps, null)(App)

@@ -4,7 +4,6 @@ const AppReducer = (state, action) => {
   let indexToRemove
   switch (action.type) {
     case 'LOG_IN':
-    console.log('in reducer is seller ', action.isSeller)
       return {...state, loggedIn: true, currentUser: {id: action.id, name: action.name, isSeller: action.isSeller}}
     case 'LOG_OUT':
       return {}

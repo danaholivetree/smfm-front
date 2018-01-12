@@ -1,6 +1,4 @@
 export const logIn = (id, name, isSeller) => {
-  console.log('login action logged in as ', name);
-  console.log('is seller? ', isSeller);
   return {
     type: 'LOG_IN',
     id,

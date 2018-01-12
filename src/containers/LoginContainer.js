@@ -32,11 +32,6 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
     getCartFromDatabase(id)
     console.log('isSeller in login ', isSeller);
     logIn(id, currUser.name, isSeller) //action
-    // if (products) {
-    //   let editedProducts = products.map(product => {
-    //     return {...product, price: parseFloat(Number(product.price).toFixed(2))}
-    //   })
-    // }
     getAllForSaleItems(products) //action
   }
 

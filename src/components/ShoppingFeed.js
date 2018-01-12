@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 const ShoppingFeed = ({filteredItems, onAddToCart, onAddBookmark, currentUser, filterItems, filterCategory}) => {
 
+
   const displayFeedItems = filteredItems.map( item => {
     return (
       <div key={item.id}>
