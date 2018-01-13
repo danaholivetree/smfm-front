@@ -36,20 +36,27 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
 
   //fetch all user's friends
     const getAllFriends = async(userID) => {
-      await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
+      return await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
+        console.log('friends ', friends);
         gotFriends(friends.data)
-        getFeedItems() //should be async after getAllFriends
+        getFeedItems(friends.data)
       })
     }
 
 //fetch all items (will need to filter this by friends ids and by not sold)
-  const getFeedItems = async() => {
-    let res = await fetch(`${API}/products`, {
-      method: 'GET',
+  const getFeedItems = async(friends) => {
+    console.log('friends going to api for products ', friends);
+    let friendIds = friends.map( friend => {
+      return friend.id
+    })
+    console.log('friend Ids going to api for get products', friendIds);
+    let res = await fetch(`${API}/sellers`, {
+      method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
-      mode: 'cors'
+      mode: 'cors',
+      body: JSON.stringify(friendIds)
     })
     let feedItems = await res.json()
     getAllFeedItems(feedItems) // action
@@ -85,7 +92,7 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
 }
 
 const mapStateToProps = state => {
-  return {loggedIn: state.loggedIn, currentUser: state.currentUser}
+  return {loggedIn: state.loggedIn, currentUser: state.currentUser, friends: state.friends}
 }
 
 const mapDispatchToProps = dispatch => {
