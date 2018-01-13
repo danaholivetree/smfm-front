@@ -13,7 +13,6 @@ import App from './App'
 
 const API = process.env.REACT_APP_API_URL
 
-
 const initialState = {
   loggedIn: false,
   friends: [],

@@ -9,8 +9,13 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
 
   const loadData = (response) => {
     window.FB.api('/me', currentUser => {
+      if (currentUser.error) {
+        console.log('error: ' , currentUser.error.type);
+        return ///// handling
+      } else {
       dbLogin(currentUser)
       getAllFriends(currentUser.id)
+    }
     })
   }
 
@@ -35,17 +40,16 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
   }
 
   //fetch all user's friends
-    const getAllFriends = async(userID) => {
-      return await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
-        console.log('friends ', friends);
-        gotFriends(friends.data)
-        getFeedItems(friends.data)
-      })
-    }
+  const getAllFriends = async(userID) => {
+    return await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
+      console.log('friends came back ', friends);
+      gotFriends(friends.data)
+      getFeedItems(friends.data)
+    })
+  }
 
-//fetch all items (will need to filter this by friends ids and by not sold)
+//fetch items for sale by friends
   const getFeedItems = async(friends) => {
-    console.log('friends going to api for products ', friends);
     let friendIds = friends.map( friend => {
       return friend.id
     })

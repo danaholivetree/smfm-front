@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom'
 const BuyOrSell = () => (
   <div className='container'>
     <div className='row justify-content-center'>
-      <h1 className="col-md-auto"> Welcome to Shit My Friends Make! Do you want to: </h1>
+      <h1 className="col-md-auto"> Welcome to Stuff My Friends Make! Do you want to: </h1>
     </div>
     <div className='row justify-content-center'>
       <div className="col-md-auto">

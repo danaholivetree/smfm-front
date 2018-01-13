@@ -12,16 +12,26 @@ const SellItemContainer = ({itemsForSale, startAddingProduct, startEditingProduc
 
   return (
     <div>
-      <Switch>
-        {/* { currentUser.isSeller ? */}
+      
+      {/* <Switch>
+        { currentUser.isSeller ?
         <Route exact path='/sell' render={() => (
           <NewItemForm addNewProduct={addNewProduct} currentUser={currentUser} />
         )} />
-        {/* : */}
+        :
         <Route exact path='/sell' render={ () => (
           <SignUpStripe currentUser={currentUser} />
         )} />
-      {/* } */}
+        }
+        <Route path='/sell/:id' render={(props) => (
+          <EditItem items={itemsForSale} editProduct={editProduct} currentUser={currentUser} history={props.history} location={props.location} match={props.match}/>
+        )}/>
+      </Switch> */}
+
+      <Switch>
+        <Route exact path='/sell' render={() => (
+          <NewItemForm addNewProduct={addNewProduct} currentUser={currentUser} />
+        )} />
         <Route path='/sell/:id' render={(props) => (
           <EditItem items={itemsForSale} editProduct={editProduct} currentUser={currentUser} history={props.history} location={props.location} match={props.match}/>
         )}/>

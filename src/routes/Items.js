@@ -4,7 +4,6 @@ import ShoppingFeedContainer from '../containers/ShoppingFeedContainer'
 import JumboItemContainer from '../containers/JumboItemContainer'
 
 const Items = () => {
-  console.log('getting to items')
   return (
 
     <div>
