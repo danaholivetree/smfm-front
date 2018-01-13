@@ -50,7 +50,16 @@ if (!currentUser.isSeller) {
 
 
       <Form onSubmit={createProduct}>
-
+        <Row>
+          <Col md={2}>
+            <FormGroup controlId="image">
+              <ControlLabel>Add an Image</ControlLabel>{' '}
+              <Button onClick={uploadWidget} className="upload-button">
+                Select
+              </Button>
+            </FormGroup>{' '}
+          </Col>
+        </Row>
 
         <Row>
           <Col md={4}>
@@ -100,15 +109,8 @@ if (!currentUser.isSeller) {
           </Col>
         </Row>
 
-        <Col md={2}>
-          <FormGroup controlId="image">
-            <ControlLabel>Add an Image</ControlLabel>{' '}
-            <Button onClick={uploadWidget} className="upload-button">
-              Select
-            </Button>
-          </FormGroup>{' '}
 
-        </Col>
+        <Button type="submit">Submit</Button>
       </Form>
 
 

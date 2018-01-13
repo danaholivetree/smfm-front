@@ -1,6 +1,5 @@
 import React from 'react'
-// import { Form, FormControl, FormGroup, ControlLabel, InputGroup, Col, Checkbox, Button } from 'react-bootstrap'
-
+import {Row, Form, FormGroup, FormControl, Col, ControlLabel, Button, Checkbox, InputGroup} from 'react-bootstrap'
 const EditItem = ({items, editProduct, currentUser, match, history, location}) => {
 
 console.log('items for sale ', items);
@@ -50,6 +49,73 @@ console.log('items for sale ', items);
   }
 
   return  (
+    <div className="container">
+
+
+
+      <Form onSubmit={handleEdit}>
+        <Row>
+          <Col md={2}>
+            <FormGroup controlId="image">
+              <ControlLabel>Add an Image</ControlLabel>{' '}
+              <Button onClick={uploadWidget} className="upload-button">
+                Select
+              </Button>
+            </FormGroup>{' '}
+          </Col>
+        </Row>
+
+        <Row>
+          <Col md={4}>
+            <FormGroup controlId="name">
+              <ControlLabel>Item Name</ControlLabel>{' '}
+              <FormControl type="text" defaultValue={itemToEdit[0].itemName} />
+            </FormGroup>{' '}
+          </Col>
+
+        </Row>
+        <Row>
+          <Col md={3}>
+            <FormGroup controlId="category">
+              <ControlLabel>Select</ControlLabel>
+              <FormControl componentClass="select" defaultValue={itemToEdit[0].category}>
+                <option value="select">Select a Category</option>
+                <option value="handmade">Handmade</option>
+                <option value="music">Music</option>
+                <option value="music">Art</option>
+                <option value="writing">Writing</option>
+              </FormControl>
+            </FormGroup>
+          </Col>
+          <Col md={2}>
+            <FormGroup controlId="quantity">
+              <ControlLabel>Quantity Available</ControlLabel>{' '}
+              <FormControl type="number" defaultValue={itemToEdit[0].quantity}/>
+            </FormGroup>{' '}
+          </Col>
+          <Col md={2}>
+            <FormGroup controlId="price">
+              <ControlLabel>Price</ControlLabel>{' '}
+              <InputGroup>
+                <InputGroup.Addon>$</InputGroup.Addon>
+                <FormControl type="text" defaultValue={itemToEdit[0].price}/>
+                {/* <InputGroup.Addon>.00</InputGroup.Addon> */}
+              </InputGroup>
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={8} >
+            <FormGroup controlId="description">
+              <ControlLabel>Description</ControlLabel>
+              <FormControl componentClass="textarea" defaultValue={itemToEdit[0].description} />
+            </FormGroup>
+          </Col>
+        </Row>
+
+
+        <Button type="submit">Submit</Button>
+      </Form>
 
     <div>
       <button onClick={uploadWidget} className="upload-button">
@@ -75,6 +141,7 @@ console.log('items for sale ', items);
         <input htmlFor='text' name='description' defaultValue={itemToEdit[0].description}/>
         <input type='submit' className='btn btn-default' value='submit edits'/>
       </form>
+    </div>
     </div>
 
   )
