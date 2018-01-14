@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Row, Col, Button, ButtonToolbar} from 'react-bootstrap'
 
 const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
+
 
   const handleRemove = (e) => {
     e.preventDefault()
@@ -20,26 +21,28 @@ const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
     selector.push(<option key={i} value={i}>{i}</option>)
   }
 
+  const serializeCost = (quant, price) => {
+    return quant === 1 ? price : (Number(price) * quant).toFixed(2)
+  }
+
   return (
-<div className="container">
 
-  <img src={item.thumbnail} alt='' />
-  {item.itemName}
-  {item.sellerName}
-
-  {item.quantity > 1 ?
-    <select onChange={handleQuantityChange} name='quantity' defaultValue={item.cartQuantity}>
-      {selector}
-    </select>
-  : item.quantityInCart}
-
-  ${item.price}
-  ${item.cartQuantity === 1 ? item.price : Number(item.price) * item.cartQuantity}
-    <Link to={`/shoppingcart/${item.productId}`} className='btn btn-primary' type='button'> Item Details </Link>
-  {/* <input className='btn btn-primary' type='button' value='update item' data-id='item.id' onClick={handleUpdate} /> */}
-  <input className='btn btn-primary' type='button' value='remove item' data-id='item.id' onClick={handleRemove} />
-</div>
-
+    <tr>
+      <td><img src={item.thumbnail} alt='' /></td>
+      <td>{item.id}</td>
+      <td>{item.itemName}</td>
+      <td>{item.sellerName}</td>
+      <td>{item.price}</td>
+      <td>{item.quantity > 1 ?
+          <select onChange={handleQuantityChange} name='quantity' defaultValue={item.cartQuantity}>
+            {selector}
+          </select>
+        : item.quantityInCart}</td>
+      {/* <td>${item.cartQuantity === 1 ? item.price : Number(item.price) * item.cartQuantity}</td> */}
+      <td>{serializeCost(item.cartQuantity, item.price)}</td>
+      <td><Link to={`/shoppingcart/${item.productId}`} className='btn btn-primary' type='button'> Item Details </Link></td>
+      <td><input className='btn btn-primary' type='button' value='remove item' data-id='item.id' onClick={handleRemove} /></td>
+    </tr>
 
   )
 }

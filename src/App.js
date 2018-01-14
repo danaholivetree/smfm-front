@@ -7,7 +7,7 @@ import NavBar from './components/nav/NavBar'
 import BuyOrSell from './components/nav/BuyOrSell'
 import Items from './routes/Items'
 import BookmarksRoute from './routes/BookmarksRoute'
-import CartRoute from './routes/Cart'
+import Cart from './routes/Cart'
 import { connect } from 'react-redux'
 import Blah from './components/Blah'
 
@@ -30,7 +30,7 @@ class App extends Component {
                   <Route exact path='/' component={BuyOrSell} />
                   <Route path='/sell' component={SellItemContainer} />
                   <Route path='/saleitems' component={ItemsForSaleContainer} />
-                  <Route path='/shoppingcart' component={CartRoute} />
+                  <Route path='/shoppingcart' component={Cart} />
                   <Route path='/bookmarks' component={BookmarksRoute} />
                   <Route path='/shoppingfeed' component={Items} />
                 </Switch>

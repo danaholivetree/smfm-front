@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import ShoppingCartContainer from '../containers/ShoppingCartContainer'
 import JumboItemContainer from '../containers/JumboItemContainer'
 
-const CartRoute = () => (
+const Cart = () => (
 
     <div>
       <Switch>
@@ -14,4 +14,4 @@ const CartRoute = () => (
 
   )
 
-export default CartRoute
+export default Cart

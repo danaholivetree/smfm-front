@@ -1,10 +1,14 @@
 import React from 'react'
 import CartItem from './CartItem'
+import { Table } from 'react-bootstrap'
 
 const ShoppingCart = ({cart, displayItem, removeItem, addToCart, updateCartQuantity, currentUser}) => {
 
+
+
   const displayCartItems = cart.map( (item, i) => {
     return (
+
         <CartItem key={i} item={item} displayItem={displayItem} removeItem={removeItem} addToCart={addToCart} updateCartQuantity={updateCartQuantity} />
     )
   })
@@ -12,8 +16,25 @@ const ShoppingCart = ({cart, displayItem, removeItem, addToCart, updateCartQuant
 return (
   <div className='container'>
 
-
+    <Table striped bordered condensed hover>
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>#</th>
+          <th>Product</th>
+          <th>Seller</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total Cost</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
         {displayCartItems}
+      </tbody>
+    </Table>
+
 
 
   </div>
