@@ -142,7 +142,7 @@ const AppReducer = (state, action) => {
       })
       indexToEdit = state.cart.indexOf(itemToEdit[0])
       if (indexToEdit === 0) {
-        return {...state, cart: [{...state.cart[0], cartQuantity: action.cartQuantity}]}
+        return {...state, cart: [{...state.cart[0], cartQuantity: action.cartQuantity}, ...state.cart.slice(1)]}
       } else {
         return {...state, cart:
             [...state.cart.slice(0, indexToEdit),
