@@ -93,7 +93,7 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
 
   return (
     <PageHeader>
-      {!loggedIn ?  <Login loadData={loadData} /> : <h1> SMFM {currentUser.name} </h1>}
+      {!loggedIn ?  <Login loadData={loadData} /> : <span> SMFM <small> {currentUser.name} </small> </span>}
     </PageHeader>
 
   )

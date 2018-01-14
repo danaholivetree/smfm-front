@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 const NaviLink = ({text, linkTo, active, showDisplay}) => {
 
     return (
-      <li className={active ? 'active' : ""}><NavLink exact activeClassName='is-active' to={`${linkTo}`}>{text}</NavLink></li>
+      <li className={active ? 'active' : ""}><NavLink exact to={`${linkTo}`}>{text}</NavLink></li>
     )
 
 }

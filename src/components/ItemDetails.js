@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
-const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => {
+const ItemDetails = ({item, selector, onAddToCart, onAddBookmark, path}) => {
 
   var quantity = 1
 
@@ -14,17 +14,21 @@ const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => {
 
   return (
     <div className='container'>
-
-          <div>
-            <h4> {item.itemName}</h4>
-          </div>
-          <div>
-            <img className="card-img-top" src={item.image} width='200px' alt='' />
-          </div>
-          <div>
-            For sale by: {item.sellerName}
-          </div>
-
+      <Row>
+        <Col md={6} sm={12}>
+          <img className="card-img-top" src={item.image} width='400px' alt='' />
+        </Col>
+        <Col md={6} sm={12}>
+          <h4> {item.itemName} </h4>
+          <h2> Category: {item.category} </h2>
+          <h1>For sale by: {item.sellerName}</h1>
+          <p> Quantity Available: {item.quantity} </p>
+          <p> ${item.price} </p>
+        </Col>
+      </Row>
+      <Row>
+        <p>{item.description}</p>
+      </Row>
     </div>
   )
 }
@@ -38,4 +42,4 @@ const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => {
 //   { path !== 'shoppingcart' ? <input className='btn btn-primary' type='button' value='add to cart' onClick={handleAdd} /> : '' }
 //   { path !== 'bookmarks' ? <input className='btn btn-primary' type='button' value='bookmark' onClick={onAddBookmark} /> : '' } */}
 
-export default FeedItem
+export default ItemDetails

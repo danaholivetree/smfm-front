@@ -1,5 +1,5 @@
 import React from 'react'
-import FeedItem from './FeedItem'
+import ItemDetails from './ItemDetails'
 // import Bookmark from './Bookmark'
 // import CartItem from './CartItem'
 import { Jumbotron } from 'react-bootstrap'
@@ -21,7 +21,7 @@ const JumboFeedItem = ({items, match, currentUser, onAddToCart, onAddBookmark, r
 return (
   <div>
     <Jumbotron>
-      <FeedItem item={itemToRender[0]}
+      <ItemDetails item={itemToRender[0]}
         // { match.path.split('/')[1] !== 'cart' ?
         onAddToCart={ (quantity) => onAddToCart(itemToRender[0].id, currentUser.id, quantity)}
         // : ''
