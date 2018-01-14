@@ -1,5 +1,7 @@
 import React from 'react'
 import NaviLink from './NavLink'
+import { NavLink } from 'react-router-dom'
+import {Navbar } from 'react-bootstrap'
 const links = [
 
   {linkTo: '/shoppingfeed', text: 'Shopping Feed', active: false},
@@ -14,30 +16,27 @@ const links = [
 export default class NavBar extends React.Component {
 
   listLinks = (link, index) => {
-    return <NaviLink text={link.text} linkTo={link.linkTo} key={index} active={link.active}/>
+    return <li key={index}><NavLink activeClassName='active'  exact to={`${link.linkTo}`}>{link.text}</NavLink></li>
   }
 
   render() {
     return(
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-              {/* <span className="sr-only">Toggle navigation</span> */}
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href='/'>smfm</a>
-          </div>
+      <Navbar>
 
-          <div className="collapse navbar-collapse" id="navbar-collapse">
+          <Navbar.Header>
+
+          
+            <Navbar.Brand>
+      				<a href="/#">SMFM</a>
+            </Navbar.Brand>
+            <Navbar.Toggle/>
+          </Navbar.Header>
+          <Navbar.Collapse>
             <ul className="nav navbar-nav">
               {links.map( this.listLinks )}
             </ul>
-          </div>
-        </div>
-      </nav>
+          </Navbar.Collapse>
+        </Navbar>
     )
   }
 }

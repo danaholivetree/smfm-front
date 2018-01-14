@@ -158,6 +158,7 @@ const AppReducer = (state, action) => {
         return item.itemName.toLowerCase().includes(action.searchFilter.toLowerCase()) || item.description.toLowerCase().includes(action.searchFilter.toLowerCase())
 
       })
+      console.log('filteredItems by search ', filteredItems);
       return {...state, filteredItems }
     case 'FILTER_SELLERS_BY_SEARCH':
       //onChange event on SearchBar in SellersFeed. action.filter
@@ -176,6 +177,8 @@ const AppReducer = (state, action) => {
         const unfiltered = state.feedItems.filter(item => {
           return item.category.toLowerCase() === action.categoryFilter
         })
+        console.log('state.filteredItems' , state.filteredItems);
+        console.log('unfiltered ', unfiltered);
         return {...state, filteredItems: [...state.filteredItems, ...unfiltered]}
       }
     default:

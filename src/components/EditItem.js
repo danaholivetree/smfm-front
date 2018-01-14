@@ -1,14 +1,17 @@
 import React from 'react'
 import {Row, Form, FormGroup, FormControl, Col, ControlLabel, Button, InputGroup} from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
+const EditItem = (props) => {
 
-const EditItem = ({items, editProduct, currentUser, match, history, location}) => {
+let {items, editProduct, currentUser, match, history, location} = props
 
-
+  if (items.length < 1) {
+    return <Redirect to='/sell' />
+  }
 
   let itemToEdit = items.filter( item => {
     return item.id === Number(match.params.id)
   })
-  console.log('item to edit ', itemToEdit[0]);
 
   var imageUrl = ''
   var thumbnailUrl = ''
@@ -26,7 +29,7 @@ const EditItem = ({items, editProduct, currentUser, match, history, location}) =
 
   const handleEdit = (e) => {
     e.preventDefault()
-      console.log('currentUser ', currentUser)
+      console.log(e.target.category.value)
     let product = {
       id: itemToEdit[0].id,
       itemName: e.target.name.value,
@@ -77,11 +80,11 @@ const EditItem = ({items, editProduct, currentUser, match, history, location}) =
             <FormGroup controlId="category">
               <ControlLabel>Select</ControlLabel>
               <FormControl componentClass="select" defaultValue={itemToEdit[0].category}>
-                <option value="select">Select a Category</option>
-                <option value="handmade">Handmade</option>
-                <option value="music">Music</option>
-                <option value="music">Art</option>
-                <option value="writing">Writing</option>
+                <option >Select a Category</option>
+                <option value="Handmade">Handmade</option>
+                <option value="Music">Music</option>
+                <option value="Art">Art</option>
+                <option value="Writing">Writing</option>
               </FormControl>
             </FormGroup>
           </Col>
