@@ -29,14 +29,18 @@ const SearchBar = ({filterItems, filterCategory}) => {
         			<FormControl type="text" placeholder="Search By Name or Description" onChange={handleFilter}/>
         		</FormGroup>{' '}
             <FormGroup controlId='category'>
-              <input type='checkbox' defaultChecked value='handmade' onChange={handleCheck} />
-              <label htmlFor='handmade'>Handmade </label>
-              <input type='checkbox' defaultChecked value='art' onChange={handleCheck}/>
-              <label htmlFor='art'>Art </label>
-              <input type='checkbox' defaultChecked value='writing' onChange={handleCheck}/>
-              <label htmlFor='writing'>Writing </label>
-              <input type='checkbox' defaultChecked value='music' onChange={handleCheck}/>
-              <label htmlFor='music'>Music </label>
+
+              <Checkbox  inline defaultChecked value='handmade' onChange={handleCheck} >Handmade</Checkbox>
+              {/* <label htmlFor='handmade'>Handmade </label> */}
+
+              <Checkbox  inline defaultChecked value='art' onChange={handleCheck}>Art</Checkbox>
+              {/* <label htmlFor='art'>Art </label> */}
+
+              <Checkbox inline defaultChecked value='writing' onChange={handleCheck}>Writing</Checkbox>
+              {/* <label htmlFor='writing'>Writing </label> */}
+
+              <Checkbox inline defaultChecked value='music' onChange={handleCheck}>Music</Checkbox>
+              {/* <label htmlFor='music'>Music </label> */}
             </FormGroup>
           </Col>
         </Row>
