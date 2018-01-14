@@ -64,6 +64,7 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
       body: JSON.stringify(friendIds)
     })
     let feedItems = await res.json()
+    console.log('feedItems ', feedItems);
     getAllFeedItems(feedItems) // action
   }
 //fetch all bookmarks by user id

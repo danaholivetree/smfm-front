@@ -52,7 +52,8 @@ const startUpdatingQuantity = (id, quantity) => {
 
 const mapStateToProps = state => {
   return  {
-    cart: state.cart
+    cart: state.cart,
+    currentUser: state.currentUser
   }
 }
 

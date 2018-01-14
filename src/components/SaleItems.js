@@ -1,19 +1,24 @@
 import React from 'react'
 import SaleItem from './SaleItem'
+import { Col, Row } from 'react-bootstrap'
 
 const SaleItems = ({itemsForSale, removeItem, match}) => {
 
   const displaySaleItems = itemsForSale.map( item => {
-    return <SaleItem item={item} key={item.id} removeItem={removeItem}/>
+    return (
+      <Col md={4} sm={12} key={item.id}>
+        <SaleItem item={item} key={item.id} removeItem={removeItem}/>
+      </Col>
+    )
   })
 
-
   return (
-
-      <ul>
-        My Items For Sale
+    <div className='container'>
+      <Row>
         {displaySaleItems}
-      </ul>
+      </Row>
+    </div>
+
 
   )
 }

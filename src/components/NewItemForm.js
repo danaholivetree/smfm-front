@@ -1,5 +1,5 @@
 import React from 'react'
-import {Row, Form, FormGroup, FormControl, Col, ControlLabel, Button, Checkbox, InputGroup} from 'react-bootstrap'
+import {Row, Form, FormGroup, FormControl, Col, ControlLabel, Button, InputGroup} from 'react-bootstrap'
 
 const NewItemForm = ({addNewProduct, currentUser}) => {
 
@@ -14,6 +14,9 @@ if (!currentUser.isSeller) {
     e.preventDefault()
     window.cloudinary.openUploadWidget({ cloud_name: 'smfm', upload_preset: 'ymtqac0s', multiple: 'false', resource_type: 'image'},
         (error, results) => {
+            if (error) {
+              return
+            }
             // const { url, secure_url, public_id, path } = result;
             console.log('setting imageUrl as secure_url= ', results[0].secure_url);
             imageUrl = results[0].secure_url
@@ -24,7 +27,7 @@ if (!currentUser.isSeller) {
 
   const createProduct = (e) => {
     e.preventDefault()
-      console.log('currentUser ', currentUser)
+      console.log(e.target.category.value);
     let product = {
       itemName: e.target.name.value,
       category: e.target.category.value,
@@ -76,10 +79,10 @@ if (!currentUser.isSeller) {
               <ControlLabel>Select</ControlLabel>
               <FormControl componentClass="select">
                 <option value="select">Select a Category</option>
-                <option value="handmade">Handmade</option>
-                <option value="music">Music</option>
-                <option value="music">Art</option>
-                <option value="writing">Writing</option>
+                <option value="Handmade">Handmade</option>
+                <option value="Music">Music</option>
+                <option value="Art">Art</option>
+                <option value="Writing">Writing</option>
               </FormControl>
             </FormGroup>
           </Col>
@@ -104,7 +107,7 @@ if (!currentUser.isSeller) {
           <Col md={8} >
             <FormGroup controlId="description">
               <ControlLabel>Description</ControlLabel>
-              <FormControl componentClass="textarea" placeholder="Describe your Product" />
+              <FormControl componentClass="textarea" rows="7" placeholder="Describe your Product" />
             </FormGroup>
           </Col>
         </Row>

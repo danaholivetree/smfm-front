@@ -11,7 +11,6 @@ const ShoppingFeed = ({filteredItems, onAddToCart, onAddBookmark, currentUser, f
     return (
       <Col md={4} sm={12} key={item.id}>
         <FeedItem item={item} onAddToCart={ (quant) => onAddToCart(item.id, currentUser.id, quant)} onAddBookmark={ () => onAddBookmark(item.id, currentUser.id)} />
-        <NavLink to={`/shoppingfeed/${item.id}`} className='btn btn-primary' type='button'> View Large </NavLink>
       </Col>
     )
   })
@@ -20,9 +19,9 @@ const ShoppingFeed = ({filteredItems, onAddToCart, onAddBookmark, currentUser, f
 
       <div className='container'>
 
-          <SearchBar filterItems={filterItems} filterCategory={filterCategory} />
+        <SearchBar filterItems={filterItems} filterCategory={filterCategory} />
 
-      <div className='container'>
+        <div className='container'>
           <Row>
             {displayFeedItems}
           </Row>

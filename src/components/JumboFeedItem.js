@@ -2,8 +2,9 @@ import React from 'react'
 import ItemDetails from './ItemDetails'
 // import Bookmark from './Bookmark'
 // import CartItem from './CartItem'
-import { Jumbotron } from 'react-bootstrap'
+import { Jumbotron, Button } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
+
 //
 const JumboFeedItem = ({items, match, currentUser, onAddToCart, onAddBookmark, removeItem}) => {
 
@@ -33,7 +34,7 @@ return (
         path={match.path.split('/')[1]}
         selector={selector}
       />
-
+        
         <NavLink to={`/${match.path.split('/')[1]}`}><button type='button' className='btn btn-primary'>Close</button></NavLink>
 
   	</Jumbotron>

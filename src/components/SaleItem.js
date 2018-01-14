@@ -10,17 +10,19 @@ const SaleItem = ({item, removeItem}) => {
 
   return (
 
-      <li>
+      <div >
         <img src={item.thumbnail} alt='' />
         <h4> {item.itemName} </h4>
 
-        <h1>{item.category}</h1>
+        <h6>{item.category}</h6>
         <p> Quantity Available: {item.quantity}</p>
-        <p> Price: ** {item.price} ** </p>
+        <p> Price: ${item.price} </p>
         <p>{item.description} </p>
-        <input type='button' className='btn btn-primary' value='remove item' onClick={handleRemove} />
+        <input type='button' className='btn btn-primary' value='Delete' onClick={handleRemove} />
         <NavLink className='btn btn-primary' type='button' to={`sell/${item.id}`}>Edit</NavLink>
-      </li>
+      </div>
+
+
 
 
   )

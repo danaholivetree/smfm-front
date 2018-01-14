@@ -1,8 +1,8 @@
 import React from 'react'
-import {Row, Form, FormGroup, FormControl, Col, ControlLabel, Button, Checkbox, InputGroup} from 'react-bootstrap'
+import {Row, Form, FormGroup, FormControl, Col, ControlLabel, Button, InputGroup} from 'react-bootstrap'
+
 const EditItem = ({items, editProduct, currentUser, match, history, location}) => {
 
-console.log('items for sale ', items);
 
 
   let itemToEdit = items.filter( item => {
@@ -18,8 +18,6 @@ console.log('items for sale ', items);
     window.cloudinary.openUploadWidget({ cloud_name: 'smfm', upload_preset: 'ymtqac0s', multiple: 'false', resource_type: 'image'},
         (error, results) => {
             // const { url, secure_url, public_id, path } = result;
-            console.log(error, results[0])
-            console.log('setting imageUrl as secure_url= ', results[0].secure_url);
             imageUrl = results[0].secure_url
             thumbnailUrl = results[0].thumbnail_url
             // onUploadSuccess({url: secure_url, id: path});
@@ -108,7 +106,7 @@ console.log('items for sale ', items);
           <Col md={8} >
             <FormGroup controlId="description">
               <ControlLabel>Description</ControlLabel>
-              <FormControl componentClass="textarea" defaultValue={itemToEdit[0].description} />
+              <FormControl rows="7" componentClass="textarea" defaultValue={itemToEdit[0].description} />
             </FormGroup>
           </Col>
         </Row>
@@ -117,7 +115,8 @@ console.log('items for sale ', items);
         <Button type="submit">Submit</Button>
       </Form>
 
-    <div>
+
+    {/* <div>
       <button onClick={uploadWidget} className="upload-button">
           Add Image
       </button>
@@ -138,10 +137,10 @@ console.log('items for sale ', items);
         <label htmlFor='price'>Price</label>
         <input type='text' name='price' defaultValue={itemToEdit[0].price}/>
         <label htmlFor='description'>Description</label>
-        <input htmlFor='text' name='description' defaultValue={itemToEdit[0].description}/>
+        <input htmlFor='text' name='description'  defaultValue={itemToEdit[0].description}/>
         <input type='submit' className='btn btn-default' value='submit edits'/>
       </form>
-    </div>
+    </div>*/}
     </div>
 
   )

@@ -1,33 +1,23 @@
 import React from 'react'
 import { Row, Col } from 'react-bootstrap'
-const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => {
+import { NavLink } from 'react-router-dom'
 
-  var quantity = 1
+const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => (
 
-  const handleAdd = (e) => {
-    onAddToCart(quantity)
-  }
+    <Col md={4} sm={12}>
+        <h4> {item.itemName}</h4>
 
-  const changeQuantity = (e) => {
-    quantity = e.target.value
-  }
 
-  return (
-    <div className='container'>
+        <NavLink to={`/shoppingfeed/${item.id}`} >
+          <img src={item.image} width='200px' alt='' />
+        </NavLink>
 
-          <div>
-            <h4> {item.itemName}</h4>
-          </div>
-          <div>
-            <img className="card-img-top" src={item.image} width='200px' alt='' />
-          </div>
-          <div>
-            For sale by: {item.sellerName}
-          </div>
 
-    </div>
+        <div>For sale by: {item.sellerName} </div>
+
+      </Col>
   )
-}
+
 
 
 //     {selector && item.quantity > 1 ?

@@ -1,7 +1,7 @@
 import React from 'react'
 import CartItem from './CartItem'
 
-const ShoppingCart = ({cart, displayItem, removeItem, addToCart, updateCartQuantity}) => {
+const ShoppingCart = ({cart, displayItem, removeItem, addToCart, updateCartQuantity, currentUser}) => {
 
   const displayCartItems = cart.map( (item, i) => {
     return (
@@ -11,25 +11,11 @@ const ShoppingCart = ({cart, displayItem, removeItem, addToCart, updateCartQuant
 
 return (
   <div className='container'>
-    My Shopping Cart
-    <table>
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Product Name</th>
-          <th>Seller</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>Totals</th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
+
+
         {displayCartItems}
-      </tbody>
-    </table>
+
+
   </div>
 
 )

@@ -14,6 +14,7 @@ const AppReducer = (state, action) => {
       //upon login. (temporarily) fetches all products from GET products and returns them as action.feedItems
       return {...state, feedItems: action.feedItems, filteredItems: action.feedItems}
     case 'GET_ITEMS_FOR_SALE':
+    console.log('got items for sale ', action.itemsForSale);
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns PRODUCTS with seller.id = user.id. products come back and set as action.itemsForSale
       return {...state, itemsForSale: action.itemsForSale}
     case 'GET_BOOKMARKS':
@@ -23,6 +24,7 @@ const AppReducer = (state, action) => {
       //upon login. sends user's FB id to POST user. if user was in db redirects to GET user/:id which returns cart items with user_id = user.id. bookmarks come back and set as action.cart
       return {...state, cart: action.cart}
     case 'ADD_ITEM_FOR_SALE':
+    console.log('new item getting to reducer ' ,action.newItem)
       //sent data from NewItemForm onSubmit event to POST products. received db item with product.id and set it as action.newItem
       return {...state, itemsForSale: [...state.itemsForSale, action.newItem]}
     case 'REMOVE_ITEM_FOR_SALE':
@@ -60,8 +62,13 @@ const AppReducer = (state, action) => {
         }
       }
     case 'EDIT_ITEM_FOR_SALE':
-      // set data from EditItemForm onSubmit event to PUT products/:id. received db item and set it as action.editedItem
-      let indexToEdit = state.itemsForSale.indexOf(action.editedItem)
+      let itemToEdit = state.itemsForSale.filter( item => {
+        return item.id === action.editedItem.id
+      })
+      let indexToEdit = state.itemsForSale.indexOf(itemToEdit[0])
+      if (indexToEdit === 0) {
+        return {...state, itemsForSale: [action.editedItem, ...state.itemsForSale.slice(1)]}
+      }
       return {...state, itemsForSale:
           [...state.itemsForSale.slice(0, indexToEdit),
             action.editedItem,
@@ -69,7 +76,6 @@ const AppReducer = (state, action) => {
           ]
       }
     case 'ADD_BOOKMARK':
-      //bookmark button onClick on FeedItem. takes product.id, sends it with currentUser.id to POST bookmarks/:id, returns a bookmark product object with a bookmark.id and set as newBookmark
       return {...state, bookmarks: [...state.bookmarks, action.newBookmark]}
 
     case 'REMOVE_BOOKMARK':
@@ -131,7 +137,7 @@ const AppReducer = (state, action) => {
       }
     case 'UPDATE_CART_QUANTITY':
       // onChange event for shopping cart selector OR quantity selector in FeedItem. send NEW Quantity to PUT cart/:id and receive updatedCartItem id and cartQuantity
-      let itemToEdit = state.cart.filter( cartItem => {
+      itemToEdit = state.cart.filter( cartItem => {
         return cartItem.id === action.id
       })
       indexToEdit = state.cart.indexOf(itemToEdit[0])
@@ -160,7 +166,7 @@ const AppReducer = (state, action) => {
       })
       return {...state, filteredSellers}
     case 'FILTER_CATEGORY':
-  
+
       if (!action.checked) {
           const filteredItems = state.filteredItems.filter( item => {
             return item.category.toLowerCase() !== action.categoryFilter

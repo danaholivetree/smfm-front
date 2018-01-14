@@ -1,30 +1,14 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
-// import { Image } from 'cloudinary-react'
+import { Link } from 'react-router-dom'
+import { Row, Col, Button, ButtonToolbar} from 'react-bootstrap'
 
 const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
 
-  // const handleDisplay = (e) => {
-  //   e.preventDefault()
-  //   displayItem(item)
-  // }
-  // const handleUpdate = (e) => {
-  //   e.preventDefault()
-  //   // updateItem(item)
-  // }
   const handleRemove = (e) => {
     e.preventDefault()
     removeItem(item.id)
   }
 
-  // const addQuantity = (e) => {
-  //   e.preventDefault()
-  //   addToCart(item)
-  // }
-  // const subtractQuantity = (e) => {
-  //   e.preventDefault()
-  //   subtractFromCart(item)
-  // }
   const handleQuantityChange = (e) => {
     e.preventDefault()
     console.log('new quantity ', e.target.value);
@@ -36,25 +20,27 @@ const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
     selector.push(<option key={i} value={i}>{i}</option>)
   }
 
-console.log('item.image ', item.image);
   return (
-      <tr>
-        <td><img src={item.thumbnail} alt='' /></td>
-        <td>{item.itemName}</td>
-        <td>{item.sellerName}</td>
+<div className="container">
 
-        <td>{item.quantity > 1 ?
-          <select onChange={handleQuantityChange} name='quantity' defaultValue={item.cartQuantity}>
-            {selector}
-          </select>
-        : item.quantityInCart}</td>
+  <img src={item.thumbnail} alt='' />
+  {item.itemName}
+  {item.sellerName}
 
-        <td>${item.price}</td>
-        <td>${item.cartQuantity === 1 ? item.price : Number(item.price) * item.cartQuantity}</td>
-        <td>  <NavLink to={`/shoppingcart/${item.productId}`} className='btn btn-primary' type='button'> View Large </NavLink> </td>
-        {/* <td><input className='btn btn-primary' type='button' value='update item' data-id='item.id' onClick={handleUpdate} /></td> */}
-        <td><input className='btn btn-primary' type='button' value='remove item' data-id='item.id' onClick={handleRemove} /></td>
-      </tr>
+  {item.quantity > 1 ?
+    <select onChange={handleQuantityChange} name='quantity' defaultValue={item.cartQuantity}>
+      {selector}
+    </select>
+  : item.quantityInCart}
+
+  ${item.price}
+  ${item.cartQuantity === 1 ? item.price : Number(item.price) * item.cartQuantity}
+    <Link to={`/shoppingcart/${item.productId}`} className='btn btn-primary' type='button'> Item Details </Link>
+  {/* <input className='btn btn-primary' type='button' value='update item' data-id='item.id' onClick={handleUpdate} /> */}
+  <input className='btn btn-primary' type='button' value='remove item' data-id='item.id' onClick={handleRemove} />
+</div>
+
+
   )
 }
 export default CartItem

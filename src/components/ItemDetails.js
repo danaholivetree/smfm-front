@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Button, ButtonToolbar} from 'react-bootstrap'
 const ItemDetails = ({item, selector, onAddToCart, onAddBookmark, path}) => {
 
   var quantity = 1
@@ -19,16 +19,23 @@ const ItemDetails = ({item, selector, onAddToCart, onAddBookmark, path}) => {
           <img className="card-img-top" src={item.image} width='400px' alt='' />
         </Col>
         <Col md={6} sm={12}>
-          <h4> {item.itemName} </h4>
-          <h2> Category: {item.category} </h2>
-          <h1>For sale by: {item.sellerName}</h1>
-          <p> Quantity Available: {item.quantity} </p>
-          <p> ${item.price} </p>
+          <h1> {item.itemName} </h1>
+          <ButtonToolbar>
+            { path !== 'shoppingcart' && <Button  onClick={handleAdd}>Add To Cart</Button>  }
+            { path !== 'bookmarks' && <Button onClick={onAddBookmark}>Add To Bookmarks</Button>  }
+          </ButtonToolbar>
+
+          <h4> Category: {item.category} </h4>
+          <h4> For sale by: {item.sellerName}</h4>
+          <h4> Quantity Available: {item.quantity} </h4>
+          <h4> ${item.price} </h4>
+          <p>{item.description}</p>
         </Col>
       </Row>
-      <Row>
-        <p>{item.description}</p>
-      </Row>
+
+
+
+
     </div>
   )
 }
