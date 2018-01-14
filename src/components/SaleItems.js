@@ -1,6 +1,6 @@
 import React from 'react'
 import SaleItem from './SaleItem'
-import { Col, Row } from 'react-bootstrap'
+import { Grid, Col, Row } from 'react-bootstrap'
 
 const SaleItems = ({itemsForSale, removeItem, match}) => {
 
@@ -14,9 +14,11 @@ const SaleItems = ({itemsForSale, removeItem, match}) => {
 
   return (
     <div className='container'>
-      <Row>
-        {displaySaleItems}
-      </Row>
+      <Grid>
+        <Row>
+          {displaySaleItems}
+        </Row>
+      </Grid>
     </div>
 
 

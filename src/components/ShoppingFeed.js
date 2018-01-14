@@ -1,17 +1,17 @@
 import React from 'react'
 import FeedItem from './FeedItem'
 import SearchBar from './SearchBar'
-import { NavLink } from 'react-router-dom'
-import {Row, Col } from 'react-bootstrap'
+// import { NavLink } from 'react-router-dom'
+import { Grid, Row, Col } from 'react-bootstrap'
 
 const ShoppingFeed = ({filteredItems, onAddToCart, onAddBookmark, currentUser, filterItems, filterCategory}) => {
 
 
   const displayFeedItems = filteredItems.map( item => {
     return (
-      <Col md={4} sm={12} key={item.id}>
-        <FeedItem item={item} onAddToCart={ (quant) => onAddToCart(item.id, currentUser.id, quant)} onAddBookmark={ () => onAddBookmark(item.id, currentUser.id)} />
-      </Col>
+
+        <FeedItem item={item} key={item.id} onAddToCart={ (quant) => onAddToCart(item.id, currentUser.id, quant)} onAddBookmark={ () => onAddBookmark(item.id, currentUser.id)} />
+
     )
   })
 
@@ -22,9 +22,12 @@ const ShoppingFeed = ({filteredItems, onAddToCart, onAddBookmark, currentUser, f
         <SearchBar filterItems={filterItems} filterCategory={filterCategory} />
 
         <div className='container'>
-          <Row>
-            {displayFeedItems}
-          </Row>
+          <Grid>
+            <Row>
+              {displayFeedItems}
+            </Row>
+          </Grid>
+
         </div>
 
       </div>

@@ -23,22 +23,17 @@ const JumboFeedItem = ({items, match, currentUser, onAddToCart, onAddBookmark, r
 
 
 return (
-  <div>
+  <div className="container">
     <Jumbotron>
+      <NavLink to={`/${match.path.split('/')[1]}`}><Button className="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span></Button></NavLink>
       <ItemDetails item={itemToRender[0]}
-        // { match.path.split('/')[1] !== 'cart' ?
-        onAddToCart={ (quantity) => onAddToCart(itemToRender[0].id, currentUser.id, quantity)}
-        // : ''
-        // }
-        // { match.path.split('/')[1] !== 'bookmarks' ?
-        onAddBookmark={ () => onAddBookmark(itemToRender[0].id, currentUser.id)}
-        // : ''
-        // }
-        path={match.path.split('/')[1]}
-        selector={selector}
+         onAddToCart={ (quantity) => onAddToCart(itemToRender[0].id, currentUser.id, quantity)}
+         onAddBookmark={ () => onAddBookmark(itemToRender[0].id, currentUser.id)}
+         path={match.path.split('/')[1]}
+         selector={selector}
       />
 
-        <NavLink to={`/${match.path.split('/')[1]}`}><button type='button' className='btn btn-primary'>Close</button></NavLink>
 
   	</Jumbotron>
   </div>

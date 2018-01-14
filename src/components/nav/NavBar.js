@@ -1,5 +1,5 @@
 import React from 'react'
-import NaviLink from './NavLink'
+// import NaviLink from './NavLink'
 import { NavLink } from 'react-router-dom'
 import {Navbar } from 'react-bootstrap'
 const links = [
@@ -25,7 +25,7 @@ export default class NavBar extends React.Component {
 
           <Navbar.Header>
 
-          
+
             <Navbar.Brand>
       				<a href="/#">SMFM</a>
             </Navbar.Brand>

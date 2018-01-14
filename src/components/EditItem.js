@@ -1,9 +1,9 @@
 import React from 'react'
 import {Row, Form, FormGroup, FormControl, Col, ControlLabel, Button, InputGroup} from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
-const EditItem = (props) => {
 
-let {items, editProduct, currentUser, match, history, location} = props
+const EditItem = ({items, editProduct, currentUser, match, history, location}) => {
+
 
   if (items.length < 1) {
     return <Redirect to='/sell' />
@@ -51,9 +51,7 @@ let {items, editProduct, currentUser, match, history, location} = props
 
   return  (
     <div className="container">
-
-
-
+      
       <Form onSubmit={handleEdit}>
         <Row>
           <Col md={2}>
@@ -88,12 +86,14 @@ let {items, editProduct, currentUser, match, history, location} = props
               </FormControl>
             </FormGroup>
           </Col>
+
           <Col md={2}>
             <FormGroup controlId="quantity">
               <ControlLabel>Quantity Available</ControlLabel>{' '}
               <FormControl type="number" defaultValue={itemToEdit[0].quantity}/>
             </FormGroup>{' '}
           </Col>
+
           <Col md={2}>
             <FormGroup controlId="price">
               <ControlLabel>Price</ControlLabel>{' '}
@@ -104,7 +104,9 @@ let {items, editProduct, currentUser, match, history, location} = props
               </InputGroup>
             </FormGroup>
           </Col>
+
         </Row>
+
         <Row>
           <Col md={8} >
             <FormGroup controlId="description">
@@ -114,36 +116,9 @@ let {items, editProduct, currentUser, match, history, location} = props
           </Col>
         </Row>
 
-
         <Button type="submit">Submit</Button>
       </Form>
 
-
-    {/* <div>
-      <button onClick={uploadWidget} className="upload-button">
-          Add Image
-      </button>
-
-
-      <form onSubmit={handleEdit}>
-        <label htmlFor='name'>Name</label>
-        <input type='text' name='name' defaultValue={itemToEdit[0].itemName}/>
-        <label htmlFor='category'>Category</label>
-        <select name='category' defaultValue={itemToEdit[0].category}>
-          <option>Handmade</option>
-          <option>Music</option>
-          <option>Art</option>
-          <option>Writing</option>
-        </select>
-        <label htmlFor='quantity'>Quantity</label>
-        <input type='text' name='quantity' defaultValue={itemToEdit[0].quantity}/>
-        <label htmlFor='price'>Price</label>
-        <input type='text' name='price' defaultValue={itemToEdit[0].price}/>
-        <label htmlFor='description'>Description</label>
-        <input htmlFor='text' name='description'  defaultValue={itemToEdit[0].description}/>
-        <input type='submit' className='btn btn-default' value='submit edits'/>
-      </form>
-    </div>*/}
     </div>
 
   )

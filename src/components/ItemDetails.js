@@ -2,15 +2,15 @@ import React from 'react'
 import { Row, Col, Button, ButtonToolbar} from 'react-bootstrap'
 const ItemDetails = ({item, selector, onAddToCart, onAddBookmark, path}) => {
 
-  var quantity = 1
-
+  // var quantity = 1
+  //
   const handleAdd = (e) => {
-    onAddToCart(quantity)
+    onAddToCart(1)
   }
-
-  const changeQuantity = (e) => {
-    quantity = e.target.value
-  }
+  //
+  // const changeQuantity = (e) => {
+  //   quantity = e.target.value
+  // }
 
   return (
     <div className='container'>

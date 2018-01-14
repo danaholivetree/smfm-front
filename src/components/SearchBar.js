@@ -17,16 +17,18 @@ const SearchBar = ({filterItems, filterCategory}) => {
     <div className='container'>
         <Row>
           <Col md={6}>
-            <FormGroup controlId="searchform">
-        			<ControlLabel>Search by Item Name or Description</ControlLabel>{' '}
-        			<FormControl type="text" placeholder="Search By Name or Description" onChange={handleFilter}/>
-        		</FormGroup>{' '}
-            <FormGroup controlId='category'>
-              <Checkbox inline defaultChecked value='handmade' onChange={handleCheck} >Handmade</Checkbox>
-              <Checkbox inline defaultChecked value='art' onChange={handleCheck}>Art</Checkbox>
-              <Checkbox inline defaultChecked value='writing' onChange={handleCheck}>Writing</Checkbox>
-              <Checkbox inline defaultChecked value='music' onChange={handleCheck}>Music</Checkbox>
-            </FormGroup>
+            <Form>
+              <FormGroup controlId="searchform">
+          			<ControlLabel>Search by Item Name or Description</ControlLabel>{' '}
+          			<FormControl type="text" placeholder="Search By Name or Description" onChange={handleFilter}/>
+          		</FormGroup>{' '}
+              <FormGroup controlId='category'>
+                <Checkbox inline defaultChecked value='handmade' onChange={handleCheck} >Handmade</Checkbox>
+                <Checkbox inline defaultChecked value='art' onChange={handleCheck}>Art</Checkbox>
+                <Checkbox inline defaultChecked value='writing' onChange={handleCheck}>Writing</Checkbox>
+                <Checkbox inline defaultChecked value='music' onChange={handleCheck}>Music</Checkbox>
+              </FormGroup>
+            </Form>
           </Col>
         </Row>
     </div>

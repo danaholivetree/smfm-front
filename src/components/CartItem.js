@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
-import { Row, Col, Button, ButtonToolbar} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+// import { Row, Col, Button, ButtonToolbar} from 'react-bootstrap'
 
 const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
 
