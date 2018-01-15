@@ -24,6 +24,7 @@ class App extends Component {
 
             {this.props.loggedIn ?
               <div>
+
                 <NavBar />
 
                 <Switch>

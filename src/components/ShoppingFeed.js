@@ -9,9 +9,9 @@ const ShoppingFeed = ({filteredItems, onAddToCart, onAddBookmark, currentUser, f
 
   const displayFeedItems = filteredItems.map( item => {
     return (
-
-        <FeedItem item={item} key={item.id} onAddToCart={ (quant) => onAddToCart(item.id, currentUser.id, quant)} onAddBookmark={ () => onAddBookmark(item.id, currentUser.id)} />
-
+  <Col md={4} key={item.id}>
+        <FeedItem item={item}  onAddToCart={ (quant) => onAddToCart(item.id, currentUser.id, quant)} onAddBookmark={ () => onAddBookmark(item.id, currentUser.id)} />
+  </Col>
     )
   })
 
@@ -21,14 +21,21 @@ const ShoppingFeed = ({filteredItems, onAddToCart, onAddBookmark, currentUser, f
 
         <SearchBar filterItems={filterItems} filterCategory={filterCategory} />
 
-        <div className='container'>
+
           <Grid>
             <Row>
-              {displayFeedItems}
+
+
+                  {displayFeedItems}
+
+
+
+
+
             </Row>
           </Grid>
 
-        </div>
+
 
       </div>
   )

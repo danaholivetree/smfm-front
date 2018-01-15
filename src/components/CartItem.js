@@ -40,7 +40,7 @@ const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
         : item.quantityInCart}</td>
       {/* <td>${item.cartQuantity === 1 ? item.price : Number(item.price) * item.cartQuantity}</td> */}
       <td>{serializeCost(item.cartQuantity, item.price)}</td>
-      <td><Link to={`/shoppingcart/${item.productId}`} className='btn btn-primary' type='button'> Item Details </Link></td>
+      <td><Link to={`/shoppingcart/${item.productId}`} className='btn btn-primary' type='button'> Details </Link></td>
       <td><input className='btn btn-primary' type='button' value='remove item' data-id='item.id' onClick={handleRemove} /></td>
     </tr>
 
