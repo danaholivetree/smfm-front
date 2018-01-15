@@ -16,13 +16,13 @@ const BuyOrSell = () => (
       </Col>
     </Row>
     <Row >
-      <Col mdOffset={5} md={4} >
+      <Col mdOffset={5} md={4}>
         <Link exact  to='/shoppingFeed'>
-          <Button type='button' className='btn btn-primary'>BUY</Button>
+          <Button>BUY</Button>
         </Link>
-
-        <Link exact className='center-block' activeClassName='is-active' to='/sell'>
-          <button type='button' className='btn btn-primary'>SELL</button>
+        {' '}
+        <Link exact to='/sell'>
+          <Button>SELL</Button>
         </Link>
       </Col>
     </Row>

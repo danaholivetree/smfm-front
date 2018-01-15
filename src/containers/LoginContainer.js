@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getAllBookmarks, getAllCart} from '../actions/AppActions';
 import Login from '../components/Login'
 import { PageHeader } from 'react-bootstrap'
+// import NavBar from '../components/nav/NavBar'
 
 const API = process.env.REACT_APP_API_URL
 
@@ -93,9 +94,13 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
   }
 
   return (
-    <PageHeader>
-      {!loggedIn ?  <Login loadData={loadData} /> : <span> SMFM <small> {currentUser.name} </small> </span>}
-    </PageHeader>
+
+    <div>
+      { !loggedIn &&<PageHeader> <Login loadData={loadData} />   </PageHeader>}
+
+    </div>
+
+
 
   )
 }

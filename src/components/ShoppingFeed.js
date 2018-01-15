@@ -18,25 +18,12 @@ const ShoppingFeed = ({filteredItems, onAddToCart, onAddBookmark, currentUser, f
   return (
 
       <div className='container'>
-
         <SearchBar filterItems={filterItems} filterCategory={filterCategory} />
-
-
           <Grid>
             <Row>
-
-
-                  {displayFeedItems}
-
-
-
-
-
+              {displayFeedItems}
             </Row>
           </Grid>
-
-
-
       </div>
   )
 }

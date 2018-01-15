@@ -13,11 +13,17 @@ const Bookmark = ({item, removeItem, onAddToCart}) => {
   }
 
   return (
-    <li>
-      <img src={item.thumbnail} alt='' /> ** {item.itemName} ** {item.category} ** {item.sellerId} ** {item.description} ** {item.quantity} ** {item.price}
+
+    <div>
+      <img src={item.thumbnail} alt='' />
+      <h4> {item.itemName} </h4>
+      <p> Quantity Available: {item.quantity}</p>
+      <p> Price: ${item.price} </p>
       <input className='btn btn-primary' type='button' value='remove' onClick={removeBookmark} />
       <input className='btn btn-primary' type='button' value='add to cart' onClick={onAddToCart} />
-    </li>
+    </div>
+
+
 
   )
 
