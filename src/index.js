@@ -26,7 +26,6 @@ const initialState = {
   filteredItems: []
 }
 let store = createStore(AppReducer, initialState, applyMiddleware(thunk.withExtraArgument(API)))
-let persistor = persistStore(store)
 
 ReactDOM.render(
   <Provider store={store}>

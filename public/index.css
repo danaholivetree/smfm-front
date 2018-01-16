@@ -13,6 +13,10 @@
   display: inline-block;
 }
 
+.container .mainView {
+  padding-top: 25px;
+}
+
 #welcome {
   color: white;
   margin: 120px 0;
@@ -74,13 +78,11 @@
 
 .bkBtnGrp {
   position: relative;
-  bottom: 60px;
-  left: 10px;
+
+  text-align: center;
 }
 
 .bookmarkBtn {
-  text-align: center;
+  width: 120px;
   margin: 10px;
-  width: 40%;
-  font-size: 1.4em;
 }

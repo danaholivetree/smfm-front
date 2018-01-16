@@ -8,7 +8,7 @@ const Bookmarks = ({removeItem, bookmarks, onAddToCart, currentUser}) => {
 
   const displayBookmarks = bookmarks.map( (item, i) => {
     return (
-      <Col md={2} xs={4} key={item.id}>
+      <Col md={4} xs={6} key={item.id}>
         <Bookmark item={item} key={i} removeItem={removeItem} onAddToCart={ () => onAddToCart(item.productId, currentUser.id)} />
         {/* <NavLink to={`/bookmarks/${item.productId}`} className='btn btn-primary' type='button'> View Large </NavLink> */}
       </Col>
@@ -16,7 +16,7 @@ const Bookmarks = ({removeItem, bookmarks, onAddToCart, currentUser}) => {
   })
 
   return (
-    <div className='container' style={{paddingTop: '15px'}}>
+    <div className='container mainView'>
       <Grid>
         <Row>
           {displayBookmarks}

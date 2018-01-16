@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, ButtonGroup } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const Bookmark = ({item, removeItem, onAddToCart}) => {
 
@@ -13,25 +14,29 @@ const Bookmark = ({item, removeItem, onAddToCart}) => {
   }
 
   return (
-    <div className='card bookmark' >
+
+    <div className='card' >
+
       <div className='card-block'>
-        <img src={item.thumbnail} alt='' />
-        <h5 className='card-title'>{item.itemName}</h5>
+        <Link to={`/shoppingfeed/${item.productId}`} >
+          <img src={item.image} height='250px' alt='card image' />
+        </Link>
+        <h3 className='card-title'>{item.itemName}</h3>
         <div className='card-body'>
-          <h6>{item.short}</h6>
-          <h6>
-            Quantity Available: {item.quantity}
-          </h6>
-          <h6> Price: ${item.price} </h6>
-          <h6>For sale by: <a href={`http://www.facebook.com/${item.sellerFb}`}>{item.sellerName}</a></h6>
+          {item.short}
         </div>
-      </div>
+
         <ButtonGroup className='bkBtnGrp'>
           <Button className='bookmarkBtn' onClick={removeBookmark}>Remove</Button>
           <Button className='bookmarkBtn' onClick={onAddToCart}>Add To Cart</Button>
         </ButtonGroup>
-
+      </div>
+      <div className='card-footer' >
+        For sale by: <a href={`http://www.facebook.com/${item.sellerFb}`}>{item.sellerName}</a>
+      </div>
     </div>
+
+
 
 
 

@@ -6,14 +6,14 @@ const SaleItems = ({itemsForSale, removeItem, match}) => {
 
   const displaySaleItems = itemsForSale.map( item => {
     return (
-      <Col md={2} xs={4} key={item.id}>
+      <Col md={3} xs={6} key={item.id}>
         <SaleItem item={item} key={item.id} removeItem={removeItem}/>
       </Col>
     )
   })
 
   return (
-    <div className='container'>
+    <div className='container mainView'>
       <Grid>
         <Row>
           {displaySaleItems}

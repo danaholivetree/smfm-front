@@ -110,7 +110,7 @@ console.log('thumbnail url ', thumbnailUrl);
           <Col md={8} >
             <FormGroup controlId="short">
               <ControlLabel>Short Description</ControlLabel>
-              <FormControl componentClass="text" placeholder="One sentence about your product." />
+              <FormControl type="text" placeholder="One sentence about your product." />
             </FormGroup>
           </Col>
         </Row>

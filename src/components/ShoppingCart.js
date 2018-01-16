@@ -14,7 +14,7 @@ const ShoppingCart = ({cart, displayItem, removeItem, addToCart, updateCartQuant
   })
 
 return (
-  <div className='container'>
+  <div className='container mainView' >
 
     <Table striped bordered condensed hover>
       <thead>
