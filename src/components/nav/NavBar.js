@@ -41,7 +41,7 @@ export default class NavBar extends React.Component {
 
               <li>
                 <NavLink exact to="/shoppingcart">
-                  Cart
+                  <img src='./ic_shopping_cart_black_24dp_1x.png' />
                 </NavLink>
               </li>
 

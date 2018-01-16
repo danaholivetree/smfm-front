@@ -14,7 +14,7 @@
 
 #welcome {
   color: white;
-  margin: 60px 0;
+  margin: 120px 0;
 }
 
 .centered {
@@ -27,9 +27,10 @@
 
 .buyorsell {
   font-weight: bold;
-  padding: 20px;
+  padding: 15px 20px;
   font-size: 1.2em;
   margin: 0 20px;
+  width: 100px;
 }
 
 #closeJumbotron {
@@ -42,20 +43,17 @@
   position: relative;
 }
 .card {
-  height: 500px;
+  height: 420px;
   overflow: hidden;
   text-align: center;
   margin-bottom: 10px;
   background: grey;
-  border-radius: 2px;
-
+  border-radius: 3px;
 }
-
 .card-block {
   padding: 20px;
   height: 100%;
 }
-
 .card-body {
     max-height: 140px;
     overflow: hidden;
@@ -67,4 +65,21 @@
     width: 100%;
     background: #e2e2e2;
     padding: 5px 0;
+}
+.bookmark {
+  height: 300px;
+  font-size: 0.6em;
+}
+
+.bkBtnGrp {
+  position: relative;
+  bottom: 60px;
+  left: 10px;
+}
+
+.bookmarkBtn {
+  text-align: center;
+  margin: 10px;
+  width: 40%;
+  font-size: 1.4em;
 }

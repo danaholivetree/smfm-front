@@ -13,7 +13,7 @@ const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => (
         </NavLink>
         <h3 className='card-title'>{item.itemName}</h3>
         <div className='card-body'>
-          {item.description}
+          {item.short}
         </div>
 
 

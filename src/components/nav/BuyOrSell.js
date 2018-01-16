@@ -20,11 +20,11 @@ const BuyOrSell = ({loggedIn}) => (
       :
       <div>
 
-          <Link exact  to='/shoppingFeed'>
+          <Link exact='true'  to='/shoppingFeed'>
             <Button className='buyorsell'>BUY</Button>
           </Link>
 
-          <Link exact to='/sell'>
+          <Link exact='true' to='/sell'>
             <Button className='buyorsell'>SELL</Button>
           </Link>
 

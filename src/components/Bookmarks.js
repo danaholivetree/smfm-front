@@ -16,7 +16,7 @@ const Bookmarks = ({removeItem, bookmarks, onAddToCart, currentUser}) => {
   })
 
   return (
-    <div className='container'>
+    <div className='container' style={{paddingTop: '15px'}}>
       <Grid>
         <Row>
           {displayBookmarks}

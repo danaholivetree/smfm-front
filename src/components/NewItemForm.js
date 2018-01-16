@@ -29,6 +29,7 @@ if (!currentUser.isSeller) {
       category: e.target.category.value,
       quantity: Number(e.target.quantity.value),
       price: e.target.price.value,
+      short: e.target.short.value,
       description: e.target.description.value,
       sellerId: currentUser.id,
       sellerName: currentUser.name,
@@ -107,8 +108,16 @@ console.log('thumbnail url ', thumbnailUrl);
         </Row>
         <Row>
           <Col md={8} >
+            <FormGroup controlId="short">
+              <ControlLabel>Short Description</ControlLabel>
+              <FormControl componentClass="text" placeholder="One sentence about your product." />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={8} >
             <FormGroup controlId="description">
-              <ControlLabel>Description</ControlLabel>
+              <ControlLabel>Full Description</ControlLabel>
               <FormControl componentClass="textarea" rows="7" placeholder="Describe your Product" />
             </FormGroup>
           </Col>

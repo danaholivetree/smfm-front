@@ -18,12 +18,13 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
       } else {
       dbLogin(currentUser)
       getAllFriends(currentUser.id)
+      console.log('loggedIn ', loggedIn);
     }
     })
   }
 
 //get userId from database and fetch their items for sale
-  const dbLogin = async(currUser) => {
+  const dbLogin = async (currUser) => {
     let res = await fetch(`${API}/users`, {
       method: 'POST',
       headers: {
@@ -45,7 +46,6 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
   //fetch all user's friends
   const getAllFriends = async(userID) => {
     return await window.FB.api(`/${userID}/friends`, 'GET', {}, function(friends) {
-      console.log('friends came back ', friends);
       gotFriends(friends.data)
       getFeedItems(friends.data)
     })
@@ -66,7 +66,7 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
       body: JSON.stringify(friendIds)
     })
     let feedItems = await res.json()
-    console.log('feedItems ', feedItems);
+    console.log('feed Items ', feedItems);
     getAllFeedItems(feedItems) // action
   }
 //fetch all bookmarks by user id

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, ButtonGroup } from 'react-bootstrap'
 
 const Bookmark = ({item, removeItem, onAddToCart}) => {
 
@@ -9,19 +9,28 @@ const Bookmark = ({item, removeItem, onAddToCart}) => {
   // }
   const removeBookmark = (e) => {
     e.preventDefault()
-    console.log('item.id from remove bookmark click ', item.id);
     removeItem(item.id)
   }
 
   return (
+    <div className='card bookmark' >
+      <div className='card-block'>
+        <img src={item.thumbnail} alt='' />
+        <h5 className='card-title'>{item.itemName}</h5>
+        <div className='card-body'>
+          <h6>{item.short}</h6>
+          <h6>
+            Quantity Available: {item.quantity}
+          </h6>
+          <h6> Price: ${item.price} </h6>
+          <h6>For sale by: <a href={`http://www.facebook.com/${item.sellerFb}`}>{item.sellerName}</a></h6>
+        </div>
+      </div>
+        <ButtonGroup className='bkBtnGrp'>
+          <Button className='bookmarkBtn' onClick={removeBookmark}>Remove</Button>
+          <Button className='bookmarkBtn' onClick={onAddToCart}>Add To Cart</Button>
+        </ButtonGroup>
 
-    <div>
-      <img src={item.thumbnail} alt='' />
-      <h4> {item.itemName} </h4>
-      <p> Quantity Available: {item.quantity}</p>
-      <p> Price: ${item.price} </p>
-      <Button onClick={removeBookmark}>Remove</Button>
-      <Button onClick={onAddToCart}>Add To Cart</Button>
     </div>
 
 

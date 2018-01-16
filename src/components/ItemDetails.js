@@ -29,7 +29,7 @@ const ItemDetails = ({item, selector, onAddToCart, onAddBookmark, path}) => {
           <h5> For sale by: {item.sellerName}</h5>
           <h5> Quantity Available: {item.quantity} </h5>
           <h5> ${item.price} </h5>
-          <p>{item.description}</p>
+          <p >{item.description}</p>
         </Col>
       </Row>
 

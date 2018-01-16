@@ -28,14 +28,13 @@ const EditItem = ({items, editProduct, currentUser, match, history, location}) =
   }
 
   const handleEdit = (e) => {
-    e.preventDefault()
-      console.log(e.target.category.value)
     let product = {
       id: itemToEdit[0].id,
       itemName: e.target.name.value,
       category: e.target.category.value,
       quantity: Number(e.target.quantity.value),
       price: e.target.price.value,
+      short: e.target.short.value,
       description: e.target.description.value
       // sellerId: currentUser.id,
       // sellerName: currentUser.name
@@ -51,7 +50,7 @@ const EditItem = ({items, editProduct, currentUser, match, history, location}) =
 
   return  (
     <div className="container">
-      
+
       <Form onSubmit={handleEdit}>
         <Row>
           <Col md={2}>
@@ -105,6 +104,15 @@ const EditItem = ({items, editProduct, currentUser, match, history, location}) =
             </FormGroup>
           </Col>
 
+        </Row>
+
+        <Row>
+          <Col md={8} >
+            <FormGroup controlId="short">
+              <ControlLabel>Short Description</ControlLabel>
+              <FormControl componentClass="text" defaultValue={itemToEdit[0].short}/>
+            </FormGroup>
+          </Col>
         </Row>
 
         <Row>
