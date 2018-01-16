@@ -7,6 +7,8 @@
   height:600px;
   text-align: center;
   background-image: url(http://res.cloudinary.com/smfm/image/upload/v1515971442/fyfp9cq4ix5uwk3juawv.jpg);
+  background-repeat:no-repeat;
+  background-size: cover;
   display: inline-block;
 }
 
@@ -28,4 +30,41 @@
   padding: 20px;
   font-size: 1.2em;
   margin: 0 20px;
+}
+
+#closeJumbotron {
+  position: absolute;
+  right: 19px;
+  top: 12px;
+}
+
+.jumbotron {
+  position: relative;
+}
+.card {
+  height: 500px;
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 10px;
+  background: grey;
+  border-radius: 2px;
+
+}
+
+.card-block {
+  padding: 20px;
+  height: 100%;
+}
+
+.card-body {
+    max-height: 140px;
+    overflow: hidden;
+}
+
+.card-footer {
+    position: relative;
+    bottom: 30px;
+    width: 100%;
+    background: #e2e2e2;
+    padding: 5px 0;
 }
