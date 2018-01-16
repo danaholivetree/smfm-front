@@ -6,7 +6,7 @@ const Login = ({loadData}) => {
     return (
       <FacebookLogin
         appId="135045367176902"
-        autoLoad={true}
+        autoLoad={false}
         fields="name,email,picture"
         returnScopes={true}
         scope="public_profile,user_friends,email"
