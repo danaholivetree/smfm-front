@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
-import LoginContainer from './containers/LoginContainer'
+// import LoginContainer from './containers/LoginContainer'
 import SellItemContainer from './containers/SellItemContainer'
 import ItemsForSaleContainer from './containers/ItemsForSaleContainer'
 import NavBar from './components/nav/NavBar'
@@ -9,7 +9,8 @@ import Items from './routes/Items'
 import BookmarksRoute from './routes/BookmarksRoute'
 import Cart from './routes/Cart'
 import { connect } from 'react-redux'
-import Blah from './components/Blah'
+// import Blah from './components/Blah'
+import { logOut} from './actions/AppActions'
 
 
 class App extends Component {
@@ -17,19 +18,20 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App" >
+
         <BrowserRouter>
           <div>
-            <LoginContainer />
+            <NavBar loggedIn={this.props.loggedIn} currentUser={this.props.currentUser} logOut={this.props.logOut} />
 
-            {this.props.loggedIn ?
+
               <div>
 
-                <NavBar />
+
 
                 <Switch>
-                  <Route exact path='/' component={BuyOrSell} />
-                  <Route path='/sell' component={SellItemContainer} />
+                  <Route exact path='/' render={()=> <BuyOrSell loggedIn={this.props.loggedIn}/> } />
+                  <Route path='/sell'  component={SellItemContainer} />
                   <Route path='/saleitems' component={ItemsForSaleContainer} />
                   <Route path='/shoppingcart' component={Cart} />
                   <Route path='/bookmarks' component={BookmarksRoute} />
@@ -37,10 +39,10 @@ class App extends Component {
                 </Switch>
               </div>
 
-              :
 
-              <Blah />
-            }
+
+
+
 
           </div>
         </BrowserRouter>
@@ -51,7 +53,13 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return (
-    {loggedIn: state.loggedIn}
+    {loggedIn: state.loggedIn,
+    currentUser: state.currentUser}
   )
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    logOut: () => dispatch(logOut())
+  }
 }
 export default connect(mapStateToProps, null)(App)

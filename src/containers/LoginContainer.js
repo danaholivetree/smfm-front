@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getAllBookmarks, getAllCart} from '../actions/AppActions';
 import Login from '../components/Login'
-import { PageHeader } from 'react-bootstrap'
+// import { Row, Col } from 'react-bootstrap'
+import BuyOrSell from '../components/nav/BuyOrSell'
 // import NavBar from '../components/nav/NavBar'
 
 const API = process.env.REACT_APP_API_URL
@@ -93,14 +94,19 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
     getAllCart(cartItems) //action
   }
 
+  // var divStyle = {
+  //   color: 'white',
+  //   backgroundImage: 'url(' + imgUrl + ')',
+  //   WebkitTransition: 'all', // note the capital 'W' here
+  //   msTransition: 'all' // 'ms' is the only lowercase vendor prefix
+  // };
+
+//check if user has a c_user cookie from facebook matching their fb_id and don\'t display the login
   return (
+      <div>
 
-    <div>
-      { !loggedIn &&<PageHeader> <Login loadData={loadData} />   </PageHeader>}
-
-    </div>
-
-
+       <Login loadData={loadData} loggedIn={loggedIn}/>
+      </div>
 
   )
 }

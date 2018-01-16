@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 
 const Bookmark = ({item, removeItem, onAddToCart}) => {
 
@@ -19,8 +20,8 @@ const Bookmark = ({item, removeItem, onAddToCart}) => {
       <h4> {item.itemName} </h4>
       <p> Quantity Available: {item.quantity}</p>
       <p> Price: ${item.price} </p>
-      <input className='btn btn-primary' type='button' value='remove' onClick={removeBookmark} />
-      <input className='btn btn-primary' type='button' value='add to cart' onClick={onAddToCart} />
+      <Button onClick={removeBookmark}>Remove</Button>
+      <Button onClick={onAddToCart}>Add To Cart</Button>
     </div>
 
 

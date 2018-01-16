@@ -1,33 +1,29 @@
 import React from 'react'
 import {Row, Form, FormGroup, FormControl, Col, ControlLabel, Button, InputGroup} from 'react-bootstrap'
-
+import { Redirect } from 'react-router-dom'
 const NewItemForm = ({addNewProduct, currentUser}) => {
 
 var imageUrl = ''
 var thumbnailUrl = ''
+
 if (!currentUser.isSeller) {
 
 }
 
   const uploadWidget = (e) => {
-    console.log('click');
     e.preventDefault()
     window.cloudinary.openUploadWidget({ cloud_name: 'smfm', upload_preset: 'ymtqac0s', multiple: 'false', resource_type: 'image'},
         (error, results) => {
             if (error) {
               return
             }
-            // const { url, secure_url, public_id, path } = result;
-            console.log('setting imageUrl as secure_url= ', results[0].secure_url);
             imageUrl = results[0].secure_url
             thumbnailUrl = results[0].thumbnail_url
-            // onUploadSuccess({url: secure_url, id: path});
         })
   }
 
   const createProduct = (e) => {
     e.preventDefault()
-      console.log(e.target.category.value);
     let product = {
       itemName: e.target.name.value,
       category: e.target.category.value,
@@ -41,10 +37,10 @@ if (!currentUser.isSeller) {
     }
     console.log('product in createProduct ', product);
     addNewProduct(product)
-    e.target.reset()
+    return  <Redirect to='/saleitems' />
   }
   // https://react-bootstrap.github.io/components/forms/
-
+console.log('thumbnail url ', thumbnailUrl);
 
   return (
 
@@ -62,6 +58,13 @@ if (!currentUser.isSeller) {
               </Button>
             </FormGroup>{' '}
           </Col>
+
+          { thumbnailUrl.length > 1 &&
+            <Col md={2}>
+              <img src={thumbnailUrl} />
+            </Col>
+          }
+
         </Row>
 
         <Row>
@@ -76,9 +79,8 @@ if (!currentUser.isSeller) {
         <Row>
           <Col md={3}>
             <FormGroup controlId="category">
-              <ControlLabel>Select</ControlLabel>
+              <ControlLabel>Select a Category</ControlLabel>
               <FormControl componentClass="select">
-                <option value="select">Select a Category</option>
                 <option value="Handmade">Handmade</option>
                 <option value="Music">Music</option>
                 <option value="Art">Art</option>

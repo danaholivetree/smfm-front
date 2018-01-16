@@ -1,34 +1,38 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {Row, Col, Button} from 'react-bootstrap'
 
-var sectionStyle = {
-  width: "100%",
-  height: "400px",
-  backgroundImage: `http://res.cloudinary.com/smfm/image/upload/v1515971442/fyfp9cq4ix5uwk3juawv.jpg`
-};
+import {Row, Col, Button, Grid} from 'react-bootstrap'
+import LoginContainer from '../../containers/LoginContainer'
 
-const BuyOrSell = () => (
-  <div className='container' style={ sectionStyle }>
-    <Row>
-      <Col md={12}>
-       <h1 className='text-center'>Welcome to Stuff My Friends Make!</h1>
-      </Col>
-    </Row>
-    <Row >
-      <Col mdOffset={5} md={4}>
-        <Link exact  to='/shoppingFeed'>
-          <Button>BUY</Button>
-        </Link>
-        {' '}
-        <Link exact to='/sell'>
-          <Button>SELL</Button>
-        </Link>
-      </Col>
-    </Row>
+const BuyOrSell = ({loggedIn}) => (
+
+  <div id='mainContainer'>
+
+    <div className='centered'>
+       <h1 id='welcome' >Welcome to Stuff My Friends Make!</h1>
 
 
+
+    { !loggedIn ?
+      <div>
+        <LoginContainer />
+      </div>
+      :
+      <div>
+
+          <Link exact  to='/shoppingFeed'>
+            <Button className='buyorsell'>BUY</Button>
+          </Link>
+
+          <Link exact to='/sell'>
+            <Button className='buyorsell'>SELL</Button>
+          </Link>
+
+      </div>
+    }
+    </div>
   </div>
+
 )
 
 export default BuyOrSell
