@@ -11,6 +11,7 @@ import Cart from './routes/Cart'
 import { connect } from 'react-redux'
 // import Blah from './components/Blah'
 import { logOut} from './actions/AppActions'
+import { CookiesProvider } from 'react-cookie';
 
 
 class App extends Component {
@@ -26,9 +27,6 @@ class App extends Component {
 
 
               <div>
-
-
-
                 <Switch>
                   <Route exact path='/' render={()=> <BuyOrSell loggedIn={this.props.loggedIn}/> } />
                   <Route path='/sell'  component={SellItemContainer} />

@@ -23,6 +23,7 @@
     "react-router-redux": "^4.0.8",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
+    "redux-persist": "^5.4.0",
     "redux-thunk": "^2.2.0",
     "sha1": "^1.1.1"
   },
@@ -33,6 +34,6 @@
     "eject": "react-scripts eject"
   },
   "engine": {
-    "node": "8.8.1"
+    "node": "9.3.0"
   }
 }

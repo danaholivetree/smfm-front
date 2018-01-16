@@ -1,5 +1,4 @@
 import React from 'react'
-// import NaviLink from './NavLink'
 import { NavLink, Link } from 'react-router-dom'
 import {Navbar, Nav, NavItem } from 'react-bootstrap'
 const links = [
@@ -22,46 +21,46 @@ export default class NavBar extends React.Component {
   render() {
     return(
       <Navbar>
-          <Navbar.Header>
-            <Navbar.Brand>
-      				SMFM
-            </Navbar.Brand>
-            <Navbar.Toggle/>
-          </Navbar.Header>
+        <Navbar.Header>
+          <Navbar.Brand>
+    				SMFM
+          </Navbar.Brand>
+          <Navbar.Toggle/>
+        </Navbar.Header>
 
-          {this.props.loggedIn &&
+        {this.props.loggedIn &&
 
-            <Navbar.Collapse className='fadeIn'>
-            <ul className="nav navbar-nav">
-              {links.map( this.listLinks )}
-            </ul>
-
-
-            <ul className='nav navbar-nav pull-right' >
-
-              <li>
-                <NavLink exact to="/shoppingcart">
-                  <img src='./ic_shopping_cart_black_24dp_1x.png' />
-                </NavLink>
-              </li>
-
-              <li>
-              <Navbar.Text >
-                {this.props.currentUser.name}
-              </Navbar.Text>
-            </li>
-
-              <NavItem  onClick={this.props.logOut}>
-                Log Out
-              </NavItem>
+        <Navbar.Collapse >
+        <ul className="nav navbar-nav">
+          {links.map( this.listLinks )}
+        </ul>
 
 
-          </ul>
+        <ul className='nav navbar-nav pull-right' >
+
+          <li>
+            <NavLink exact to="/shoppingcart" style={{height: '50px'}}>
+              <img src='./ic_shopping_cart_black_24dp_1x.png' />
+            </NavLink>
+          </li>
+
+          <li>
+            <Navbar.Text >
+              {this.props.currentUser.name}
+            </Navbar.Text>
+          </li>
+
+          <NavItem  onClick={this.props.logOut}>
+            Log Out
+          </NavItem>
 
 
-          </Navbar.Collapse>
+        </ul>
+        </Navbar.Collapse>
+
         }
-        </Navbar>
+
+      </Navbar>
     )
   }
 }
