@@ -10,6 +10,8 @@ import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import './index.css'
 import App from './App'
+import { persistStore, persistCombineReducers } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 const API = process.env.REACT_APP_API_URL
 
@@ -24,6 +26,7 @@ const initialState = {
   filteredItems: []
 }
 let store = createStore(AppReducer, initialState, applyMiddleware(thunk.withExtraArgument(API)))
+let persistor = persistStore(store)
 
 ReactDOM.render(
   <Provider store={store}>
