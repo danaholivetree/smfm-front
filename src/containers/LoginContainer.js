@@ -11,11 +11,13 @@ const API = process.env.REACT_APP_API_URL
 const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getAllBookmarks, getAllCart}) => {
 
   const loadData = (response) => {
+    console.log('response ', response);
     window.FB.api('/me', currentUser => {
       if (currentUser.error) {
         console.log('error: ' , currentUser.error.type);
         return ///// handling
       } else {
+
       dbLogin(currentUser)
       getAllFriends(currentUser.id)
       console.log('loggedIn ', loggedIn);
