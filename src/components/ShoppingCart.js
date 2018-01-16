@@ -16,7 +16,7 @@ const ShoppingCart = ({cart, displayItem, removeItem, addToCart, updateCartQuant
 return (
   <div className='container mainView' >
 
-    <Table striped bordered condensed hover>
+    <Table striped bordered condensed >
       <thead>
         <tr>
           <th>image</th>

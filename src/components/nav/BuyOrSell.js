@@ -9,7 +9,7 @@ const BuyOrSell = ({loggedIn}) => (
   <div id='mainContainer'>
 
     <div className='centered'>
-       <h1 id='welcome' >Welcome to Stuff My Friends Make!</h1>
+       <h1 id='welcome'>STUFF MY FRIENDS MAKE</h1>
 
 
 

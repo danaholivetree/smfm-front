@@ -10,6 +10,7 @@ const Login = ({loadData}) => {
         fields="name,email,picture"
         returnScopes={true}
         scope="public_profile,user_friends,email"
+        cssClass="btn btn-default btn-lg"
         callback={loadData}
       />
     )

@@ -22,7 +22,7 @@ export default class NavBar extends React.Component {
     return(
       <Navbar>
         <Navbar.Header>
-          <Navbar.Brand>
+          <Navbar.Brand style={{color:'pink'}}>
     				SMFM
           </Navbar.Brand>
           <Navbar.Toggle/>
@@ -45,7 +45,7 @@ export default class NavBar extends React.Component {
           </li>
 
           <li>
-            <Navbar.Text >
+            <Navbar.Text style={{color:'pink'}}>
               {this.props.currentUser.name}
             </Navbar.Text>
           </li>

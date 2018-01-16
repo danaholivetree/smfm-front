@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {Button} from 'react-bootstrap'
 // import { Row, Col, Button, ButtonToolbar} from 'react-bootstrap'
 
 const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
@@ -41,7 +42,7 @@ const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
       {/* <td>${item.cartQuantity === 1 ? item.price : Number(item.price) * item.cartQuantity}</td> */}
       <td>{serializeCost(item.cartQuantity, item.price)}</td>
       <td><Link to={`/shoppingcart/${item.productId}`} className='btn btn-primary' type='button'> Details </Link></td>
-      <td><input className='btn btn-primary' type='button' value='remove item' data-id='item.id' onClick={handleRemove} /></td>
+      <td><Button onClick={handleRemove} >Remove</Button></td>
     </tr>
 
   )

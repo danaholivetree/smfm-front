@@ -49,7 +49,7 @@ const EditItem = ({items, editProduct, currentUser, match, history, location}) =
   }
 
   return  (
-    <div className="container">
+    <div className="container mainView">
 
       <Form onSubmit={handleEdit}>
         <Row>
@@ -110,7 +110,7 @@ const EditItem = ({items, editProduct, currentUser, match, history, location}) =
           <Col md={8} >
             <FormGroup controlId="short">
               <ControlLabel>Short Description</ControlLabel>
-              <FormControl componentClass="text" defaultValue={itemToEdit[0].short}/>
+              <FormControl type="text" defaultValue={itemToEdit[0].short}/>
             </FormGroup>
           </Col>
         </Row>
