@@ -5,7 +5,7 @@ import {Button} from 'react-bootstrap'
 
 const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
 
-
+  console.log('cartItem ', item);
   const handleRemove = (e) => {
     e.preventDefault()
     removeItem(item.id)
@@ -29,20 +29,19 @@ const CartItem = ({item, addToCart, updateCartQuantity, removeItem}) => {
   return (
 
     <tr>
-      <td><img src={item.thumbnail} alt='' /></td>
-      <td>{item.id}</td>
-      <td>{item.itemName}</td>
-      <td>{item.sellerName}</td>
-      <td>{item.price}</td>
-      <td>{item.quantity > 1 ?
+      <td className='td-img' style={{width: '1px'}}><img src={item.thumbnail} alt='' /></td>
+      <td className='words'>{item.itemName}</td>
+      <td className='words'>{item.sellerName}</td>
+      <td className='numbers'>${item.price}</td>
+      <td className='numbers'>{item.quantity > 1 ?
           <select onChange={handleQuantityChange} name='quantity' defaultValue={item.cartQuantity}>
             {selector}
           </select>
-        : item.quantityInCart}</td>
+        : item.cartQuantity}</td>
       {/* <td>${item.cartQuantity === 1 ? item.price : Number(item.price) * item.cartQuantity}</td> */}
-      <td>{serializeCost(item.cartQuantity, item.price)}</td>
-      <td><Link to={`/shoppingcart/${item.productId}`} className='btn btn-primary' type='button'> Details </Link></td>
-      <td><Button onClick={handleRemove} >Remove</Button></td>
+      <td className='numbers'>${serializeCost(item.cartQuantity, item.price)}</td>
+      <td className='td-btn'><Link to={`/shoppingcart/${item.productId}`}><Button> Details</Button> </Link></td>
+      <td className='td-btn'><Button onClick={handleRemove} >Remove</Button></td>
     </tr>
 
   )

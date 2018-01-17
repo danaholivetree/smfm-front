@@ -9,7 +9,7 @@ const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => (
 
       <div className='card-block'>
         <NavLink to={`/shoppingfeed/${item.id}`} >
-          <img src={item.image} height='250px' alt='card image' />
+          <img style={{maxWidth:'100%'}}src={item.image} height='250px' alt='card image' />
         </NavLink>
         <h3 className='card-title'>{item.itemName}</h3>
         <div className='card-body'>
@@ -19,7 +19,7 @@ const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => (
 
       </div>
       <div className='card-footer' >
-        For sale by: <a href={`http://www.facebook.com/${item.sellerFb}`}>{item.sellerName}</a>
+        For sale by: <a href={`http://www.facebook.com/${item.sellerFb}`} target="_blank">{item.sellerName}</a>
       </div>
     </div>
 

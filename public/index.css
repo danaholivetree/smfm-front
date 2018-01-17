@@ -4,6 +4,15 @@ body {
   background-color:whitesmoke;
 }
 
+a:link {
+    color: black;
+}
+a:visited {
+    color: black;
+}
+
+
+
 .navbar {
   margin-bottom: 0;
   width: 100%;
@@ -58,6 +67,24 @@ body {
   margin-top: 40px;
 }
 
+
+td.words {
+  padding: 20px 12px !important;
+}
+
+td.numbers {
+  text-align: right !important;
+  padding: 20px 12px !important;
+}
+
+td.td-btn {
+  padding: 20px 12px !important;
+  text-align: center !important;
+}
+
+th {
+  text-align: center !important;
+}
 /* .fadeIn {
    transition: opacity .25s ease-in;
 } */
@@ -92,15 +119,19 @@ body {
   max-width: 80%;
 }
 .card {
-  height: 420px;
+  height: 400px;
   overflow: hidden;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
   border-radius: 2px;
+  background-color: #FAFAFA;
 }
 .card-block {
   padding: 20px;
   height: 100%;
+}
+.card-title {
+  margin-top:15px;
 }
 .card-body {
   max-height: 140px;
@@ -108,6 +139,7 @@ body {
   text-align: left;
   padding-left: 20px;
   padding-top: 0;
+
 }
 .sale-btn {
   width: 80px;
@@ -123,13 +155,13 @@ h6 {
   padding:0;
 }
 
-/* .card-footer {
+.card-footer {
   position: relative;
   bottom: 30px;
   width: 100%;
-  background: #e2e2e2;
+  background: rgba(255, 192, 203, 0.2);
   padding: 5px 0;
-} */
+}
 .bookmark {
   height: 300px;
   font-size: 0.6em;
@@ -138,4 +170,11 @@ h6 {
 .bookmark-btn {
   width: 120px;
   margin: 10px;
+}
+.btn-default:focus {
+  outline: none;
+}
+
+.btn-default:active {
+  outline: none;
 }

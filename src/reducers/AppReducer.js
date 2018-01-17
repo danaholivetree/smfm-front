@@ -94,31 +94,8 @@ const AppReducer = (state, action) => {
         }
       }
     case 'ADD_TO_CART':
-      //add to cart button on FeedItem onClick. checks to see if item is already in the cart by comparing the item's id with items in the cart state.
-      //
-      // let alreadyInCart = state.cart.filter(el => {
-      //   return (el.id === item.id)
-      // })
-      // if (alreadyInCart.length < 1) { //wasn't already in the cart
-      //   item.quantityInCart = 1
-        //api POST to cart. takes action.item.id, sends it with currentUser.id to POST cart/:id, returns a cart product object with cart quantity and a cart.id. set it as newCartItem.
         return {...state, cart: [...state.cart, action.newCartItem]}
-      // } else if (item.quantity > item.quantityInCart) { //item already in cart
-      //   let indexOfItem = this.state.cart.indexOf(alreadyInCart[0])
-      //   let oldQuantity = alreadyInCart[0].quantityInCart
-      //   let newQuantity = oldQuantity + 1
-      //
-      //   return { ...state,
-      //     cart: [
-      //       ...state.cart.slice(0, indexOfItem), {
-      //         ...alreadyInCart[0],
-      //         quantityInCart: (newQuantity)
-      //       },
-      //       ...state.cart.slice(indexOfItem + 1)
-      //     ]
-      //   }
-      // }
-      // else return state
+
 
     case 'REMOVE_FROM_CART':
       //delete button on CartItem in ShoppingCart container. sends cartItem.id to DELETE cart/:id and returns item as itemToRemove

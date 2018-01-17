@@ -40,6 +40,7 @@ const addCartItemToDatabase = async (productId, userId, API) => {
        body: JSON.stringify({productId, userId})
   })
   let newCartItem = await res.json()
+  console.log('newCartItem came back from db', newCartItem);
   return newCartItem
 }
 
