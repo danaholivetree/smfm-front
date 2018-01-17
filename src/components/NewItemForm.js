@@ -31,6 +31,7 @@ if (!currentUser.isSeller) {
       price: e.target.price.value,
       short: e.target.short.value,
       description: e.target.description.value,
+      // external: e.target.external.value,
       sellerId: currentUser.id,
       sellerName: currentUser.name,
       image: imageUrl,

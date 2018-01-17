@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
-import {Navbar, Nav, NavItem } from 'react-bootstrap'
+import {Navbar, Nav, NavItem, Badge } from 'react-bootstrap'
 const links = [
 
   {linkTo: '/shoppingfeed', text: 'Shopping Feed', active: false},
@@ -12,13 +12,21 @@ const links = [
   // {linkTo: '/logout', text: 'Log Out', active: false}
 ]
 
-export default class NavBar extends React.Component {
+const NavBar = ({loggedIn, currentUser, logOut, cart}) => {
 
-  listLinks = (link, index) => {
+  const listLinks = (link, index) => {
     return <li key={index}><NavLink activeClassName='active'  exact to={`${link.linkTo}`}>{link.text}</NavLink></li>
   }
 
-  render() {
+
+  const cartCount = cart.reduce( (acc, curr) => {
+    console.log('cart ', cart);
+    console.log('acc ', acc);
+    console.log('curr.cartQuantity ', curr.cartQuantity);
+    return acc += curr.cartQuantity
+  }, 0)
+
+
     return(
       <Navbar>
         <Navbar.Header>
@@ -28,11 +36,11 @@ export default class NavBar extends React.Component {
           <Navbar.Toggle/>
         </Navbar.Header>
 
-        {this.props.loggedIn &&
+        {loggedIn &&
 
         <Navbar.Collapse >
         <ul className="nav navbar-nav">
-          {links.map( this.listLinks )}
+          {links.map( listLinks )}
         </ul>
 
 
@@ -41,16 +49,18 @@ export default class NavBar extends React.Component {
           <li>
             <NavLink exact to="/shoppingcart" style={{height: '50px'}}>
               <img src='./ic_shopping_cart_black_24dp_1x.png' />
+              <Badge>{cartCount}</Badge>
+
             </NavLink>
           </li>
 
           <li>
             <Navbar.Text style={{color:'pink'}}>
-              {this.props.currentUser.name}
+              {currentUser.name}
             </Navbar.Text>
           </li>
 
-          <NavItem  onClick={this.props.logOut}>
+          <NavItem  onClick={logOut}>
             Log Out
           </NavItem>
 
@@ -62,5 +72,6 @@ export default class NavBar extends React.Component {
 
       </Navbar>
     )
-  }
+
 }
+export default NavBar

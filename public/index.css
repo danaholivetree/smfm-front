@@ -7,11 +7,28 @@ body {
 a:link {
     color: black;
 }
+
 a:visited {
     color: black;
 }
 
+a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
 
+.navbar-default .navbar-nav>li>a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.navbar-default .navbar-nav>li>.a:target {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.navbar-default .navbar-nav>li>.a:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
 
 .navbar {
   margin-bottom: 0;
@@ -165,6 +182,7 @@ h6 {
   background: rgba(255, 192, 203, 0.2);
   padding: 5px 0;
 }
+
 .bookmark {
   height: 300px;
   font-size: 0.6em;
@@ -174,10 +192,20 @@ h6 {
   width: 120px;
   margin: 10px;
 }
+
 .btn-default:focus {
-  outline: none;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: white !important;
 }
 
 .btn-default:active {
-  outline: none;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: white !important;
+}
+
+.btn-default:target {
+  outline: none !important;
+  box-shadow: none !important;
 }

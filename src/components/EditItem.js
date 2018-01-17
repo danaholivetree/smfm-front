@@ -36,6 +36,7 @@ const EditItem = ({items, editProduct, currentUser, match, history, location}) =
       price: e.target.price.value,
       short: e.target.short.value,
       description: e.target.description.value
+      // external: e.target.external.value
       // sellerId: currentUser.id,
       // sellerName: currentUser.name
     }

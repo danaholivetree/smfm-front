@@ -13,8 +13,8 @@ const SaleItem = ({item, removeItem}) => {
 
     <div className='card' >
       <div className='card-block'>
-        <img src={item.image} style={{height:'250px'}} alt='' />
-        <h3 className='card-title'>{item.itemName}</h3>
+        <img  src={item.image} style={{maxWidth: '100%', maxHeight:'200px'}} alt='' />
+        <h4 className='card-title'>{item.itemName}</h4>
         <div className='card-body'>
           <h6> Quantity Available: {item.quantity}</h6>
           <h6> Price: ${item.price} </h6>

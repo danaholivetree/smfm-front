@@ -23,7 +23,7 @@ class App extends Component {
 
         <BrowserRouter>
           <div>
-            <NavBar loggedIn={this.props.loggedIn} currentUser={this.props.currentUser} logOut={this.props.logOut} />
+            <NavBar loggedIn={this.props.loggedIn} currentUser={this.props.currentUser} logOut={this.props.logOut} cart={this.props.cart} />
 
 
               <div>
@@ -52,7 +52,8 @@ class App extends Component {
 const mapStateToProps = state => {
   return (
     {loggedIn: state.loggedIn,
-    currentUser: state.currentUser}
+    currentUser: state.currentUser,
+    cart: state.cart}
   )
 }
 const mapDispatchToProps = dispatch => {

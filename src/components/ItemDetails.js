@@ -23,7 +23,7 @@ const ItemDetails = ({item, selector, onAddToCart, onAddBookmark, path}) => {
           <h2 style={{marginTop:0, marginBottom: '25px'}}> {item.itemName} </h2>
 
             { path !== 'shoppingcart' && <Button className='bookmark-btn' onClick={handleAdd}>Add To Cart</Button>  }
-            { path !== 'bookmarks' && <Button className='bookmark-btn' onClick={onAddBookmark}>Add To Bookmarks</Button>  }
+            { path !== 'bookmarks' && <Button className='bookmark-btn' onClick={onAddBookmark}>Bookmark</Button>  }
 
 
           <h5> Category: {item.category} </h5>

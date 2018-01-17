@@ -9,7 +9,7 @@ const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => (
 
       <div className='card-block'>
         <NavLink to={`/shoppingfeed/${item.id}`} >
-          <img style={{maxWidth:'100%'}}src={item.image} height='250px' alt='card image' />
+          <img style={{maxWidth:'100%'}} src={item.image} height='250px' alt='card image' />
         </NavLink>
         <h3 className='card-title'>{item.itemName}</h3>
         <div className='card-body'>
