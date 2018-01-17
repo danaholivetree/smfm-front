@@ -1,25 +1,31 @@
 import React from 'react'
 import {Row, Form, FormGroup, FormControl, Col, ControlLabel, Button, InputGroup} from 'react-bootstrap'
 import { Redirect } from 'react-router-dom'
+
 const NewItemForm = ({addNewProduct, currentUser}) => {
 
-var imageUrl = ''
-var thumbnailUrl = ''
+  var imageUrl = ''
+  var thumbnailUrl = ''
 
-if (!currentUser.isSeller) {
+  if (!currentUser.isSeller) {
 
-}
+  }
 
   const uploadWidget = (e) => {
     e.preventDefault()
-    window.cloudinary.openUploadWidget({ cloud_name: 'smfm', upload_preset: 'ymtqac0s', multiple: 'false', resource_type: 'image'},
-        (error, results) => {
-            if (error) {
-              return
-            }
-            imageUrl = results[0].secure_url
-            thumbnailUrl = results[0].thumbnail_url
-        })
+    window.cloudinary.openUploadWidget({
+      cloud_name: 'smfm',
+      upload_preset: 'ymtqac0s',
+      multiple: 'false',
+      resource_type: 'image'
+    },
+      (error, results) => {
+        if (error) {
+          return
+        }
+        imageUrl = results[0].secure_url
+        thumbnailUrl = results[0].thumbnail_url
+      })
   }
 
   const createProduct = (e) => {
@@ -39,16 +45,16 @@ if (!currentUser.isSeller) {
     }
     console.log('product in createProduct ', product);
     addNewProduct(product)
-    return  <Redirect to='/saleitems' />
+    if (product) {
+      return  <Redirect to='/saleitems' from='/sell' />
+    }
+
   }
-  // https://react-bootstrap.github.io/components/forms/
-console.log('thumbnail url ', thumbnailUrl);
+
 
   return (
 
     <div className="container mainView">
-
-
 
       <Form onSubmit={createProduct}>
         <Row>
@@ -73,7 +79,7 @@ console.log('thumbnail url ', thumbnailUrl);
           <Col md={4}>
             <FormGroup controlId="name">
         			<ControlLabel>Item Name</ControlLabel>{' '}
-        			<FormControl type="text" placeholder="Stuff You Made" />
+        			<FormControl componentClass="textarea" rows='1' placeholder="Stuff You Made" />
         		</FormGroup>{' '}
           </Col>
 
@@ -111,7 +117,7 @@ console.log('thumbnail url ', thumbnailUrl);
           <Col md={8} >
             <FormGroup controlId="short">
               <ControlLabel>Short Description</ControlLabel>
-              <FormControl type="text" placeholder="One sentence about your product." />
+              <FormControl componentClass='textarea' rows='1' placeholder="One sentence about your product." />
             </FormGroup>
           </Col>
         </Row>
@@ -124,34 +130,8 @@ console.log('thumbnail url ', thumbnailUrl);
           </Col>
         </Row>
 
-
         <Button type="submit">Submit</Button>
       </Form>
-
-
-    {/* <label htmlFor='name'>Name</label>
-    <input type='text' name='name' placeholder='Item Name'/>
-    <label htmlFor='category'>Category</label>
-    <select name='category'>
-      <option>Handmade</option>
-      <option>Music</option>
-      <option>Art</option>
-      <option>Writing</option>
-    </select>
-    <label htmlFor='quantity'>Quantity</label>
-    <input type='text' name='quantity' placeholder='Quantity Available'/>
-    <label htmlFor='price'>Price</label>
-    <input type='text' name='price' placeholder='Price'/>
-    <label htmlFor='description'>Description</label>
-    <input htmlFor='text' name='description' placeholder='Description'/>
-    <input type='submit' className='btn btn-default' value='submit new item'/> */}
-
-
-
-
-
-
-
 
     </div>
   )

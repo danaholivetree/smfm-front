@@ -46,7 +46,7 @@ const EditItem = ({items, editProduct, currentUser, match, history, location}) =
     }
     console.log('editedProduct ', product);
     editProduct(product)
-    e.target.reset()
+    return <Redirect to={'/saleitems'} />
   }
 
   return  (
@@ -78,7 +78,7 @@ const EditItem = ({items, editProduct, currentUser, match, history, location}) =
             <FormGroup controlId="category">
               <ControlLabel>Select</ControlLabel>
               <FormControl componentClass="select" defaultValue={itemToEdit[0].category}>
-                <option >Select a Category</option>
+                <option> Select a Category</option>
                 <option value="Handmade">Handmade</option>
                 <option value="Music">Music</option>
                 <option value="Art">Art</option>

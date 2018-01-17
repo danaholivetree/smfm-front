@@ -20,9 +20,6 @@ const NavBar = ({loggedIn, currentUser, logOut, cart}) => {
 
 
   const cartCount = cart.reduce( (acc, curr) => {
-    console.log('cart ', cart);
-    console.log('acc ', acc);
-    console.log('curr.cartQuantity ', curr.cartQuantity);
     return acc += curr.cartQuantity
   }, 0)
 

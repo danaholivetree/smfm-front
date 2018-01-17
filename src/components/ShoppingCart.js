@@ -14,9 +14,6 @@ const ShoppingCart = ({cart, displayItem, removeItem, addToCart, updateCartQuant
   })
 
   const subtotal = cart.reduce( (acc, curr) => {
-    // console.log('curr.price ', curr.price, ' curr.cartQuantity ', curr.cartQuantity);
-    // console.log('curr.price ', typeof curr.price, ' curr.cartQuantity ', typeof curr.cartQuantity);
-    console.log('acc ', acc);
     return acc += Number(curr.price) * curr.cartQuantity
   }, 0)
 

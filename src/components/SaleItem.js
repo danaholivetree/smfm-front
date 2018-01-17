@@ -20,6 +20,10 @@ const SaleItem = ({item, removeItem}) => {
           <h6> Price: ${item.price} </h6>
 
         </div>
+
+
+      </div>
+      <div className='btn-footer'>
         <Button className='sale-btn' onClick={handleRemove}>Remove</Button>
         <Link to={`sell/${item.id}`}><Button className='sale-btn'>Edit</Button></Link>
       </div>
