@@ -67,7 +67,10 @@ a:visited {
   margin-top: 40px;
 }
 
-
+td.subtotal {
+  padding: 20px 12px !important;
+  text-align: right;
+}
 td.words {
   padding: 20px 12px !important;
 }

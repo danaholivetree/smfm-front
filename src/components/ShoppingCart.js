@@ -1,6 +1,6 @@
 import React from 'react'
 import CartItem from './CartItem'
-import { Table } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
 
 const ShoppingCart = ({cart, displayItem, removeItem, addToCart, updateCartQuantity, currentUser}) => {
 
@@ -38,8 +38,9 @@ return (
       <tbody>
         {displayCartItems}
         <tr>
-          <td colSpan={5} style={{textAlign:'right'}}>Subtotal:</td>
+          <td colSpan={5} className='subtotal'>Subtotal:</td>
           <td className='numbers'><b>${subtotal.toFixed(2)}</b></td>
+          <td colSpan={2} className='checkout td-btn'><Button>Checkout</Button></td>
         </tr>
       </tbody>
 
