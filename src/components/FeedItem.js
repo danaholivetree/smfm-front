@@ -16,11 +16,11 @@ const FeedItem = ({item, selector, onAddToCart, onAddBookmark, path}) => (
           {item.short}
         </div>
 
+        <div className='card-footer' >
+          For sale by: <a href={`http://www.facebook.com/${item.sellerFb}`} target="_blank">{item.sellerName}</a>
+        </div>
+      </div>
 
-      </div>
-      <div className='card-footer' >
-        For sale by: <a href={`http://www.facebook.com/${item.sellerFb}`} target="_blank">{item.sellerName}</a>
-      </div>
     </div>
 
 
