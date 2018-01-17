@@ -16,9 +16,9 @@ const SearchBar = ({filterItems, filterCategory}) => {
   return (
     <div className='container'>
         <Row>
-          <Col md={6}>
+          <Col md={8}>
             <Form>
-              <FormGroup controlId="searchform">
+              <FormGroup controlId="searchform" bsSize="large">
           			<ControlLabel>Search by Item Name or Description</ControlLabel>{' '}
           			<FormControl type="text" placeholder="Search By Name or Description" onChange={handleFilter}/>
           		</FormGroup>{' '}

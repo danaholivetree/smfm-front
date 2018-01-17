@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color:teal;
+  background-color:whitesmoke;
 }
 
 .navbar {
@@ -12,23 +12,14 @@ body {
   border:0;
   border-bottom: 1px solid pink;
 }
+
 .navbar-default .navbar-nav>li>a {
     color: white;
-
 }
 
 .navbar-default .navbar-nav>li>a:hover {
-    background:pink;
+    color:pink;
 }
-
-.btn {
-  background:pink;
-}
-
-.btn:hover {
-  background:teal;
-}
-
 
 #mainContainer {
   width: 100%;
@@ -77,7 +68,11 @@ body {
   font-size: 1.2em;
   margin: 0 20px;
   width: 100px;
-  background-color:pink;
+  background-color: pink;
+}
+
+.buyorsell:hover {
+  background-color: palevioletred;
 }
 
 #closeJumbotron {
@@ -88,14 +83,19 @@ body {
 
 .jumbotron {
   position: relative;
-  background-color:lightgrey;
+  margin-top:25px;
+  max-width:100%;
+  /* background-color: whitesmoke; */
+}
+
+.jumbotron .img {
+  max-width: 80%;
 }
 .card {
   height: 420px;
   overflow: hidden;
   text-align: center;
   margin-bottom: 10px;
-  background: grey;
   border-radius: 2px;
 }
 .card-block {
@@ -103,29 +103,39 @@ body {
   height: 100%;
 }
 .card-body {
-    max-height: 140px;
-    overflow: hidden;
+  max-height: 140px;
+  overflow: hidden;
+  text-align: left;
+  padding-left: 20px;
+  padding-top: 0;
+}
+.sale-btn {
+  width: 80px;
+  margin: 5px;
 }
 
-.card-footer {
-    position: relative;
-    bottom: 30px;
-    width: 100%;
-    background: #e2e2e2;
-    padding: 5px 0;
+h3 {
+  font-weight:bold;
+  margin: 5px 0;
 }
+
+h6 {
+  padding:0;
+}
+
+/* .card-footer {
+  position: relative;
+  bottom: 30px;
+  width: 100%;
+  background: #e2e2e2;
+  padding: 5px 0;
+} */
 .bookmark {
   height: 300px;
   font-size: 0.6em;
 }
 
-.bkBtnGrp {
-  position: relative;
-  text-align: center;
-}
-
-.bookmarkBtn {
+.bookmark-btn {
   width: 120px;
   margin: 10px;
-  background-color:pink;
 }

@@ -22,17 +22,14 @@ const Bookmark = ({item, removeItem, onAddToCart}) => {
           <img src={item.image} height='250px' alt='card image' />
         </Link>
         <h3 className='card-title'>{item.itemName}</h3>
-        <div className='card-body'>
-          {item.short}
-        </div>
 
-        <ButtonGroup className='bkBtnGrp'>
-          <Button className='bookmarkBtn' onClick={removeBookmark}>Remove</Button>
-          <Button className='bookmarkBtn' onClick={onAddToCart}>Add To Cart</Button>
-        </ButtonGroup>
-      </div>
-      <div className='card-footer' >
-        For sale by: <a href={`http://www.facebook.com/${item.sellerFb}`}>{item.sellerName}</a>
+        For sale by your friend <a href={`http://www.facebook.com/${item.sellerFb}`} target="_blank">{item.sellerName}</a>
+        {/* <div className='card-body'>
+          {item.short}
+        </div> */}
+
+        <Button className='bookmark-btn' onClick={removeBookmark}>Remove</Button>
+        <Button className='bookmark-btn' onClick={onAddToCart}>Add To Cart</Button>
       </div>
     </div>
 
