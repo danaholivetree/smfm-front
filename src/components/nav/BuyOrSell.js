@@ -7,11 +7,8 @@ import LoginContainer from '../../containers/LoginContainer'
 const BuyOrSell = ({loggedIn}) => (
 
   <div id='mainContainer'>
-
     <div className='centered'>
        <h1 id='welcome'>STUFF MY FRIENDS MAKE</h1>
-
-
 
     { !loggedIn ?
       <div>
@@ -19,15 +16,13 @@ const BuyOrSell = ({loggedIn}) => (
       </div>
       :
       <div>
+        <Link exact='true' to='/shoppingFeed'>
+          <Button className='buyorsell'>BUY</Button>
+        </Link>
 
-          <Link exact='true'  to='/shoppingFeed'>
-            <Button className='buyorsell'>BUY</Button>
-          </Link>
-
-          <Link exact='true' to='/sell'>
-            <Button className='buyorsell'>SELL</Button>
-          </Link>
-
+        <Link exact='true' to='/sell'>
+          <Button className='buyorsell'>SELL</Button>
+        </Link>
       </div>
     }
     </div>

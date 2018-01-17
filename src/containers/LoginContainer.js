@@ -11,7 +11,7 @@ const API = process.env.REACT_APP_API_URL
 const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedItems, getAllForSaleItems, getAllBookmarks, getAllCart}) => {
 
   const loadData = (response) => {
-    console.log('response ', response);
+    console.log('response from login', response);
     window.FB.api('/me', currentUser => {
       if (currentUser.error) {
         console.log('error: ' , currentUser.error.type);
@@ -20,7 +20,6 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
 
       dbLogin(currentUser)
       getAllFriends(currentUser.id)
-      console.log('loggedIn ', loggedIn);
     }
     })
   }
@@ -58,7 +57,6 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
     let friendIds = friends.map( friend => {
       return friend.id
     })
-    console.log('friend Ids going to api for get products', friendIds);
     let res = await fetch(`${API}/sellers`, {
       method: 'POST',
       headers: {
@@ -68,7 +66,6 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
       body: JSON.stringify(friendIds)
     })
     let feedItems = await res.json()
-    console.log('feed Items ', feedItems);
     getAllFeedItems(feedItems) // action
   }
 //fetch all bookmarks by user id
@@ -96,20 +93,11 @@ const LoginContainer = ({loggedIn, currentUser, logIn, gotFriends, getAllFeedIte
     getAllCart(cartItems) //action
   }
 
-  // var divStyle = {
-  //   color: 'white',
-  //   backgroundImage: 'url(' + imgUrl + ')',
-  //   WebkitTransition: 'all', // note the capital 'W' here
-  //   msTransition: 'all' // 'ms' is the only lowercase vendor prefix
-  // };
-
 //check if user has a c_user cookie from facebook matching their fb_id and don\'t display the login
   return (
       <div>
-
        <Login loadData={loadData} loggedIn={loggedIn}/>
       </div>
-
   )
 }
 
